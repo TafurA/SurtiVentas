@@ -1,0 +1,7 @@
+{
+  "name": "SurtiVentas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,48 @@
+$c-gray-5: #F5F5F5;
+$c-gray-25: #C9C9C9;
+$c-text: #383838;
+
+.c-menu {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 8px;
+}
+
+.c-menu__item {
+  flex: 1;
+  display: block;
+  min-width: 110px;
+  min-height: 84px;
+  padding: 8px;
+  border: 1px solid $c-gray-25;
+  text-decoration: none;
+  text-align: left;
+  color: $c-text;
+  background-color: $c-gray-5;
+
+  a,
+  button {
+    text-align: left;
+    color: $c-text;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  button {
+    background: none;
+    margin-top: 4px;
+  }
+}
+
+.c-menu__item-icon {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+.c-menu__item-text {
+  font-size: 11px;
+}

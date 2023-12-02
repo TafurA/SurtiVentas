@@ -1,0 +1,47 @@
+// Icon component
+.c-action-sheet {
+  .action-sheet-group {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .action-sheet-title {
+    font-family: $f-title;
+    font-weight: $f-bold;
+    border-bottom: 1px solid $c-gray-disabled-10;
+    color: $c-text;
+  }
+
+  .action-sheet-button {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 16px;
+    height: max-content;
+    contain: none;
+
+    &::before {
+      font-family: $font-family-ico;
+    }
+
+    &:first-of-type {
+      background-color: red;
+      &::before {
+        content: $i-user;
+      }
+    }
+
+    &:last-of-type {
+      &::before {
+        content: $i-home;
+      }
+    }
+
+    .action-sheet-button-inner {
+      flex-shrink: initial;
+      font-family: $f-title;
+      font-weight: $f-regular;
+      font-size: 14px;
+    }
+  }
+}

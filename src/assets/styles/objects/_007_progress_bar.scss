@@ -1,0 +1,28 @@
+.o-radial-progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+
+  &::before {
+    content: "75";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    font-weight: $f-bold;
+    font-family: $f-title;
+    font-size: 32px;
+    color: $c-neutro;
+    background: $c-success;
+  }
+
+  // To align center the element
+  &_center {
+    margin: 0 auto;
+  }
+}

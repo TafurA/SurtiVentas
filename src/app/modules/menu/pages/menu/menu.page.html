@@ -1,0 +1,65 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page">
+
+    <!-- <app-back-button></app-back-button> -->
+
+    <div class="o-canvas">
+
+      <!-- Header -->
+      <header class="o-headline">
+        <p class="o-text">Usuario en sesión</p>
+        <h1 class="o-heading">{{ userModel.name }}</h1>
+      </header>
+
+      <!-- navigation of support pages -->
+      <div class="c-navigation-support">
+        <a *ngFor="let item of NAVIGATION_MENU" class="c-navigation-support__item"
+          [routerLink]="item.pathModule">
+          <span class="c-navigation-support__ico i-{{ item.ico }}"></span>
+          <span class="
+            c-navigation-support__txt
+            i-after-arrow-right
+          ">
+            {{ item.title }}
+          </span>
+        </a>
+
+        <div>
+
+          <button class="c-navigation-support__item o-dropdown js-dropdown-target" (click)="toggleDropdownSupport($event)">
+            <span class="c-navigation-support__ico i-help"></span>
+            <span class="
+                c-navigation-support__txt o-dropdown__text
+                i-after-arrow-down
+              ">
+              Soporte
+            </span>
+          </button>
+
+          <nav class="c-navigation-support__submenu">
+            <a class="c-navigation-support__submenu-link" [routerLink]="['/menu/billing-time']">
+              Nuestros horarios
+            </a>
+            <a class="c-navigation-support__submenu-link" [routerLink]="['/menu/frequent-question']">
+              Preguntas frecuentes
+            </a>
+            <a class="c-navigation-support__submenu-link"
+              href="https://surtilider.com/files/SURTILIDER%20POLITICA%20HABEAS%20DATA.pdf" download target="_blank">
+              Tratamiento de datos personales
+            </a>
+          </nav>
+
+        </div>
+
+        <button (click)="logOut()" class="c-navigation-support__item">
+          <span class="c-navigation-support__ico i-logout"></span>
+          <span class="c-navigation-support__txt">
+            Cerrar Sesión
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

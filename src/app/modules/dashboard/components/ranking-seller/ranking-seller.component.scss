@@ -1,0 +1,100 @@
+@import '../../../../../assets/styles/settings/var_color';
+@import '../../../../../assets/styles/settings/var_typo';
+
+
+.c-ranking-seller__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  padding-bottom: 64px;
+}
+
+
+.c-ranking-seller {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 24px;
+  padding: 8px 16px;
+
+  &::before {
+    line-height: 1;
+  }
+
+  &:nth-child(1) {
+    background-color: rgba($color: $c-gold, $alpha: 0.8);
+
+    &::before {
+      content: url('../../../../../assets/imgs/tritone/medal_one.svg');
+    }
+  }
+
+  &:nth-child(2) {
+    &::before {
+      content: url('../../../../../assets/imgs/tritone/medal_two.svg');
+    }
+  }
+
+  &:nth-child(3) {
+    &::before {
+      content: url('../../../../../assets/imgs/tritone/medal_three.svg');
+    }
+  }
+
+  &:nth-child(4),
+  &:nth-child(5) {
+    &::before {
+      flex: 1 10%;
+      width: 32px;
+      font-family: $f-title;
+      font-weight: $f-bold;
+      font-size: 32px;
+      text-align: center;
+      color: $c-gray-25;
+    }
+  }
+
+  &:nth-child(4) {
+    &::before {
+      content: '4'
+    }
+  }
+
+  &:nth-child(5) {
+    &::before {
+      content: '5';
+    }
+  }
+}
+
+
+.c-ranking-seller__tile {
+  font-size: 16px;
+  text-transform: capitalize;
+
+  span  {
+    display: block;
+    font-size: 14px;
+    font-weight: 100;
+  }
+}
+
+
+.c-ranking-seller__avatar {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  flex: 1 80%;
+}
+
+.c-ranking-seller__img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0px 2px 12px rgba(0, 0, 0, 0.18));
+}
+
+.c-ranking-seller__points {
+  font-size: 12px;
+}

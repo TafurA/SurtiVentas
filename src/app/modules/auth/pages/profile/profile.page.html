@@ -1,0 +1,92 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page-small">
+
+    <app-back-button></app-back-button>
+
+    <div class="o-canvas">
+
+      <header class="o-headline">
+        <h1 class="o-heading">👤 Perfil {{ userModel.name }}</h1>
+        <p class="o-text o-text_fs-14">
+          Modifica y mantén actualizados tus datos personales.
+        </p>
+      </header>
+
+      <section>
+        <h2 class="o-title">Datos de contacto</h2>
+
+        <div class="c-photo">
+
+          <!-- User's avatar -->
+          <ion-thumbnail slot="start" class="o-avatar__figure">
+            <!-- src="https://ionicframework.com/docs/img/demos/thumbnail.svg" -->
+            <img alt="Avatar " src="{{ userModel.foto }}" />
+          </ion-thumbnail>
+
+          <div class="c-photo__caption">
+            <!-- <button class="o-link o-link_secondary o-link_underline">Actualizar imagen de perfil</button> -->
+            <strong class="c-photo__text">{{ userModel.name }}</strong>
+          </div>
+
+        </div>
+
+        <ul class="c-detail">
+          <!-- <li class="c-detail__item">
+            <h3 class="c-detail__item-box">Nombre:</h3>
+            <strong class="c-detail__item-box c-detail__item-box_70">{{ userModel.name }}</strong>
+          </li> -->
+          <li class="c-detail__item">
+            <h3 class="c-detail__item-box">NIT:</h3>
+            <strong class="c-detail__item-box c-detail__item-box_70">{{ userModel.nitEmp }}</strong>
+          </li>
+          <li class="c-detail__item">
+            <h3 class="c-detail__item-box">Correo:</h3>
+            <input
+              class="c-detail__item-box c-detail__item-box_70"
+              [ngClass]="{'is-form-active':isFormActive}"
+              [(ngModel)]="userModel.email"
+              (blur)="showActionToEdit()"
+            >
+          </li>
+          <li class="c-detail__item">
+            <h3 class="c-detail__item-box">Teléfono:</h3>
+            <strong class="c-detail__item-box c-detail__item-box_70">{{ userModel.telemp_b }}</strong>
+          </li>
+          <li class="c-detail__item">
+            <h3 class="c-detail__item-box">Nombre grupo:</h3>
+            <strong class="c-detail__item-box c-detail__item-box_70">{{ userModel.grupo }}</strong>
+          </li>
+        </ul>
+
+        <div class="o-action">
+          <button [routerLink]="['/auth/update-password']" class="o-button o-button_full">
+            Actualizar contraseña
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <div *ngIf="!isFormActive">
+      <ion-fab (click)="showEditForm()" slot="fixed" vertical="bottom" horizontal="end">
+        <div class="o-float-btn">
+          <ion-fab-button>
+            <!-- <ion-icon name="add"></ion-icon> -->
+            <span [classList]="iconAction"></span>
+          </ion-fab-button>
+        </div>
+      </ion-fab>
+    </div>
+
+    <div *ngIf="isFormActive">
+      <ion-fab (click)="saveEditForm()" slot="fixed" vertical="bottom" horizontal="end">
+        <div class="o-float-btn">
+          <ion-fab-button>
+            <!-- <ion-icon name="add"></ion-icon> -->
+            <span [classList]="iconAction"></span>
+          </ion-fab-button>
+        </div>
+      </ion-fab>
+    </div>
+  
+  </div>
+</ion-content>

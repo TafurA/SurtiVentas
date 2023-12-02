@@ -1,0 +1,146 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page-small">
+
+    <div class="o-canvas">
+      <button
+        type="button"
+        class="o-link o-back-button o-link_primary u-margin-bottom-16 i-arrow-left"
+        (click)="goBack()"
+      >
+        Visitar cliente
+      </button>
+    </div>
+
+    <div class="o-canvas">
+
+      <!-- Header -->
+      <header class="o-headline">
+        <h1 class="o-title">
+          Carrito - {{ nameStore }} 
+          ({{ this._cartService.numberProductsCart$ | async }})
+        </h1>
+      </header>
+
+      <!-- Client data -->
+      <div class="o-box-data">
+        <h3 class="o-box-data__title">Datos del cliente: </h3>
+        <p class="o-box-data__txt">Estado: <span class="o-bold">{{ orderState }}</span></p>
+        <p class="o-box-data__txt">Dirección: <span class="o-bold">{{ orderAddress }}</span></p>
+        <p class="o-box-data__txt">Valor ultima compra: <span class="o-bold">${{ ultimacompra | number:'1.0-0':'es-CO' }}</span></p>
+        <div class="o-box-data__select">
+          <label class="o-box-data__txt" for="">Dejar observación</label>
+          <select [(ngModel)]="orderObservation" class="c-filter__select">
+            <option value="">Seleccionar una observación</option>
+            <option value="Entregar antes de las 10 am">Entregar antes de las 10 am</option>
+            <option value="Entregar antes de medio dia">Entregar antes de medio día</option>
+            <option value="Entregar luego de medio dia">Entregar luego de medio día</option>
+            <option value="Reciben ped. uni. x la manana">Reciben pedidos únicamente en la mañana</option>
+            <option value="Reciben ped. uni. x la tarde">Reciben pedidos únicamente en la tarde</option>
+            <option value="Favor entregar Bonificacion">Favor entregar Bonificación</option>
+            <option value="Cerr. x almuerzo de 12m a 2pm">Cerrado por almuerzo entre 12 m y 2 p.m.</option>
+            <option value="No reciben ped. desp de 4pm">No reciben pedidos después de las 4 p.m.</option>
+            <option value="No reciben ped. desp de 5pm">No reciben pedidos después de las 5 p.m.</option>
+            <option value="Entrega Conjuntos favor llamar">Para entrega en Conjuntos favor llamar.</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Group products order -->
+      <ul>
+        <li *ngFor="let productObject of productsList">
+          <span id="exclusive-tag" class="is-exclusive o-bold" *ngIf="productObject.isGold">Exclusivo</span>
+          <app-product [isCheckout]="true" [productObject]="productObject"></app-product>
+          <ion-modal *ngIf="este" trigger="checkout-{{ productObject.codeProduct  }}" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+            <ng-template>
+              <div class="block">
+          
+                <div id="modal" class="c-product-alert__wrap">
+                  <div class="c-product-alert__header">
+          
+                    <h3 class="c-product-alert__title">Actualizar producto</h3>
+          
+                    <div class="c-add-car">
+          
+                      <div class="c-add-car__box">
+                        <button class="c-add-car__btn" (click)="quantityIntoModal(0)">-</button>
+                        <input class="c-add-car__number" [(ngModel)]="cartCount"
+                          (input)="_cartService.quantityIntoInput(cartCount)">
+                        <button class="c-add-car__btn c-add-car__btn_primary" (click)="quantityIntoModal(1)">+</button>
+                      </div>
+          
+                      <button *ngIf="(this._cartService.maxNumExceded | async) === false" (click)="confirm()"
+                        class="o-link o-link_primary">
+                        Seguir comprando
+                      </button>
+          
+                    </div>
+                  </div>
+          
+                </div>
+          
+              </div>
+            </ng-template>
+          </ion-modal>
+        </li>
+      </ul>
+
+      <!-- Group bonification products order -->
+      <div class="">
+        <ul *ngIf="isProducstMixLoaded">
+          <li *ngFor="let productObject of this._cartService.cartItemsTicket | async">
+            <span class="is-exclusive o-bold">Bonificación</span>
+            <app-product [isBonification]="true" [productObject]="productObject"></app-product>
+          </li>
+        </ul>
+        <ul *ngIf="!isProducstMixLoaded">
+          <li>
+            <ion-skeleton-text [animated]="true" style="width: 98px; height: 18px; border-radius: 8px; margin-left: 95px;"></ion-skeleton-text>
+            <div style="display: flex; gap: 15px;">
+              
+              <!-- Image and title -->
+              <figure class="c-product__figure">
+                <ion-skeleton-text [animated]="true" style="width: 80px; height: 80px; border-radius: 8px"></ion-skeleton-text>
+              </figure>
+
+              <!-- Value and discount -->
+              <div style="padding-top: 24px;" class="c-product__detailed">
+                <ion-skeleton-text [animated]="true" style="width: 176px; height: 16px; border-radius: 8px"></ion-skeleton-text>
+
+                <div>
+                  <div class="c-product__quantity">
+                    <ion-skeleton-text [animated]="true" style="width: 78px; height: 16px; border-radius: 8px"></ion-skeleton-text>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Amounts and call to action -->
+      <div class="o-checkout-detail">
+        <p class="o-checkout-detail__item">
+          <strong>Total <span>(iva incluido): </span></strong>
+          <strong>
+            $ {{ this._cartService.currentAmountCart$ | async | number:'1.0-0':'es-CO' }} COP
+          </strong>
+        </p>
+        <p class="o-checkout-detail__item">
+          <strong>Calificación visita</strong>
+          <span class="checkout-calification">
+            <img src="assets/imgs/tritone/{{ this._cartService.calificationIcon | async }}" alt="" class="o-img">
+            <strong>{{ this._cartService.calificationNumber | async }}%</strong>
+          </span>
+        </p>
+        <button (click)="sendOrder()" class="o-button o-button_full">
+          <span *ngIf="isPendingOrder === 'true'">Guardar pedido</span>
+          <span *ngIf="isPendingOrder === 'false' || !isPendingOrder">Hacer pedido</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

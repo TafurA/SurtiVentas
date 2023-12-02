@@ -1,0 +1,23 @@
+<header class="c-header">
+  <div class="o-canvas">
+
+    <div class="c-header__wrap">
+      <figure class="c-header__brand">
+        <img src="assets/imgs/brand/logo_color.svg" alt="" class="o-img">
+      </figure>
+
+      <div id="headerActions" class="c-header__actions is-opacity">
+
+        <!-- <button class="c-header__search-btn i-search" (click)="showSearch()"></button> -->
+        <button (click)="this._cartService.goToCheckout()" class="c-header__car js-target-iconCart is-hidden">
+          <i class="i-car"></i>
+          <span id="icon-cart" class="c-header__car-number">
+            0
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</header>

@@ -1,0 +1,63 @@
+<footer class="c-footer">
+  <nav class="c-footer__navigation">
+    <a
+      [routerLink]="['/menu/home']"
+      routerLinkActive="is-active"
+      class="c-footer__link i-menu"
+    >
+      <span class="c-footer__link-bg"></span>
+    </a>
+    <a
+      [routerLink]="['/dashboard']"
+      routerLinkActive="is-active"
+      class="c-footer__link i-home"
+    >
+      <span class="c-footer__link-bg"></span>
+    </a>
+    <button id="modal-change-rout" class="c-footer__link i-change_rut">
+      <span class="c-footer__link-bg"></span>
+    </button>
+  </nav>
+</footer>
+
+<ion-modal
+  trigger="modal-change-rout"
+  [initialBreakpoint]="1"
+  [breakpoints]="[0, 1]"
+>
+  <ng-template>
+    <div class="block">
+      <div class="c-modal">
+        <h3 class="c-modal__title i-change_rut">
+          Cambio de ruta
+        </h3>
+
+        <div class="o-current-rout">
+          <p class="o-text o-text_fs-14 o-bold">Ruta actual:</p>
+          <p class="o-text o-text_fs-14 o-bold o-color-primary">{{ currentRout }}</p>
+        </div>
+
+        <form action="" class="c-alert__form">
+          <div *ngFor="let rout of routList" class="c-alert__form-input">
+            <input id="{{ rout.codrut_b }}" name="rout" type="radio" [(ngModel)]="selectedRout" value="{{ rout.codrut_b }}">
+            <label for="{{ rout.codrut_b }}">
+              <div class="box">
+                <span>{{ rout.zona }}</span>
+                <span>ID: {{ rout.codrut_b }}</span>
+              </div>
+            </label>
+          </div>
+        </form>
+
+        <div class="c-modal__actions" *ngIf="selectedRout">
+          <button
+            class="o-button"
+            (click)="setCurrentRout()"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>

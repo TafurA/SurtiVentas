@@ -1,0 +1,51 @@
+.o-headline {
+  margin-top: 24px;
+  margin-bottom: 24px;
+
+  .o-heading {
+    margin-bottom: 8px;
+  }
+
+  /* Center text modifier */
+  &_center {
+    text-align: center;
+  }
+
+  // Two columns modifier
+  &_columns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .o-heading {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.o-headline-media {
+  text-align: center;
+}
+
+.o-headline-media__figure {
+  margin-bottom: 40px;
+}
+
+
+.o-heading,
+.o-title,
+.o-kicker {
+  font-family: $f-title;
+}
+
+.o-heading {
+  font-weight: $f-bold;
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.o-title {
+  font-weight: $f-bold;
+  font-size: 18px;
+}

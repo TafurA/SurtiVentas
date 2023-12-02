@@ -1,0 +1,15 @@
+.o-dropdown {
+  .o-dropdown__text {
+    &::before {
+      transition: all 0.2s ease-in;
+    }
+  }
+
+  &.is-dropdown-show {
+    .o-dropdown__text {
+      &::before {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

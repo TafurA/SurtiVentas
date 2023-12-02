@@ -1,0 +1,242 @@
+<!-- GENERAL PRODUCT -->
+<article
+  *ngIf="!isCheckout && !isCatalog && !isBonification"
+  class="c-product"
+  [style.border-top]="'5px solid #' + productObject.color_champions"
+>
+
+  <a
+    [routerLink]="['/client-visit/product-detail', productObject.codeProduct]"
+    class="c-product__wrap"
+  >
+
+    <!-- Image and title -->
+    <figure class="c-product__figure">
+
+      <img src="{{ productObject.img_prod }}" alt="" class="c-product__img">
+
+      <figcaption class="c-product__title" *ngIf="productObject.nameProduct !== null">
+        {{ productObject.nameProduct }}
+      </figcaption>
+
+    </figure>
+
+    <!-- Value and discount -->
+    <div>
+      <span class="c-product__amount">
+        ${{ productObject.totalValue }}
+      </span>
+
+      <div *ngIf="productObject.porcDescuento !== '0.00' && productObject.porcDescuento !== '0'"
+        class="c-product__ico c-product__ico_discount i-star">
+        <span class="c-product__ico_discount-txt">{{ productObject.porcDescuento }}</span>
+        <span class="c-product__ico-txt">${{ productObject.precioSinDcto }}</span>
+      </div>
+
+    </div>
+
+  </a>
+
+  <!-- Add to favorite and Add to cart -->
+  <footer>
+
+    <button id="{{ productObject.codeProduct }}" (click)="openModalCart()" class="c-product__add i-plus"></button>
+
+  </footer>
+
+</article>
+
+<ion-modal *ngIf="!isCheckout && !isCatalog && !isBonification" trigger="{{ productObject.codeProduct  }}" [initialBreakpoint]="1"
+  [breakpoints]="[0, 1]">
+  <ng-template>
+    <div class="block">
+
+      <div id="modal" class="c-product-alert__wrap">
+        <div class="c-product-alert__header">
+
+          <h3 class="c-product-alert__title">Producto agregado</h3>
+
+          <div class="c-add-car">
+
+            <div class="c-add-car__box">
+              <button class="c-add-car__btn" (click)="quantityIntoModal(0)">-</button>
+              <input class="c-add-car__number" [(ngModel)]="cartCount"
+                (input)="_cartService.quantityIntoInput(cartCount)">
+              <button class="c-add-car__btn c-add-car__btn_primary" (click)="quantityIntoModal(1)">+</button>
+            </div>
+
+            <button *ngIf="(this._cartService.maxNumExceded | async) === false" (click)="confirm()"
+              class="o-link o-link_primary">
+              Seguir comprando
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </ng-template>
+</ion-modal>
+<!-- GENERAL PRODUCT -->
+
+<!-- CHECKOUT PRODUCT -->
+<article id="productCheckout-{{ productObject.codeProduct }}" *ngIf="isCheckout && !isCatalog" class="c-product c-product_checkout">
+
+  <a
+    [routerLink]="['/client-visit/product-detail', productObject.codeProduct]"
+    class="c-product__wrap"
+  >
+
+    <!-- Image and title -->
+    <figure class="c-product__figure">
+
+      <img src="{{ productObject.img_prod }}" alt="" class="c-product__img">
+
+    </figure>
+
+    <!-- Value and discount -->
+    <div class="c-product__detailed">
+      <p class="c-product__title" *ngIf="productObject.nameProduct !== null">
+        {{ productObject.nameProduct }}
+      </p>
+      <span style="font-size:12px; margin-top: 4px;" class="o-text">
+        Código: {{ productObject.codeProduct }}
+      </span>
+
+      <div *ngIf="productObject.porcDescuento !== '0.00' && productObject.porcDescuento !== '0'"
+        class="c-product__ico c-product__detailed-offert c-product__ico_discount">
+        <span class="c-product__ico_discount-txt i-star">
+          <span class="c-product__ico_discount-txt-txt">{{ productObject.porcDescuento }}</span>
+        </span>
+        <span class="c-product__ico-txt">${{ productObject.precioSinDcto }}</span>
+      </div>
+
+      <div>
+        <span class="c-product__amount">
+          Precio unit: ${{ productObject.totalValue }}
+        </span>
+
+        <div class="c-product__quantity">
+          
+          <strong>
+            $ {{ calculateAmount() | number:'1.0-0':'es-CO' }}
+          </strong>
+          <span class="c-product__quantity-num">
+            Cantidad <span>{{ productObject.cantidadCart }}</span>
+          </span>
+
+        </div>
+      </div>
+
+    </div>
+
+  </a>
+
+  <!-- Add to favorite and Add to cart -->
+  <footer class="c-product_checkout-footer">
+
+    <button id="checkout-{{productObject.codeProduct}}" (click)="openModalCart()"
+      class="c-product__add i-pencil"></button>
+
+    <button id="checkout-{{productObject.codeProduct}}" (click)="removeCartProduct(productObject.codeProduct)"
+      class="c-product__add c-product__add-red i-close"></button>
+
+  </footer>
+
+</article>
+<!-- CHECKOUT PRODUCT -->
+
+<!-- BONIFICATION PRODUCT -->
+<article id="productCheckout-{{ productObject.codpro_b }}" *ngIf="isBonification && !isCatalog && !isCheckout" class="c-product c-product_checkout">
+  <a
+    [routerLink]="['/client-visit/product-detail', productObject.codpro_b]"
+    class="c-product__wrap"
+  >
+
+    <!-- Image and title -->
+    <figure class="c-product__figure">
+
+      <img src="{{ productObject.img_prod }}" alt="" class="c-product__img">
+
+    </figure>
+
+    <!-- Value and discount -->
+    <div class="c-product__detailed">
+      <p class="c-product__title" *ngIf="productObject.nompro_b !== null">
+        {{ productObject.nompro_b }}
+      </p>
+
+      <!-- <div *ngIf="productObject.porcDescuento !== '0.00' && productObject.porcDescuento !== '0'"
+        class="c-product__ico c-product__detailed-offert c-product__ico_discount">
+        <span class="c-product__ico_discount-txt i-star">
+          <span class="c-product__ico_discount-txt-txt">{{ productObject.porcDescuento }}</span>
+        </span>
+        <span class="c-product__ico-txt">${{ productObject.precioSinDcto }}</span>
+      </div> -->
+
+      <div>
+        <!-- <span class="c-product__amount">
+          Precio unit: ${{ productObject.totalValue }}
+        </span> -->
+
+        <div class="c-product__quantity">
+          
+          <!-- <strong>
+            $ {{ calculateAmount() | number:'1.0-0':'es-CO' }}
+          </strong> -->
+          <span class="c-product__quantity-num">
+            Cantidad <span>{{ productObject.cantidad }}</span>
+          </span>
+
+        </div>
+      </div>
+
+    </div>
+
+  </a>
+</article>
+<!-- BONIFICATION PRODUCT -->
+
+<!-- CATALOG PRODUCT -->
+<article id="productCatalog-{{ productObject.codeProduct }}" *ngIf="isCatalog && !isCheckout" class="c-product c-product_checkout c-product_catalog">
+
+  <a
+    [routerLink]="['/client-visit/product-detail', productObject.codeProduct]"
+    class="c-product__wrap"
+  >
+
+    <!-- Image and title -->
+    <figure class="c-product__figure">
+
+      <img src="{{ productObject.img_prod }}" alt="" class="c-product__img">
+
+    </figure>
+
+    <!-- Value and discount -->
+    <div class="c-product__detailed">
+      <p class="c-product__title" *ngIf="productObject.nameProduct !== null">
+        {{ productObject.nameProduct }}
+      </p>
+
+      <div *ngIf="productObject.porcDescuento !== '0.00' && productObject.porcDescuento !== '0'"
+        class="c-product__ico c-product__detailed-offert c-product__ico_discount"
+      >
+        <span class="c-product__ico_discount-txt i-star">
+          <span class="c-product__ico_discount-txt-txt">{{ productObject.porcDescuento }}</span>
+        </span>
+        <span class="c-product__ico-txt">${{ productObject.precioSinDcto }}</span>
+      </div>
+
+      <div>
+        <span class="c-product__amount">
+          Precio unit: ${{ productObject.totalValue }}
+        </span>
+      </div>
+
+    </div>
+
+  </a>
+
+</article>
+<!-- CATALOG PRODUCT -->

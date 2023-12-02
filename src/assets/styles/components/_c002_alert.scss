@@ -1,0 +1,135 @@
+.c-alert {
+  align-items: flex-end;
+
+  &.untouched {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .alert-wrapper {
+    min-width: 100%;
+    border-radius: 8px 8px 0 0;
+    padding: 16px 0;
+    border-width: 1px 1px 0 1px;
+    border-style: groove;
+  }
+
+  .alert-head {
+    padding: 0;
+  }
+
+  .alert-title,
+  .alert-message {
+    font-family: $f-title;
+  }
+
+  .alert-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: $f-bold;
+    font-size: 16px;
+
+    &::before {
+      content: "";
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 12px;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      font-size: 19px;
+      font-family: $font-family-ico;
+      animation: rotateAnimation 1s linear;
+      animation-iteration-count: 1;
+    }
+  }
+
+  .alert-sub-title,
+  .alert-message {
+    font-size: 14px;
+  }
+
+  .alert-sub-title {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .alert-button-group {
+    padding: 0;
+  }
+
+  // Alert's state
+  &.is-success {
+    .alert-wrapper {
+      border-color: $c-success;
+    }
+
+    .alert-title {
+      &::before {
+        content: $i-check-circle;
+        border-color: $c-success;
+        color: $c-success;
+      }
+    }
+  }
+
+  &.is-error {
+    .alert-wrapper {
+      border-color: $c-secondary;
+    }
+
+    .alert-title {
+      &::before {
+        content: $i-close;
+        border-color: $c-secondary;
+        color: $c-secondary;
+      }
+    }
+  }
+
+  &.is-warning {
+    .alert-wrapper {
+      border-color: $c-info;
+    }
+
+    .alert-title {
+      &::before {
+        content: $i-info;
+        border-color: $c-info;
+        color: $c-info;
+      }
+    }
+  }
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotateY(-60deg)
+  }
+
+  20% {
+    transform: rotateY(-120deg)
+  }
+
+  40% {
+    transform: rotateY(-180deg)
+  }
+
+  60% {
+    transform: rotateY(-240deg)
+  }
+
+  80% {
+    transform: rotateY(-300deg)
+  }
+
+  100% {
+    transform: rotateY(-360deg)
+  }
+}

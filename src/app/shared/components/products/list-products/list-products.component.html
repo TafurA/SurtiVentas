@@ -1,0 +1,118 @@
+<section id="search-component-scroll"  class="o-section o-section_aling-right">
+  <div class="o-canvas">
+    <button id="modal-filter" class="i-filter o-link o-link_primary">
+      Filtrar productos por
+    </button>
+    <button style="margin-left: 16px" (click)="resetFilters()" *ngIf="isFiltersShow" class="i-home o-link o-link_secondary">
+      Eliminar filtros
+    </button>
+  </div>
+</section>
+
+<section>
+
+  <ng-container>
+    <form id="search-component" class="c-header__search">
+      <input id="search-word" (keyup)="sendWord$($event)" class="c-header__search-input">
+      <label class="c-header__search-label i-search" for="" *ngIf="!isTerm"></label>
+      <label class="c-header__search-label i-close" (click)="getProductsList()" for="" *ngIf="isTerm"></label>
+    </form>
+  </ng-container>
+
+  <div *ngIf="isProductsListLoaded">
+    <ng-container *ngFor="let subCategory of getProductSubCategories()">
+      <div class="o-canvas">
+        <h3 class="o-title c-product-slider__title">{{ subCategory }}</h3>
+      </div>
+      <swiper-container [modules]="swiperModules" [slidesPerGroup]="3" [slidesPerView]="3" [loop]="true" class="c-product-slider">
+        <swiper-slide class="c-product-slider__slide" *ngFor="let productObject of getProductGroup(subCategory)">
+          <app-product [productObject]="productObject"></app-product>
+        </swiper-slide>
+      </swiper-container>
+    </ng-container>
+  </div>
+
+  <!-- Data unloaded -->
+  <div *ngIf="!isProductsListLoaded">
+    <div class="o-canvas">
+      <ion-skeleton-text [animated]="true" style="width: 80px; height: 13px;"></ion-skeleton-text>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+      </div>
+    </div>
+    <div class="o-canvas">
+      <ion-skeleton-text [animated]="true" style="width: 80px; height: 13px;"></ion-skeleton-text>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+      </div>
+    </div>
+    <div class="o-canvas">
+      <ion-skeleton-text [animated]="true" style="width: 80px; height: 13px;"></ion-skeleton-text>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+  <!-- End data unloaded -->
+
+  <ion-modal trigger="modal-filter" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <div class="block">
+        <div class="c-modal">
+          <div
+            class="o-canvas">
+
+            <!-- <button class="c-modal__close i-close"></button> -->
+            <h3 class="c-modal__title i-filter">
+              Filtrar productos por
+            </h3>
+
+            <div class="c-filter">
+
+              <div class="c-filter__box">
+                <label class="o-bold" for="">Productos con ofertas</label>
+                <input class="c-filter__offert-input" [(ngModel)]="isOffers" type="checkbox" (change)="applyFilters()">
+                <ion-toggle [checked]="isOffers" aria-label="Enable Notifications"></ion-toggle>
+              </div>
+
+              <div class="c-filter__box">
+                <label class="o-bold" for="">Proveedor</label>
+                <select class="c-filter__select" [(ngModel)]="selectedProvider" (change)="applyFilterProvide()">
+                  <option value="">Todos los proveedores</option>
+                  <ng-container *ngFor="let category of categoriesList">
+                    <option [value]="category">{{ category }}</option>
+                  </ng-container>
+                </select>
+              </div>
+
+              <div class="c-filter__box c-filter__box_row">
+                <label class="o-bold" for="">Categorías</label>
+
+                <div class="c-filter__group-pill">
+                  <div class="c-filter__pill" *ngFor="let category of REALcategoriesList, let i = index">
+                    <input type="checkbox" id="{{ category }}" name="{{ category }}-{{i}}" value="{{ category }}" (change)="createCategorys($event)">
+                    <label for="{{ category }}">{{ category }}</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="c-modal__actions c-modal__actions_no-padding">
+              <button (click)="toggleCategory()" class="o-button">
+                Guardar filtros
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+</section>

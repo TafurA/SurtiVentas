@@ -1,0 +1,94 @@
+<section class="o-section">
+  <nav class="c-menu">
+
+    <!-- Menu's item navigation -->
+    <div class="c-menu__item has-border-radius-8" *ngFor="let item_navigation of NAVIGATION_MENU">
+      <a
+        title="Ir a {{ item_navigation.title }}"
+        *ngIf="item_navigation.title !== 'VISITAR CLIENTE' && item_navigation.title !== 'RUTERO'"
+        routerLink="{{ item_navigation.pathModule }}"
+      > 
+        <!-- Ico item -->
+        <span
+          [ngStyle]="{'color': item_navigation.color}"
+          class="c-menu__item-icon i-{{ item_navigation.ico }}"
+        ></span>
+
+        <!-- Title and lee -->
+        <h2
+          class="
+            c-menu__item-text
+            o-font-primary o-bold
+          "
+        >
+          {{ item_navigation.title }}
+        </h2>
+        <p
+          class="
+            c-menu__item-text
+            o-font-primary
+          "
+        >
+          {{ item_navigation.description }}
+        </p>
+      </a>
+      <button
+        *ngIf="item_navigation.title === 'VISITAR CLIENTE'"
+        (click)="hrefToPage(item_navigation.pathModule, 'visit')"
+      > 
+        <!-- Ico item -->
+        <span
+          [ngStyle]="{'color': item_navigation.color}"
+          class="c-menu__item-icon i-{{ item_navigation.ico }}"
+        ></span>
+
+        <!-- Title and lee -->
+        <h2
+          class="
+            c-menu__item-text
+            o-font-primary o-bold
+          "
+        >
+          {{ item_navigation.title }}
+        </h2>
+        <p
+          class="
+            c-menu__item-text
+            o-font-primary
+          "
+        >
+          {{ item_navigation.description }}
+        </p>
+      </button>
+      <button
+        *ngIf="item_navigation.title === 'RUTERO'"
+        (click)="hrefToPage(item_navigation.pathModule, 'router')"
+      > 
+        <!-- Ico item -->
+        <span
+          [ngStyle]="{'color': item_navigation.color}"
+          class="c-menu__item-icon i-{{ item_navigation.ico }}"
+        ></span>
+
+        <!-- Title and lee -->
+        <h2
+          class="
+            c-menu__item-text
+            o-font-primary o-bold
+          "
+        >
+          {{ item_navigation.title }}
+        </h2>
+        <p
+          class="
+            c-menu__item-text
+            o-font-primary
+          "
+        >
+          {{ item_navigation.description }}
+        </p>
+      </button>
+    </div>
+
+  </nav>
+</section>

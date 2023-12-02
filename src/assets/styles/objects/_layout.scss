@@ -1,0 +1,70 @@
+.o-main {
+  padding: 40px 0;
+}
+
+.o-section-top {
+  margin-top: 24px;
+}
+
+.o-section {
+  margin-bottom: 24px;
+}
+
+.o-section_aling-right {
+  text-align: right;
+}
+
+.o-surface {
+  padding: 40px 0;
+
+  &.primary-20 {
+    color: $c-neutro;
+    background-color: $c-primary-20;
+  }
+
+  &.gray-20 {
+    background-color: $c-gray-20;
+  }
+}
+
+.o-surface_gold {
+  padding: 20px 0 10px;
+  margin: 20px 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('/assets/imgs/bg_gold.jpeg');
+
+  .c-product__title {
+    color: $c-gold-60;
+  }
+}
+
+.o-margin-top-16 {
+  margin-top: 16px;
+}
+
+.o-canvas {
+  width: 95%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.o-layout-page {
+  padding-top: 90px;
+  padding-bottom: 80px;
+  height: 100%;
+}
+
+.o-layout-page-small {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.o-background-bottom {
+  height: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: $c-neutro;
+  --background: initial;
+}

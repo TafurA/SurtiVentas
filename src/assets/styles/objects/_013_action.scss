@@ -1,0 +1,11 @@
+.o-action {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  margin-top: 24px;
+
+  .o-button {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}

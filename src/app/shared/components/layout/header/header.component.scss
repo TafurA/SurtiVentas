@@ -1,0 +1,148 @@
+@import '../../../../../assets/styles/settings/settings';
+
+
+.c-header {
+  position: relative;
+  border-bottom: 1px solid $c-gray-20;
+  padding: 12px;
+  background-color: $c-neutro;
+  z-index: 1000;
+}
+
+
+.c-header__wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 16px;
+}
+
+
+.c-header__brand {
+  max-width: 60px;
+  min-width: 60px;
+}
+
+
+.c-header__search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.c-header__search-input {
+  width: 176px;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 10px;
+  color: $c-gray-25;
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+
+  .is-open & {
+    animation: showSearchInput 1s 1 forwards;
+  }
+}
+
+.c-header__search-btn {
+  font-size: 20px;
+  color: $c-gray-25;
+  background: transparent;
+}
+
+
+.c-header__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 16px;
+}
+
+
+.c-header__car {
+  position: relative;
+  line-height: 1;
+  text-decoration: none;
+
+  i {
+    color: $c-gray;
+    font-size: 24px;
+  }
+
+  &.is-product-add {
+    animation: reboteOut 1s 1;
+  }
+}
+
+.c-header__car-number {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $c-secondary;
+  padding: 8px;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $c-neutro;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+@keyframes showSearchInput {
+
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: .3;
+    border-color: $c-gray-25;
+    width: 180px;
+  }
+
+  50% {
+    width: 185px;
+    opacity: .5;
+  }
+
+  75% {
+    opacity: .8;
+    width: 190px;
+  }
+
+  100% {
+    width: 221px;
+    opacity: 1;
+    border-color: $c-gray-25;
+  }
+
+}
+
+@keyframes reboteOut {
+
+  25% {
+
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  100% {
+
+    transform: scale(0.0);
+    opacity: 0;
+
+  }
+
+}

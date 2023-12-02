@@ -1,0 +1,25 @@
+@import "/src/assets/styles/settings/var_color";
+
+
+.c-ranking {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 40px;
+  border-radius: 8px;
+  padding: 12px 32px;
+  color: $c-neutro;
+  background-color: $c-success;
+}
+
+.c-ranking__header {
+  flex:  1 60%;
+}
+
+.c-ranking__title {
+  margin-bottom: 8px;
+}
+
+.c-ranking__bar {
+  flex: 1 30%;
+}

@@ -1,0 +1,102 @@
+<section class="o-surface" [ngClass]="surface">
+  <div class="o-canvas">
+
+    <div class="c-list-store">
+      <h3 class="c-list-store__title">{{title}}</h3>
+
+      <ng-container>
+        <form id="search-component" class="c-header__search">
+          <input 
+            id="search-term"
+            class="c-header__search-input js-input-search" 
+            placeholder="Buscar por nombre o dirección del cliente..." 
+            (keyup)="sendWord$($event)"
+          >
+          <label class="c-header__search-label i-search" for="" *ngIf="!isTerm"></label>
+          <label class="c-header__search-label i-close" (click)="getListStores('close')" for="" *ngIf="isTerm"></label>
+        </form>
+      </ng-container>
+
+      <!-- STORE LIST VISITED -->
+      <ul *ngIf="type === 'visited'" class="c-list-store__list">
+        <li *ngFor="let store of storesVisited" class="c-list-store__item">
+          <div>
+            <h4 class="c-list-store__item-title o-title o-bold">{{ store.nomcli_b }}</h4>
+            <ul style="margin-top: 8px; margin-left: 16px;">
+              <li style="font-size:12px; margin-top: 4px;" class="o-text">
+                {{ store.codcli_b }}
+              </li>
+              <li style="font-size:12px; margin-top: 4px;" class="o-text">
+                {{ store.empcli_b }}
+              </li>
+              <li style="font-size:12px; margin-top: 4px;" class="o-text">
+                {{ store.dircli_b }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="c-list-store__item-actions">
+            <p class="c-list-store__item-copy">VISITADA</p>
+          </div>
+        </li>
+      </ul>
+
+      <!-- TODO: PONER LOADER -->
+      <!-- STORE LIST BY VISIT -->
+      <ul *ngIf="type !== 'visited' && isStoresByVisitLoaded" class="c-list-store__list">
+        <li
+          *ngFor="let store of storesByVisit; index as i"
+          class="c-list-store__item"
+          [style.border-left]="'10px solid #' + store.color"
+        >
+          <div>
+            <h4 class="c-list-store__item-title o-title o-bold">{{ store.nomcli_b }}</h4>
+            <ul style="margin-top: 8px; margin-left: 16px;">
+              <li style="font-size:12px; margin-top: 4px;" class="o-text">
+                {{ store.codcli_b }}
+              </li>
+              <li style="font-size:12px; margin-top: 4px;" class="o-text">
+                {{ store.empcli_b }}
+              </li>
+              <li style="font-size:12px; margin-top: 4px;" class="o-text">
+                {{ store.dircli_b }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="c-list-store__item-actions">
+            <button *ngIf="type === 'init'" id="modal-visit-{{i}}" class="o-link o-link_primary i-after-arrow-right">
+              Iniciar visita
+            </button>
+            <button *ngIf="type === 'detail'" class="o-link o-link_primary" (click)="saveCurrentStore(store)">
+              Detalle
+            </button>
+          </div>
+
+          <!-- Modal visit client -->
+          <app-start-visit style="position: absolute;" modalIdentifier="modal-visit-{{i}}"
+            idStore="{{ store.codcli_b }}" nameStore="{{ store.nomcli_b }}"></app-start-visit>
+
+        </li>
+      </ul>
+
+      <!-- Data unloaded -->
+      <ul class="c-list-store__list" *ngIf="!isStoresByVisitLoaded">
+        <li class="c-list-store__item">
+          <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+        </li>
+        <li class="c-list-store__item">
+          <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+        </li>
+        <li class="c-list-store__item">
+          <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+</section>

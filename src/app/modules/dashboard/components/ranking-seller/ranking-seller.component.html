@@ -1,0 +1,67 @@
+<section class="o-section">
+
+  <!-- Data loaded -->
+  <div *ngIf="dataForRankingSellerLoaded">
+    <div class="o-canvas">
+      <header class="o-headline">
+        <h2 class="o-heading">Ranking vendedores</h2>
+        <p class="o-link">Se listan los mejores cinco</p>
+      </header>
+    </div>
+
+
+    <ul class="c-ranking-seller__list">
+      <li class="c-ranking-seller" *ngFor="let rankingUser of rankingSellerList">
+        <!-- User avatar -->
+        <figure class="c-ranking-seller__avatar">
+          <img
+            class="c-ranking-seller__img"
+            src="https://surtiappdev.surtilider.com:9001/IntranetSurti/Assets/img/vendedor/{{rankingUser['login']}}.jpg"
+            appImgBroken
+            alt="Avatar {{ rankingUser['nombreVendedor'] }}"
+          >
+          <figcaption class="c-ranking-seller__tile o-title o-bold">
+            {{ rankingUser['nombreVendedor'] }}
+            <span>Grupo: {{ rankingUser['bodega'] }}</span>
+          </figcaption>
+        </figure>
+        <!-- Points -->
+        <span class="c-ranking-seller__points o-title o-bold">
+          {{ rankingUser['cumplimiento'] }} Ventas
+        </span>
+      </li>
+    </ul>
+
+  </div>
+  <!-- End data loaded -->
+
+  <!-- Data unloaded -->
+  <div *ngIf="!dataForRankingSellerLoaded">
+    <div class="o-canvas">
+      <header class="c-ranking__header" style="margin-bottom: 24px;">
+        <ion-skeleton-text [animated]="true" style="width: 220px; height: 26px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 80px; height: 13px;"></ion-skeleton-text>
+      </header>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <ion-skeleton-text [animated]="true" style="width: 29px; height: 48px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 232px; height: 32px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 52px; height: 28px;"></ion-skeleton-text>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <ion-skeleton-text [animated]="true" style="width: 29px; height: 48px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 232px; height: 32px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 52px; height: 28px;"></ion-skeleton-text>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <ion-skeleton-text [animated]="true" style="width: 29px; height: 48px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 232px; height: 32px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 52px; height: 28px;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+  <!-- End data unloaded -->
+
+</section>

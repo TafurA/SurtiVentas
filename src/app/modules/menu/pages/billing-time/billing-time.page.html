@@ -1,0 +1,55 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page-small">
+
+    <!-- Back button-->
+    <app-back-button></app-back-button>
+
+    <div class="o-canvas">
+
+      <!-- Header -->
+      <header class="o-headline">
+        <p class="o-text">Soporte</p>
+        <h1 class="o-heading">Horarios de facturación</h1>
+      </header>
+
+      <section *ngFor="let day of daysBillingList">
+        <h3 class="o-box-support__title">{{day.dia}}</h3>
+        <article class="o-box-support">
+          Desde las: {{day.HoraInicio}} - Hasta las: {{day.HoraFinal}}
+        </article>
+      </section>
+
+      <div>
+
+        <button class="c-navigation-support__item o-dropdown js-dropdown-target"
+          (click)="toggleDropdownSupport($event)">
+          <span class="c-navigation-support__ico i-help"></span>
+          <span class="
+              c-navigation-support__txt o-dropdown__text
+              i-after-arrow-down
+            ">
+            Soporte
+          </span>
+        </button>
+
+        <nav class="c-navigation-support__submenu">
+          <a class="c-navigation-support__submenu-link" [routerLink]="['/menu/billing-time']"
+            routerLinkActive="is-active">
+            Horarios de facturación
+          </a>
+          <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/question']"
+            routerLinkActive="is-active">
+            Preguntas frecuentes
+          </a>
+          <a class="c-navigation-support__submenu-link"
+            href="https://surtilider.com/files/SURTILIDER%20POLITICA%20HABEAS%20DATA.pdf" download target="_blank">
+            Tratamiento de datos personales
+          </a>
+        </nav>
+
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

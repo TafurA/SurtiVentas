@@ -1,0 +1,9 @@
+<ul class="c-list-days">
+  <li class="c-list-days__item" *ngFor="let day of daysOfWeek"
+    [ngClass]="{'is-active':today.getDate().toString() === day.dayNumeric.toString()}">
+    <div class="c-list-days__item-text">
+      <span>{{ day.dayString }}</span>
+      <span>{{ day.dayNumeric }}</span>
+    </div>
+  </li>
+</ul>

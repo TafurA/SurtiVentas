@@ -1,0 +1,31 @@
+.c-map {
+  display: flex;
+  column-gap: 16px;
+
+  #map {
+    min-width: 100%;
+    border-radius: 16px;
+    height: 154px;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 18%);
+  }
+
+  .c-detail {
+    padding: 16px 16px 0;
+    width: 100%;
+  }
+
+  .c-detail__item {
+    margin-bottom: 16px;
+  }
+}
+
+.c-map-crate {
+  .c-detail__item_col {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .c-detail__item-box {
+      font-size: 12px;
+    }
+  }
+}

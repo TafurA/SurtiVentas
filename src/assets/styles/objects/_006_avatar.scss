@@ -1,0 +1,19 @@
+.o-avatar {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  margin-bottom: 24px;
+}
+
+.o-avatar__figure {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

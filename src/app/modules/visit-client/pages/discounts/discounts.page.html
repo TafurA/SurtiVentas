@@ -1,0 +1,175 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page-small">
+    <app-back-button></app-back-button>
+
+    <div class="o-canvas">
+      <header class="o-headline">
+        <h1 class="o-heading">Gestión de descuentos</h1>
+        <p class="o-text">Aquí podrás administrar y aplicar descuentos a las órdenes realizadas</p>
+      </header>
+    </div>
+
+    <section class="o-section">
+      <div
+        class="o-canvas">
+        <!-- Descuentos -->
+        <ng-container>
+          <h3 class="o-title">Descuentos diarios</h3>
+
+          <div class="c-discount-slider__wrap" *ngIf="isDiscountsListLoaded">
+            <ng-container *ngFor="let state of getDiscountState()">
+              <h3 *ngIf="state === 'PEND'" class="o-title c-product-slider__title">PENDIENTE</h3>
+              <h3 *ngIf="state === 'CONT'" class="o-title c-product-slider__title">ACEPTADO</h3>
+              <h3 *ngIf="state === 'RECH'" class="o-title c-product-slider__title">RECHAZADO</h3>
+
+              <swiper-container [modules]="swiperModules" [slidesPerView]="'auto'">
+                <swiper-slide class="c-discount__slide" *ngFor="let discount of getDiscountGroup(state)">
+                  <div class="c-discount" ngClass="is-{{ discount.estdes_b }}">
+                    <h4 class="c-discount__title o-bold">{{ discount.nomcli_b }}</h4>
+                    <div class="c-discount__content">
+                      <p class="c-discount__text">{{ discount.obsdes_b }}</p>
+                      <p class="c-discount__text">
+                        Valor final: <strong>${{ discount.valorFinal }}</strong></p>
+                      <div class="c-discount__footer">
+                        <p class="o-bold">Fecha:
+                          {{ discount.fecdes_b }}</p>
+                        <p class="o-bold">{{ discount.numped_b }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </swiper-slide>
+              </swiper-container>
+            </ng-container>
+          </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="!isEmpty">
+          <div class="o-checkout__dropdown">
+            <h3 class="o-title i-after-arrow-down" (click)="toggleDropdown($event)">Órdenes para aplicar descuento</h3>
+            <div>
+              <div class="o-checkout__products">
+                <form id="search-component" class="c-header__search">
+                  <input id="search-term" type="text" class="c-header__search-input js-input-search" placeholder="Buscar por nombre del cliente..." (keyup)="sendWord$($event)">
+                  <label class="c-header__search-label i-search" for="" *ngIf="!isTerm"></label>
+                  <label class="c-header__search-label i-close" (click)="getOrdersDiscounts()" for="" *ngIf="isTerm"></label>
+                </form>
+
+                <div *ngIf="isOrderDiscountsListLoaded">
+                  <div *ngFor="let item of orderDiscountsList, let i = index">
+                    <div class="c-card-detail">
+                      <header class="c-card-detail__header">
+                        <p class="o-text o-bold c-card-detail__grey">4 productos</p>
+                        <p class="o-text o-bold">${{ item.valped_b | number:'1.0-0':'es-CO' }}</p>
+                      </header>
+                      <div class="c-card-detail__content">
+                        <p class="o-text">{{ item.nomcli_b }}</p>
+                      </div>
+                      <footer class="c-card-detail__footer">
+                        <p class="o-text o-bold o-text_fs-14 c-card-detail__grey">Fecha:
+                          {{ item.fecped_b }}</p>
+                        <button id="send-discount-{{ i }}" (click)="saveDiscountToSend(item)" class="o-link o-link_secondary o-text_fs-14">Aplicar descuento</button>
+                      </footer>
+                    </div>
+                    <ion-modal *ngIf="isModalCreated" trigger="send-discount-{{i}}" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+                      <ng-template>
+                        <div class="block">
+                          <div
+                            class="c-modal">
+                            <!-- <button class="c-modal__close i-close"></button> -->
+                            <h3 class="c-modal__title i-discount">
+                              Descripción del descuento
+                            </h3>
+
+                            <!-- BASIC INFORMATION -->
+                            <div
+                              class="o-form">
+
+                              <!-- Identification or user field -->
+                              <div class="o-form__field">
+
+                                <div class="o-form__field-wrap">
+                                  <input id="nameStore" [(ngModel)]="descriptionDiscount" class="o-form__input" type="textarea" placeholder="Aplicar descuento del 3%">
+                                  <label for="nameStore" class="o-form__label"></label>
+                                </div>
+                              </div>
+
+                            </div>
+
+                            <div class="c-modal__actions" *ngIf="descriptionDiscount">
+                              <button class="o-button" (click)="saveDiscountFinally()">
+                                Enviar descuento
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ion-modal>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="o-message o-message_info" *ngIf="isEmpty">
+          <h2 class="o-message__title i-info">En el momento no hay ordenes para aplicar descuentos.</h2>
+        </div>
+
+        <!-- Data unloaded -->
+        <div *ngIf="!isOrderDiscountsListLoaded && !isEmpty">
+          <div class="o-canvas">
+            <div class="c-card-detail is-pend">
+              <header class="c-card-detail__header">
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 59px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+              </header>
+              <div class="c-card-detail__content">
+                <ion-skeleton-text [animated]="true" style="width: 345px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+              </div>
+              <footer class="c-card-detail__footer">
+                <p class="o-text o-bold o-text_fs-14 c-card-detail__grey">Fecha:
+                  <ion-skeleton-text [animated]="true" style="width: 121px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 116px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+                </p>
+              </footer>
+            </div>
+            <div class="c-card-detail is-pend">
+              <header class="c-card-detail__header">
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 59px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+              </header>
+              <div class="c-card-detail__content">
+                <ion-skeleton-text [animated]="true" style="width: 345px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+              </div>
+              <footer class="c-card-detail__footer">
+                <p class="o-text o-bold o-text_fs-14 c-card-detail__grey">Fecha:
+                  <ion-skeleton-text [animated]="true" style="width: 121px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 116px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+                </p>
+              </footer>
+            </div>
+            <div class="c-card-detail is-pend">
+              <header class="c-card-detail__header">
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 59px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+              </header>
+              <div class="c-card-detail__content">
+                <ion-skeleton-text [animated]="true" style="width: 345px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+              </div>
+              <footer class="c-card-detail__footer">
+                <p class="o-text o-bold o-text_fs-14 c-card-detail__grey">Fecha:
+                  <ion-skeleton-text [animated]="true" style="width: 121px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 116px; height: 19px; border-radius: 8px"></ion-skeleton-text>
+                </p>
+              </footer>
+            </div>
+          </div>
+        </div>
+        <!-- End data unloaded -->
+
+      </div>
+    </section>
+
+  </div>
+</ion-content>

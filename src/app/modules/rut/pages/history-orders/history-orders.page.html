@@ -1,0 +1,131 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page-small">
+
+    <!-- Header back -->
+    <app-back-button></app-back-button>
+
+    <div class="o-canvas">
+
+      <header class="o-headline">
+        <h1 class="o-heading">Histórico de pedidos</h1>
+        <p class="o-text o-text_fs-14">
+          Aquí encuentras el listado de los pedidos realizados en esta tienda con sus respectivos seguimientos.
+        </p>
+      </header>
+
+      <ng-container>
+        <form id="search-component" class="c-header__search">
+          <input id="search-term" type="text" class="c-header__search-input js-input-search" placeholder="Buscar por id del pedido..." (keyup)="sendWord$($event)">
+          <label class="c-header__search-label i-search" for="" *ngIf="!isTerm"></label>
+          <label class="c-header__search-label i-close" (click)="getOrder()" for="" *ngIf="isTerm"></label>
+        </form>
+      </ng-container>
+
+      <div *ngIf="!loaded">
+        <ion-skeleton-text [animated]="true" style="width: 100%; height: 24px"></ion-skeleton-text>
+
+        <!-- Personal information -->
+        <div class="o-information">
+
+          <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+
+          <div class="o-information__form">
+
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+
+          </div>
+
+        </div>
+        <ion-skeleton-text [animated]="true" style="width: 100%; height: 24px"></ion-skeleton-text>
+
+        <!-- Personal information -->
+        <div class="o-information">
+
+          <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+
+          <div class="o-information__form">
+
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+
+          </div>
+
+        </div>
+        <ion-skeleton-text [animated]="true" style="width: 100%; height: 24px"></ion-skeleton-text>
+
+        <!-- Personal information -->
+        <div class="o-information">
+
+          <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+
+          <div class="o-information__form">
+
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 20px"></ion-skeleton-text>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div>
+
+        <div *ngIf="!isEmpty">
+
+          <div *ngIf="loaded">
+            <div *ngFor="let subCategory of getProductSubCategories()">
+              <div class="o-checkout__dropdown">
+
+                  <h2 class="o-headline__title o-history-title i-arrow-right" (click)="toggleDropdown($event)">{{ subCategory }}</h2>
+
+                  <div class="o-checkout__products">
+                    <!-- Personal information -->
+                    <div class="o-information" *ngFor="let order of getProductGroup(subCategory)">
+
+                      <h2 class="o-information__title">Número factura: <span class="o-information__kicker">#{{ order.idpedido }}</span></h2>
+
+                      <div class="o-information__form">
+
+                        <label class="o-information__input">Fecha emición: <strong>{{ order.fecha }}</strong></label>
+                        <label class="o-information__input">Total de la compra: <strong>{{ order.valped_b }}</strong></label>
+                        <label class="o-information__input">Total de productos: <strong>{{ order.productos }}</strong></label>
+
+                        <button
+                          (click)="saveCurrentDetail(order)"
+                          class="o-link o-link_secondary"
+                        >
+                          VER DETALLES
+                        </button>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="o-message o-message_info" *ngIf="isEmpty">
+          <h2 class="o-message__title i-info">En el momento no se encuentran pedidos registrados.</h2>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

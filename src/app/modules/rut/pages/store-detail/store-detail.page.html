@@ -1,0 +1,124 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page-small">
+
+    <app-back-button></app-back-button>
+
+    <div class="o-canvas">
+
+      <header class="o-headline">
+        <h1 class="o-heading">🏪 Tienda {{ this.store.empcli_b }} </h1>
+        <p class="o-text o-text_fs-14">
+          Modifica y manten actualizados los datos del cliente.
+        </p>
+      </header>
+
+      <section class="o-section">
+        <header class="o-headline">
+          <h2 class="o-title">Datos básicos</h2>  
+        </header>
+
+        <ul class="c-detail">
+          <li class="c-detail__item">
+            <h3 class="c-detail__item-box">Nombre cliente:</h3>
+            <strong
+              class="c-detail__item-box c-detail__item-box_70"
+            >
+              {{ this.store.nomcli_b }} {{ this.store.ape1cli_b }} {{ this.store.ape2cli_b }}
+            </strong>
+          </li>
+          <li class="c-detail__item">
+            <h3 class="c-detail__item-box">Nombre empresa:</h3>
+            <strong class="c-detail__item-box c-detail__item-box_70">{{ this.store.empcli_b }}</strong>
+            <input
+              class="c-detail__item-box c-detail__item-box_70"
+              [ngClass]="{'is-form-active':isFormActive}"
+              [(ngModel)]="this.store.empcli_b"
+              (blur)="showActionToEdit()"
+            >
+          </li>
+          <li class="c-detail__item">
+            <h3 class="c-detail__item-box">Teléfono:</h3>
+
+            <div class="is-flex-70">
+              <input
+                class="c-detail__item-box c-detail__item-box_70"
+                [ngClass]="{'is-form-active':isFormActive}"
+                [(ngModel)]="this.store.telcli_b"
+                (blur)="showActionToEdit()"
+                (input)="showNumbersCel()"
+              >
+              <span *ngIf="messageError" class="o-form__error">Máximo 10 digitos</span>
+            </div>
+
+          </li>
+          <li class="c-detail__item">
+            <h3 class="c-detail__item-box">Correo electrónico:</h3>
+            <input
+              class="c-detail__item-box c-detail__item-box_70"
+              [ngClass]="{'is-form-active':isFormActive}"
+              [(ngModel)]="this.store.emacli_b"
+              (blur)="showActionToEdit()"
+            >
+          </li>
+          <li class="c-detail__item">
+            <h3 class="c-detail__item-box">Dirección:</h3>
+            <strong class="c-detail__item-box c-detail__item-box_70">{{ this.store.dircli_b }}</strong>
+          </li>
+        </ul>
+
+      </section>
+
+      <section class="o-section">
+        <header class="o-headline">
+          <h2 class="o-title">Datos ubicación</h2>  
+        </header>
+
+        <!-- <div>
+          <label for="address">Ingresa una dirección:</label>
+          <input type="text" id="address" />
+          <button (click)="geocodeAddress()">Obtener Coordenadas</button>
+        </div> -->
+        <div class="c-map">
+          <div id="map"></div>
+          <ul class="c-detail">
+            <li class="c-detail__item">
+              <h3 class="c-detail__item-box">Coordenadas:</h3>
+            </li>
+            <li class="c-detail__item">
+              <h3 class="c-detail__item-box">Latitud:</h3>
+              <strong class="c-detail__item-box c-detail__item-box_70">{{ this.store.latcli_b }}</strong>
+            </li>
+            <li class="c-detail__item">
+              <h3 class="c-detail__item-box">Longitud:</h3>
+              <strong class="c-detail__item-box c-detail__item-box_70">{{ this.store.loncli_b }}</strong>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+
+    <div *ngIf="!isFormActive">
+      <ion-fab (click)="showEditForm()" slot="fixed" vertical="bottom" horizontal="end">
+        <div class="o-float-btn">
+          <ion-fab-button>
+            <!-- <ion-icon name="add"></ion-icon> -->
+            <span [classList]="iconAction"></span>
+          </ion-fab-button>
+        </div>
+      </ion-fab>
+    </div>
+
+    <div *ngIf="isFormActive && !messageError">
+      <ion-fab (click)="saveEditForm()" slot="fixed" vertical="bottom" horizontal="end">
+        <div class="o-float-btn">
+          <ion-fab-button>
+            <!-- <ion-icon name="add"></ion-icon> -->
+            <span [classList]="iconAction"></span>
+          </ion-fab-button>
+        </div>
+      </ion-fab>
+    </div>
+
+  </div>
+</ion-content>

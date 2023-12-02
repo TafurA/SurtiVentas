@@ -1,0 +1,28 @@
+<ion-modal
+  trigger="{{ modalIdentifier }}"
+  [initialBreakpoint]="1"
+  [breakpoints]="[0, 1]"
+>
+  <ng-template>
+    <div class="block">
+      <div class="c-modal">
+        <!-- <button class="c-modal__close i-close"></button> -->
+        <h3 class="c-modal__title i-vehicle-truck-cube" *ngIf="estped_b === 'PEND'">
+          ¿Continuar visita a {{ nameStore }}?
+        </h3>
+        <h3 class="c-modal__title i-vehicle-truck-cube" *ngIf="!estped_b">
+          ¿Iniciar visita a {{ nameStore }}?
+        </h3>
+
+        <div class="c-modal__actions">
+          <button
+            (click)="startClientVisit()"
+            class="o-button"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>

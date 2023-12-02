@@ -1,0 +1,25 @@
+@import '../../../../../assets/styles/settings/var_color';
+
+.c-photo {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin: 32px 0 24px 0;
+
+  .o-avatar__figure {
+    min-width: 70px;
+    min-height: 70px;
+  }
+}
+
+.c-photo__caption {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  max-width: 228px;
+}
+
+.c-photo__text {
+  font-size: 14px;
+  color: $c-text-10;
+}

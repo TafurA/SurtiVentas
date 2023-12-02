@@ -1,0 +1,108 @@
+<ion-content [fullscreen]="true">
+  <section class="o-main">
+    <div class="o-canvas">
+
+      <div class="o-headline-media">
+        <figure class="o-headline-media__figure">
+          <img src="assets/imgs/brand/logo_color.svg" alt="Logo Surtilider de colores azul y rojo">
+        </figure>
+        <header class="o-headline">
+          <h1 class="o-heading">¡Bienvenido de nuevo! 👋</h1>
+          <p class="o-text">Ingresa tus credenciales para iniciar sesión.</p>
+          <p class="o-text" style="font-size: 12px; margin-top: 16px; color: #ccc;">Versión {{ currentNumberVersion }}</p>
+        </header>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form class="o-form" (ngSubmit)="validateLogin()" [formGroup]="formLogin">
+
+        <!-- Identification or user field -->
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            <input
+              id="user"
+              formControlName="user"
+              class="o-form__input"
+              type="text"
+              placeholder="Nombre de usuario"
+            >
+            <label for="user" class="o-form__label i-person"></label>
+          </div>
+          <span class="o-form__error">{{ getErrorField('user')}}</span>
+        </div>
+
+        <!-- Password field -->
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            <input
+              id="password"
+              formControlName="password"
+              class="o-form__input"
+              type="password"
+              placeholder="*******"
+            >
+            <label for="password" class="o-form__label">
+              <button
+                title="cambiar contraseña"
+                type="button"
+                class="o-form__label-ico i-eye"
+                (click)="this._authService.passwordChange($event)"
+              ></button>
+            </label>
+          </div>
+          <span class="o-form__error">{{ getErrorField('password')}}</span>
+        </div>
+
+        <!-- Login, Recover and Contact actions -->
+        <footer *ngIf="currentVersion" class="o-form__actions">
+
+          <!-- Login and recover actions -->
+          <div class="o-form__actions-box">
+            <button
+              type="button"
+              class="o-button"
+              (click)="validateLogin()"
+              [disabled]="formLogin.invalid"
+            >
+              Ingresar
+            </button>
+            <a
+              class="o-link o-link_underline"
+              [routerLink]="['/auth/forgot-password']"
+              routerLinkActive="router-link-active"
+            >
+              ¿Olvidaste tu contraseña?
+            </a>
+          </div>
+
+          <!-- Support contact actions -->
+          <div class="o-form__actions-box">
+            <p class="o-divider">
+              <span class="o-divider__text">Ó también puedes</span>
+            </p>
+
+            <!-- Ways of support contact -->
+            <button
+              id="open-action-support-contact"
+              type="button"
+              class="o-button o-button_secondary"
+            >
+              Contactar a Soporte
+            </button>
+            <ion-action-sheet
+              trigger="open-action-support-contact"
+              class="c-action-sheet"
+              header="¿Como deseas contactar a soporte?"
+              [buttons]="actionWaysSupportContact"
+              (didDismiss)="getModeOfContact($event)"
+            ></ion-action-sheet>
+            <!-- End Ways of support contact -->
+
+          </div>
+        </footer>
+
+      </form>
+
+    </div>
+  </section>
+</ion-content>

@@ -1,0 +1,144 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page-small">
+    <app-back-button></app-back-button>
+
+    <div class="o-canvas">
+      <header class="o-headline o-headline_columns">
+        <h1 class="o-heading">Devoluciones</h1>
+      </header>
+    </div>
+
+    <section class="o-section">
+      <div class="o-canvas">
+
+        <div *ngIf="loader">
+          <ng-container *ngFor="let date of getDevolutionsDate()">
+            <h3 class="o-title c-product-slider__title">{{ date }}</h3>
+            <ul>
+              <li *ngFor="let item of getDevolutionsGroup(date)" class="c-card-detail is-pend">
+                <header class="c-card-detail__header">
+                  <p class="o-text o-bold c-card-detail__grey">{{ item.productos }} productos</p>
+                  <p class="o-text o-bold">${{ item.total | number:'1.0-0':'es-CO' }}</p>
+                </header>
+                <div class="c-card-detail__content">
+                  <p class="o-text">{{ item.cliente }}</p>
+                  <p class="o-text">Causal: <span class="c-card-detail__causal">{{ item.causal }}</span></p>
+                  <p class="o-text">Transportador(a): <span class="c-card-detail__causal">{{ item.trasnportador }}</span></p>
+                </div>
+                <footer class="c-card-detail__footer">
+                  <div class="o-checkout__dropdown">
+
+                    <button class="
+                        o-link o-link_secondary
+                        i-after-arrow-down
+                      " (click)="toggleDropdown($event)">
+                      DETALLE PRODUCTOS
+                    </button>
+        
+                    <div>
+                      <div class="o-checkout__products">
+        
+                        <div *ngFor="let product of producstList">
+                        <article *ngIf="product.fact === item.id" class="c-product-horizontal">
+                          <figure class="c-product-horizontal__figure">
+                            <img class="c-product-horizontal__img o-img" src="{{ product.image }}" alt="">
+                            <figcaption class="c-product-horizontal__caption">
+                              <p class="c-product-horizontal__title">{{ product.nombre }}</p>
+                              <p class="c-product-horizontal__amount-wrap">Cantidad:
+                                <span class="c-product-horizontal__amount">
+                                  {{ product.cant }}
+                                </span>
+                              </p>
+                              <p class="c-product-horizontal__amount-wrap">
+                                Precio Unit: ${{ product.precio | number:'1.0-0':'es-CO' }} COP
+                              </p>
+                            </figcaption>
+                          </figure>
+                          <div class="c-product-horizontal__price">
+                            <span class="c-product__amount">${{ product.total | number:'1.0-0':'es-CO' }} COP</span>
+                            <!-- <div
+                              *ngIf="product.porcDescuento !== '0.00' && product.porcDescuento !== '0'"
+                              class="c-product__ico c-product__ico_discount i-star"
+                            >
+                              <span class="c-product__ico_discount-txt">{{ product.porcDescuento }}%</span>
+                              <span class="c-product__ico-txt">${{ product.precioSinDcto }} cop</span>
+                            </div> -->
+                          </div>
+                        </article>
+                        </div>
+
+                      </div>
+                    </div>
+        
+                  </div>
+                </footer>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+
+        <ng-container *ngIf="!loader">
+          <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+
+          <ul>
+            <li class="c-card-detail is-pend">
+              <header class="c-card-detail__header">
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+              </header>
+              <div class="c-card-detail__content">
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+              </div>
+              <footer class="c-card-detail__footer">
+                <div class="o-checkout__dropdown">
+
+                  <ion-skeleton-text [animated]="true" style="width: 40px; height: 13px;"></ion-skeleton-text>
+       
+                 </div>
+              </footer>
+            </li>
+            <li class="c-card-detail is-pend">
+              <header class="c-card-detail__header">
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+              </header>
+              <div class="c-card-detail__content">
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+              </div>
+              <footer class="c-card-detail__footer">
+                <div class="o-checkout__dropdown">
+
+                  <ion-skeleton-text [animated]="true" style="width: 40px; height: 13px;"></ion-skeleton-text>
+       
+                 </div>
+              </footer>
+            </li>
+            <li class="c-card-detail is-pend">
+              <header class="c-card-detail__header">
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+              </header>
+              <div class="c-card-detail__content">
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 94px; height: 13px;"></ion-skeleton-text>
+              </div>
+              <footer class="c-card-detail__footer">
+                <div class="o-checkout__dropdown">
+
+                  <ion-skeleton-text [animated]="true" style="width: 40px; height: 13px;"></ion-skeleton-text>
+       
+                 </div>
+              </footer>
+            </li>
+          </ul>
+        </ng-container>
+
+      </div>
+    </section>
+  </div>
+</ion-content>

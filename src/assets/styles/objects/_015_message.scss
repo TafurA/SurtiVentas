@@ -1,0 +1,35 @@
+.o-message__caption {
+  font-family: "Open sans";
+  max-width: 300px;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.o-message_confirm {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+
+.o-message {
+  padding: 24px;
+  text-align: center;
+}
+
+.o-message_info {
+  color: #3A93DF;
+}
+
+.o-message__title {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 24px;
+  font-weight: 700;
+
+  &::before {
+    font-size: 50px;
+  }
+}

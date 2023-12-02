@@ -1,0 +1,23 @@
+.o-loader {
+
+  &.sc-ion-loading-md-h {
+    --backdrop-opacity: .6;
+  }
+
+  // Ionic component
+  ion-backdrop {
+    background-color: $c-neutro;
+  }
+
+  .loading-wrapper {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  ion-spinner {
+    transform: scale(5);
+    color: $c-primary !important;
+  }
+
+}

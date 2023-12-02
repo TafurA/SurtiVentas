@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page">
+
+    <div class="o-canvas">
+      <!-- Header dashboard -->
+      <section class="o-section">
+        <div class="o-avatar">
+          <!-- User's avatar -->
+          <ion-thumbnail slot="start" class="o-avatar__figure">
+            <img alt="Avatar {{ userModel.name }}" src="{{ userModel.foto }}" />
+          </ion-thumbnail>
+          <!-- Greet label and Seller's name -->
+          <div>
+            <p class="o-text">Buen día,</p>
+            <h1 class="o-title">{{ userModel.name }} 😄</h1>
+          </div>
+        </div>
+
+        <!-- Ranking component -->
+        <!-- <app-ranking-weekly></app-ranking-weekly> -->
+      </section>
+
+      <!-- Primary navigation menu -->
+      <app-menu></app-menu>
+
+      <!-- Metrics component -->
+      <app-metrics></app-metrics>
+    </div>
+    <!-- Ranking seller component -->
+    <app-ranking-seller></app-ranking-seller>
+
+  </div>
+</ion-content>

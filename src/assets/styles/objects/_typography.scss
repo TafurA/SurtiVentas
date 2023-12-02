@@ -1,0 +1,58 @@
+html,
+.theme {
+  color: $c-text;
+  font-size: 100%;
+  font-family: $f-title;
+}
+
+body,
+.o-text {
+  line-height: 1.2;
+  color: $c-text;
+  font-family: $f-title;
+  font-weight: $f-regular;
+  font-size: 16px;
+}
+
+.o-font-primary {
+  font-family: $f-title;
+}
+
+.o-text_fs-14 {
+  font-size: 14px;
+}
+
+.o-text_fs-12 {
+  font-size: 12px;
+}
+
+u,
+.o-underline {
+  text-underline-position: under;
+}
+
+b,
+strong,
+.o-bold {
+  font-weight: $f-bold;
+}
+
+.o-light {
+  font-weight: $f-light;
+}
+
+.o-regular {
+  font-weight: $f-regular;
+}
+
+.o-medium {
+  font-weight: $f-medium;
+}
+
+.o-color-primary {
+  color: $c-primary;
+}
+
+.o-color-light {
+  color: $c-gray;
+}

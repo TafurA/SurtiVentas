@@ -1,0 +1,97 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import '@ionic/angular/css/display.css';
+
+
+/* Surtilider's Styles */
+@import "assets/styles/utils/utils";
+@import "assets/styles/settings/settings";
+@import "assets/styles/generic/generic";
+@import "assets/styles/objects/objects";
+
+@import "assets/styles/components/components";
+
+.c-product-related {
+  .c-product__add {
+    display: none !important;
+  }
+}
+
+.o-current-rout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: $c-gray-5;
+}
+
+.c-header__search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 24px;
+
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.c-header__search-input {
+  width: 100%;
+  border: 1px solid #C9C9C9;
+  border-radius: 8px;
+  padding: 10px;
+  color: #C9C9C9;
+  transition: all 0.2s ease-in-out;
+}
+
+.c-header__search-input::placeholder {
+  font-size: 12px;
+}
+
+.c-header__search-label {
+  position: absolute;
+  right: 40px;
+  font-size: 20px;
+  color: #C9C9C9;
+  background: transparent;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light {
+  border: none !important;
+}
+
+.c-tooltip__title {
+  background: #a4a4df;
+  font-size: 12px;
+  padding: 4px;
+}
+
+.c-tooltip__content {
+  padding: 8px;
+}
+
+.c-tooltip__txt {
+  display: block;
+  font-size: 12px;
+
+  &:first-of-type {
+    margin-bottom: 4px;
+  }
+}

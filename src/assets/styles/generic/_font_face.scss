@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Open+Sans:wght@300;400;600;700&display=swap');
+
+
+// - Icommon Font Ico
+@font-face {
+  font-family: '#{$font-family-ico}';
+  src: url('#{$path-font}/#{$font-family-ico}.eot?qqnr5');
+  src: url('#{$path-font}/#{$font-family-ico}.eot?#iefix') format('embedded-opentype'), url('#{$path-font}/#{$font-family-ico}.ttf?qqnr5') format('truetype'), url('#{$path-font}/#{$font-family-ico}.woff?qqnr5') format('woff'), url('#{$path-font}/#{$font-family-ico}.svg?qqnr5##{$font-family-ico}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.i-,
+[class^="i-"],
+[class*=" i-"],
+.o-ico {
+  &::before {
+    font-family: '#{$font-family-ico}' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.i-after-,
+[class^="i-after-"],
+[class*="i-after-"] {
+  &::after {
+    font-family: '#{$font-family-ico}' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.i-graph-box {
+  &:before {
+    content: $i-graph-box; 
+  }
+}
+.i-arrow-down {
+  &:before {
+    content: $i-arrow-down; 
+  }
+}
+.i-after-arrow-down {
+  &::after {
+    content: $i-arrow-down; 
+  }
+}
+.i-arrow-left {
+  &:before {
+    content: $i-arrow-left; 
+  }
+}
+.i-arrow-right {
+  &:before {
+    content: $i-arrow-right; 
+  }
+}
+.i-after-arrow-right {
+  &::after {
+    content: $i-arrow-right; 
+  }
+}
+.i-calendar {
+  &:before {
+    content: $i-calendar; 
+  }
+}
+.i-discount {
+  &:before {
+    content: $i-discount; 
+  }
+}
+.i-car {
+  &:before {
+    content: $i-car; 
+  }
+}
+.i-cart_zero {
+  &:before {
+    content: $i-cart_zero; 
+  }
+}
+.i-catalog {
+  &:before {
+    content: $i-catalog; 
+  }
+}
+.i-change_rut {
+  &:before {
+    content: $i-change_rut; 
+  }
+}
+.i-check-circle {
+  &:before {
+    content: $i-check-circle; 
+  }
+}
+.i-close {
+  &:before {
+    content: $i-close; 
+  }
+}
+.i-credential {
+  &:before {
+    content: $i-credential; 
+  }
+}
+.i-crown {
+  &:before {
+    content: $i-crown; 
+  }
+}
+.i-devolution {
+  &:before {
+    content: $i-devolution; 
+  }
+}
+.i-disk {
+  &:before {
+    content: $i-disk; 
+  }
+}
+.i-eye-lock {
+  &:before {
+    content: $i-eye-lock; 
+  }
+}
+.i-eye {
+  &:before {
+    content: $i-eye; 
+  }
+}
+.i-filter {
+  &:before {
+    content: $i-filter; 
+  }
+}
+.i-help {
+  &:before {
+    content: $i-help; 
+  }
+}
+.i-history-outline {
+  &:before {
+    content: $i-history-outline; 
+  }
+}
+.i-home {
+  &:before {
+    content: $i-home; 
+  }
+}
+.i-info {
+  &:before {
+    content: $i-info; 
+  }
+}
+.i-logout {
+  &:before {
+    content: $i-logout; 
+  }
+}
+.i-menu {
+  &:before {
+    content: $i-menu; 
+  }
+}
+.i-pencil {
+  &:before {
+    content: $i-pencil; 
+  }
+}
+.i-plus {
+  &:before {
+    content: $i-plus; 
+  }
+}
+.i-prize {
+  &:before {
+    content: $i-prize; 
+  }
+}
+.i-route-outline {
+  &:before {
+    content: $i-route-outline; 
+  }
+}
+.i-search {
+  &:before {
+    content: $i-search; 
+  }
+}
+.i-star {
+  &:before {
+    content: $i-star; 
+  }
+}
+.i-store {
+  &:before {
+    content: $i-store; 
+  }
+}
+.i-user {
+  &:before {
+    content: $i-user; 
+  }
+}
+.i-vehicle-truck-cube {
+  &:before {
+    content: $i-vehicle-truck-cube; 
+  }
+}
+.i-visit {
+  &:before {
+    content: $i-visit; 
+  }
+}
+.i-work-history-outline {
+  &:before {
+    content: $i-work-history-outline; 
+  }
+}
+.i-sorter-az {
+  &:before {
+    content: $i-sorter-az; 
+  }
+}
+.i-sorter-za {
+  &:before {
+    content: $i-sorter-za; 
+  }
+}

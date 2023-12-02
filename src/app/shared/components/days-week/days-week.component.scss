@@ -1,0 +1,47 @@
+@import '../../../../assets/styles/settings/var_color';
+
+.c-list-days {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0 16px 16px 16px;
+  column-gap: 16px;
+  overflow: auto;
+}
+
+.c-list-days__item {
+  width: 66px;
+  border-radius: 50%;
+  padding: 8px 8px 16px;
+  height: 72px;
+  background-color: $c-gray-20;
+
+  &.is-active {
+    position: relative;
+    background-color: $c-primary-20;
+
+    &::before {
+      content: url('../../../../assets/imgs/utils/active_day.svg');
+      position: absolute;
+      top: 77%;
+      left: 1px;
+      z-index: -1;
+    }
+  }
+}
+
+.c-list-days__item-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: capitalize;
+  line-height: 1.1;
+  background-color: $c-gray-5;
+}

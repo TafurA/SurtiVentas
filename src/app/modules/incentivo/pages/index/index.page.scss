@@ -1,0 +1,25 @@
+.button-incentivos-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 24px;
+  margin-top: 150px;
+}
+
+.button-incentivos {
+  padding: 24px;
+  border-radius: 8px;
+  width: 80%;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+
+  &:first-child {
+    background: #0e407e;
+  }
+
+  &:last-child {
+    background: #115e96;
+  }
+}

@@ -1,0 +1,607 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page-small">
+    <app-back-button></app-back-button>
+
+    <div class="o-canvas">
+      <header class="o-headline o-headline_columns">
+        <h1 class="o-heading">Rutero</h1>
+
+        <!-- <div class="c-filter">
+                                                                          <label class="c-filter__label" for="filter">Filtrar por:</label>
+                                                                          <select class="c-filter__select" name="filter" id="filter">
+                                                                            <option value="">Menor distancia</option>
+                                                                            <option value="">AZ</option>
+                                                                            <option value="">ZA</option>
+                                                                          </select>
+                                                                        </div> -->
+      </header>
+
+      <div *ngIf="isRoutLoaded" class="o-current-rout">
+        <p class="o-text o-text_fs-14 o-bold">Ruta actual:</p>
+        <p class="o-text o-text_fs-14 o-bold o-color-primary">{{ currentRout }}</p>
+      </div>
+      <div *ngIf="!isRoutLoaded" class="o-current-rout">
+        <ion-skeleton-text [animated]="true" style="width: 84px; height: 19px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 171px; height: 19px;"></ion-skeleton-text>
+      </div>
+
+    </div>
+
+    <app-days-week></app-days-week>
+
+    <app-list-store-component title="Listado de clientes" surface="primary-20" type="detail"></app-list-store-component>
+
+    <section class="o-section-top">
+      <div class="o-canvas">
+        <header class="o-headline o-headline_columns">
+          <h1 class="o-title">Solicitudes de cliente</h1>
+        </header>
+
+        <div class="o-checkout__dropdown" *ngFor="let requestTi of getRequestState()">
+
+          <h3 (click)="toggleDropdown($event)" *ngIf="requestTi === '2'"
+            class="o-title c-product-slider__title i-after-arrow-down">CREADAS</h3>
+          <h3 (click)="toggleDropdown($event)" *ngIf="requestTi === '1'"
+            class="o-title c-product-slider__title i-after-arrow-down">RECHAZADAS</h3>
+          <h3 (click)="toggleDropdown($event)" *ngIf="requestTi === '0'"
+            class="o-title c-product-slider__title i-after-arrow-down">PENDIENTES</h3>
+
+          <div>
+            <div class="o-checkout__products">
+              <ul>
+                <li *ngFor="let request of getProductGroup(requestTi)" class="c-card-detail c-card-detail_space"
+                  ngClass="is-{{ request.codcli_b }}">
+                  <header class="c-card-detail__header">
+                    <p class="o-text o-bold c-card-detail__grey">
+                      {{ request.feccli_b }}</p>
+                    <p class="o-text o-bold">Tel:
+                      {{ request.telcli_b }}</p>
+                  </header>
+                  <div class="c-card-detail__content">
+                    <p *ngIf="request.nomcli_b" class="o-text">
+                      {{ request.nomcli_b }}
+                      {{ request.ape1cli_b }}
+                      {{ request.ape2cli_b }}
+                    </p>
+                    <p *ngIf="!request.nomcli_b" class="o-text">
+                      {{ request.empcli_b }}
+                    </p>
+                    <p class="o-text">Dirección:
+                      <span class="c-card-detail__causal">{{ request.dircli_b }}</span>
+                    </p>
+                  </div>
+                  <footer *ngIf="request.destab_b" class="rta-service">
+                    <p>Observación:</p>
+                    <p>{{ request.destab_b }}</p>
+                  </footer>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <ion-fab id="modal-create-store" (click)="checkStepsForms()" vertical="bottom" horizontal="end">
+      <div class="o-float-btn">
+        <ion-fab-button>
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </div>
+    </ion-fab>
+
+    <ion-modal 
+      trigger="modal-create-store" 
+      [initialBreakpoint]="1" 
+      [breakpoints]="[0, 1]"
+      [canDismiss]="canDismissModalCreateStore"
+    >
+      <ng-template>
+        <div class="block">
+          <div class="o-modal-create">
+
+            <button class="o-link o-link_secondary o-modal-create__link-close" (click)="closeModal()">Cerrar</button>
+
+            <div class="o-canvas">
+              <!-- <button class="c-modal__close i-close"></button> -->
+              <header class="o-headline">
+                <h1 class="o-heading">🏪 Dar de alta tienda</h1>
+                <p class="o-text">Crear nueva tienda para un cliente</p>
+              </header>
+            </div>
+
+            <div class="c-accordion-group">
+
+              <div id="basic" class="o-checkout__dropdown is-dropdown-show">
+
+                <h2 class="o-headline__title o-history-title i-arrow-right" (click)="toggleDropdownDos($event)">
+                  Información
+                  general</h2>
+
+                <div class="o-checkout__products">
+                  <!-- BASIC INFORMATION -->
+                  <form class="o-form" [formGroup]="informacionPersonalForm">
+
+                    <!-- Identification or user field -->
+                    <div class="o-form__field">
+                      <div class="o-form__field-wrap o-form__field-wrap_select">
+                        <ion-select interface="popover" class="o-form__input" placeholder="Tipo de documento"
+                          id="docType" formControlName="docType" (ionChange)="getDocType($event)">
+                          <ion-select-option *ngFor="let type of docTypes" [value]="type.id">
+                            {{ type.name }}
+                          </ion-select-option>
+                        </ion-select>
+                        <label for="docType" class="o-form__labels"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('docType', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <div *ngIf="isCcValue" class="o-form__field">
+                      <div class="o-form__field-wrap">
+                        <input id="documentNumber" formControlName="documentNumber" class="o-form__input" type="text"
+                          placeholder="Número de documento">
+                        <label for="documentNumber" class="o-form__label i-credential"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('documentNumber', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <div *ngIf="isCcEValue" class="o-form__field">
+                      <div class="o-form__field-wrap">
+                        <input id="documentExrangerNumber" formControlName="documentExrangerNumber" class="o-form__input" type="text"
+                          placeholder="Número de documento extranjero">
+                        <label for="documentExrangerNumber" class="o-form__label i-credential"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('documentExrangerNumber', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <div *ngIf="isNitValue" class="o-form__field o-form__field_70">
+                      <div class="o-form__field-wrap">
+                        <input id="nit" formControlName="nit" class="o-form__input" type="text" placeholder="Número de NIT">
+                        <label for="nit" class="o-form__label i-credential"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('nit', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <div *ngIf="isNitValue" class="o-form__field o-form__field_20">
+                      <div class="o-form__field-wrap">
+                        <input id="verificationCode" formControlName="verificationCode" class="o-form__input"
+                          type="text" placeholder="Código">
+                        <label for="verificationCode" class="o-form__label i-credential"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('verificationCode', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <div *ngIf="isNitValue" class="o-form__field">
+                      <div class="o-form__field-wrap">
+                        <input id="nameStore" formControlName="nameStore" class="o-form__input" type="text"
+                          placeholder="Nombre *">
+                        <label for="nameStore" class="o-form__label i-user"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('nameStore', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <div *ngIf="isCcValue || isCcEValue" class="o-form__field o-form__field_50">
+                      <div class="o-form__field-wrap">
+                        <input id="nameStore" formControlName="nameStore" class="o-form__input" type="text"
+                          placeholder="Nombre *">
+                        <label for="nameStore" class="o-form__label i-user"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('nameStore', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <div *ngIf="isCcValue || isCcEValue" class="o-form__field o-form__field_50">
+                      <div class="o-form__field-wrap">
+                        <input id="secondNameStore" formControlName="secondNameStore" class="o-form__input" type="text"
+                          placeholder="Segundo nombre">
+                        <label for="secondNameStore" class="o-form__label i-user"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('secondNameStore', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <div *ngIf="isCcValue || isCcEValue" class="o-form__field o-form__field_50">
+                      <div class="o-form__field-wrap">
+                        <input id="lastName" formControlName="lastName" class="o-form__input" type="text"
+                          placeholder="Apellido *">
+                        <label for="lastName" class="o-form__label i-user"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('lastName', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <div *ngIf="isCcValue || isCcEValue" class="o-form__field o-form__field_50">
+                      <div class="o-form__field-wrap">
+                        <input id="secondLastName" formControlName="secondLastName" class="o-form__input" type="text"
+                          placeholder="Segundo apellido">
+                        <label for="secondLastName" class="o-form__label i-user"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('secondLastName', informacionPersonalForm)}}</span>
+                    </div>
+
+                    <footer class="o-form__actions o-form__actions_right">
+
+                      <div class="o-form__actions-box">
+                        <button type="button" (click)="steps($event)" class="o-link o-link_primary"
+                          [disabled]="informacionPersonalForm.invalid" *ngIf="informacionPersonalForm.valid">
+                          Guardar
+                        </button>
+                      </div>
+
+                    </footer>
+
+                  </form>
+                </div>
+
+              </div>
+
+              <div id="contact" class="o-checkout__dropdown">
+
+                <h2 class="o-headline__title o-history-title i-arrow-right" (click)="toggleDropdown($event)">Información
+                  de
+                  contacto</h2>
+
+                <div class="o-checkout__products">
+                  <!-- CONTACT INFORMATION -->
+                  <form class="o-form" [formGroup]="informacionContactoForm">
+
+                    <div class="o-form__field">
+                      <div class="o-form__field-wrap">
+                        <input id="email" formControlName="email" class="o-form__input" type="email"
+                          placeholder="Correo electrónico">
+                        <label for="email" class="o-form__label i-person"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('email', informacionContactoForm)}}</span>
+                    </div>
+
+                    <div class="o-form__field">
+                      <div class="o-form__field-wrap">
+                        <input id="phone" formControlName="phone" class="o-form__input" type="text"
+                          placeholder="Telefono de contacto *">
+                        <label for="phone" class="o-form__label i-person"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('phone', informacionContactoForm)}}</span>
+                    </div>
+
+                    <footer class="o-form__actions o-form__actions_right">
+
+                      <div class="o-form__actions-box">
+                        <button type="button" (click)="steps($event)" class="o-link o-link_primary"
+                          [disabled]="informacionContactoForm.invalid" *ngIf="informacionContactoForm.valid">
+                          Guardar
+                        </button>
+                      </div>
+
+                    </footer>
+
+                  </form>
+                </div>
+
+              </div>
+
+              <div id="clasification" class="o-checkout__dropdown">
+
+                <h2 class="
+                                                                                                                    o-headline__title
+                                                                                                                    o-history-title
+                                                                                                                    i-arrow-right
+                                                                                                                  "
+                  (click)="toggleDropdown($event)">
+                  Clasificación tienda
+                </h2>
+
+                <div class="o-checkout__products">
+                  <form class="o-form">
+
+                    <div id="{{question.id}}" *ngFor="let question of questionClasificationForm, let i = index"
+                      class="is-hidden js-container-clasification">
+
+                      <p class="c-clasification__title">{{ i+1 }} - {{ question.question }}</p>
+
+                      <div class="o-form__radio-custom">
+                        <div class="o-form__radio-custom__field">
+                          <input (change)="changeClasification($event, question)" type="radio" id="yes"
+                            name="{{question.id}}" value="SI" checked>
+                          <label for="SI">SI</label>
+                        </div>
+                        <div class="o-form__radio-custom__field">
+                          <input (change)="changeClasification($event, question)" type="radio" id="no"
+                            name="{{question.id}}" value="NO">
+                          <label for="NO">NO</label>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <footer class="o-form__actions o-form__actions_right">
+
+                      <div *ngIf="topographicCategory" style="text-align: center; width: 100%;">
+                        <p>Categoría de la tienda</p>
+                        <strong>{{ topographicCategory.toUpperCase() }}</strong>
+                      </div>
+
+                      <div class="o-form__actions-box o-form__actions-box_left">
+                        <button type="button" (click)="saveClasification()" class="o-link o-link_primary">
+                          Guardar clasificación
+                        </button>
+                        <button type="button" (click)="steps($event)" class="o-link o-link_primary"
+                          *ngIf="stepClasification === true">
+                          Guardar paso
+                        </button>
+                      </div>
+
+                    </footer>
+
+                  </form>
+                </div>
+
+              </div>
+
+              <div id="store" class="o-checkout__dropdown">
+
+                <h2 class="o-headline__title o-history-title i-arrow-right" (click)="toggleDropdown($event)">Información
+                  de
+                  la tienda</h2>
+
+                <div class="o-checkout__products">
+                  <form class="o-form" [formGroup]="informacionStoreForm">
+                    <div class="o-form__field">
+                      <div class="o-form__field-wrap">
+                        <input id="nameStoreForm" formControlName="nameStoreForm" class="o-form__input" type="text"
+                          placeholder="Nombre de la tienda *">
+                        <label for="nameStoreForm" class="o-form__label i-store"></label>
+                      </div>
+                      <span class="o-form__error">{{ getErrorField('nameStoreForm', informacionStoreForm)}}</span>
+                    </div>
+
+                    <div class="form-address">
+                      <label class="o-form__label">Dirección</label>
+
+                      <!-- AUT - CLL -->
+                      <div class="o-form__field o-form__field_address_uno">
+                        <div class="o-form__field-wrap">
+                          <select name="" id="" class="o-form__input" (change)="getAddressCombined($event)">
+                            <option selected value="">Seleccione</option>
+                            <option *ngFor="let address of addressOne" value="{{ address.abreviatura }}">
+                              {{ address.descripcion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- NUMBER -->
+                      <div class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <input class="o-form__input" type="number" placeholder="#"
+                            (change)="getAddressCombined($event)">
+                        </div>
+                      </div>
+
+                      <!-- LETTER -->
+                      <div class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <select (change)="getAddressCombined($event)" name="" id="" class="o-form__input">
+                            <option selected value="">Seleccione</option>
+                            <option *ngFor="let address of addressFour" value="{{ address.descripcion }}">
+                              {{ address.descripcion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- BIS -->
+                      <div class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <select (change)="getAddressCombined($event)" name="" id="" class="o-form__input">
+                            <option selected value="">Seleccione</option>
+                            <option *ngFor="let address of addressBis" value="{{ address.descripcion }}">
+                              {{ address.descripcion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- LETTER -->
+                      <div class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <select (change)="getAddressCombined($event)" name="" id="" class="o-form__input">
+                            <option selected value="">Seleccione</option>
+                            <option *ngFor="let address of addressFour" value="{{ address.descripcion }}">
+                              {{ address.descripcion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- ZONA -->
+                      <div class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <select (change)="getAddressCombined($event)" name="" id="" class="o-form__input">
+                            <option selected value="">Seleccione</option>
+                            <option *ngFor="let address of addressTwo" value="{{ address.abreviatura }}">
+                              {{ address.descripcion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- NUMBER -->
+                      <div class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <input (change)="getAddressCombined($event)" type="number" class="o-form__input"
+                            placeholder="#">
+                        </div>
+                      </div>
+
+                      <!-- LETTER -->
+                      <div class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <select (change)="getAddressCombined($event)" name="" id="" class="o-form__input">
+                            <option selected value="">Seleccione</option>
+                            <option *ngFor="let address of addressFour" value="{{ address.descripcion }}">
+                              {{ address.descripcion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- NUMBER -->
+                      <div class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <input (change)="getAddressCombined($event)" type="number" class="o-form__input"
+                            placeholder="#">
+                        </div>
+                      </div>
+
+                      <!-- ZONA -->
+                      <div class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <select (change)="getAddressCombined($event)" name="" id="" class="o-form__input">
+                            <option selected value="">Seleccione</option>
+                            <option *ngFor="let address of addressTwo" value="{{ address.abreviatura }}">
+                              {{ address.descripcion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <label class="o-form__label">Campos opcionales</label>
+
+                      <!-- MAS -->
+                      <div style="flex: 1 0 45%" class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <select (change)="getAddressCombined($event)" name="" id="" class="o-form__input">
+                            <option selected value="">Seleccione</option>
+                            <option *ngFor="let address of addressOptionalOne" value="{{ address.abreviatura }}">
+                              {{ address.descripcion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- NUMBER -->
+                      <div style="flex: 1 0 45%" class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <input class="o-form__input" type="text" placeholder="# o Aa"
+                            (change)="getAddressCombined($event)">
+                        </div>
+                      </div>
+
+                      <!-- MAS -->
+                      <div style="flex: 1 0 45%" class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <select (change)="getAddressCombined($event)" name="" id="" class="o-form__input">
+                            <option selected value="">Seleccione</option>
+                            <option *ngFor="let address of addressOptionalOne" value="{{ address.abreviatura }}">
+                              {{ address.descripcion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- NUMBER -->
+                      <div style="flex: 1 0 45%" class="o-form__field">
+                        <div class="o-form__field-wrap">
+                          <input class="o-form__input" type="text" placeholder="# o Aa"
+                            (change)="getAddressCombined($event)">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="o-form__field o-form__field-wrap_address is-relative">
+                      <div class="o-form__field-wrap">
+                        <input style="pointer-events: none;" class="o-form__input" id="address" formControlName="address" type="text"
+                          placeholder="Ingresa la dirección">
+                        <label for="address" class="o-form__label i-search"></label>
+                      </div>
+                      <button class="o-form__input-btn-coordenadas i-search" (click)="geocodeAddress()"> </button>
+                    </div>
+                    <button *ngIf="!buttonDeleteAddress" (click)="deleteAddress()" class="o-link o-link_secondary">
+                      Borrar dirección
+                    </button>
+                  </form>
+
+                  <div class="c-map c-map-crate o-section-top">
+                    <div id="map"></div>
+                    <!-- <ul class="c-detail">
+                      <li class="c-detail__item">
+                        <h3 class="c-detail__item-box">Coordenadas:</h3>
+                      </li>
+                      <li class="c-detail__item c-detail__item_col">
+                        <h3 class="c-detail__item-box">Latitud:</h3>
+                        <strong class="c-detail__item-box c-detail__item-box_70">
+                          {{ this.latLocated }}
+                        </strong>
+                      </li>
+                      <li class="c-detail__item c-detail__item_col">
+                        <h3 class="c-detail__item-box">Longitud:</h3>
+                        <strong class="c-detail__item-box c-detail__item-box_70">
+                          {{ this.longLocated }}
+                        </strong>
+                      </li>
+                    </ul> -->
+                  </div>
+
+                  <section class="o-section o-section-top">
+                    <li class="c-detail__item">
+                      <h3 class="c-detail__item-box">Dirección:</h3>
+                      <strong class="c-detail__item-box c-detail__item-box_70">{{ this.newAddressValue }}</strong>
+                    </li>
+                  </section>
+                </div>
+
+              </div>
+
+              <div id="support" class="o-checkout__dropdown">
+
+                <h2 
+                  class="o-headline__title o-history-title i-arrow-right" 
+                  (click)="toggleDropdown($event)"
+                >
+                  Soporte para la validación
+                </h2>
+
+                <div class="o-checkout__products">
+                  <form class="o-form" enctype="multipart/form-data" method="POST">                    
+                    
+                    <button (click)="takePicture()">tomarr</button>
+
+                    <input type="file" name="imagen" (change)="onFileSelected($event)">
+                    
+                    <footer class="o-form__actions o-form__actions_right">
+
+                      <div class="o-form__actions-box">
+                        <button type="button" (click)="steps($event)" class="o-link o-link_primary"
+                          [disabled]="!selectedFile" *ngIf="selectedFile">
+                          Guardar
+                        </button>
+                      </div>
+
+                    </footer>
+
+                    <button
+                    class="o-button o-button_full" (click)="testd()">
+                    Dar de alta puea
+                  </button>
+
+                  </form>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="o-canvas">
+              <!-- <button
+                *ngIf="informacionPersonalForm.valid && informacionContactoForm.valid && informacionStoreForm.valid && selectedFile"
+                class="o-button o-button_full" (click)="onSubmit()">
+                Dar de alta
+              </button> -->
+
+            </div>
+
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+  </div>
+</ion-content>

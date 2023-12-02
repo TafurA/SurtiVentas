@@ -1,0 +1,47 @@
+.is-visuallyHidden {
+  position: absolute;
+  top: -1000px;
+  opacity: 0;
+  z-index: -10000;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.is-disabled {
+  opacity: .4;
+}
+
+.is-opacity {
+  opacity: 0;
+}
+
+.is-relative {
+  position: relative;
+}
+
+.has-border-radius-8 {
+  border-radius: 8px;
+}
+
+.o-layout-page,
+.c-header {
+  &.is-cart-open {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: rgba(0, 0, 0, .5);
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+    }
+
+  }
+}

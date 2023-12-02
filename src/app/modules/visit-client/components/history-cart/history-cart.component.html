@@ -1,0 +1,48 @@
+<ion-modal
+  trigger="{{modalIdentifier}}"
+  [initialBreakpoint]="1"
+  [breakpoints]="[0, 1]"
+>
+  <ng-template>
+    <div class="block">
+      <div class="c-modal">
+        <!-- <button class="c-modal__close i-close"></button> -->
+        <h3 class="c-modal__title i-history-outline">
+          Informe detallado de la visita 
+        </h3>
+
+        <ul class="c-list-modal">
+          <li>
+            <span class="c-list-modal__label">Total productos:</span>
+            <strong class="c-list-modal__input" id="products-cart-count">
+              {{ this._cartService.numberProductsCart$ | async }}
+            </strong>
+          </li>
+          <li>
+            <span class="c-list-modal__label">Valor total:</span>
+            <strong class="c-list-modal__input">
+              $ {{ this._cartService.currentAmountCart$ | async | number:'1.0-0':'es-CO' }}
+            </strong>
+          </li>
+        </ul>
+
+        <div class="c-modal__actions c-modal__actions_row">
+          <button
+            (click)="hideModalStoreDetail()"
+            [routerLink]="['/rut/history-orders']"
+            class="o-button"
+          >
+            Histórico pedidos
+          </button>
+          <button
+            (click)="hideModalStoreDetail()"
+            class="o-button o-button_secondary"
+            [routerLink]="['/rut/store-detail']"
+          >
+            Datos cliente
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>

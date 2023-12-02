@@ -1,0 +1,214 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page">
+    <div class="o-canvas">
+      <button
+        type="button"
+        class="o-link o-back-button o-link_primary u-margin-bottom-16 i-arrow-left"
+        (click)="goBack()"
+      >
+        Visitar cliente / <strong style="text-transform: lowercase; margin-left: 4px;"> {{ nameStoreId }}</strong>
+      </button>
+    </div>
+
+    <div class="o-canvas">
+
+      <!-- Graphic -->
+      <section class="o-section">
+        <div class="c-indicator">
+          <div class="c-indicator__wrap">
+            <h2 class="c-indicator__title">Objetivo de la visita</h2>
+            <div class="c-filter__box c-filter__box_column">
+              <p style="align-self='baseline'" class="o-bold">Estado del pedido</p>
+              <input class="c-filter__offert-input" [(ngModel)]="isPending" type="checkbox" (change)="changeCartState('')">
+              <ion-toggle [checked]="isPending" aria-label="Enable Notifications"></ion-toggle>
+              <label class="o-bold c-indicator__title" for="">Marcar como {{ lastText }}</label>
+            </div>
+          </div>
+          <ion-progress-bar
+            class="c-indicator__bar"
+            value="{{ this._cartService.barGoalsAmount$ | async }}">
+          </ion-progress-bar>
+          <ul class="c-indicator___values">
+            <li class="c-indicator__value">
+              <h3 class="c-indicator__value-title">Meta</h3>
+              <span
+                class="c-indicator__value-txt"
+              >
+                ${{ this._cartService.goalAmountCart$ | async | number:'1.0-0':'es-CO' }}
+              </span>
+            </li>
+            <li class="c-indicator__value">
+              <h3 class="c-indicator__value-title">Progreso</h3>
+              <span class="c-indicator__value-txt">
+                ${{ this._cartService.currentAmountCart$ | async | number:'1.0-0':'es-CO' }}
+              </span>
+            </li>
+            <li class="c-indicator__value">
+              <h3 class="c-indicator__value-title">Restante</h3>
+              <span class="c-indicator__value-txt">${{ this._cartService.restanteAmountCart$ | async | number:'1.0-0':'es-CO' }}</span>
+            </li>
+          </ul>
+          <ul class="c-indicator___values c-indicator___values_double">
+            <li class="c-indicator__value">
+              <h3 class="c-indicator__value-title">Valor ultima compra</h3>
+              <span
+                class="c-indicator__value-txt"
+              >
+                ${{ ultimacompra | number:'1.0-0':'es-CO' }}
+              </span>
+            </li>
+            <li class="c-indicator__value c-indicator__value_red" *ngIf="this._cartService.currentAmountCart$.getValue() < minimoCompra">
+              <h3 class="c-indicator__value-title">Mínimo de compra</h3>
+              <span class="c-indicator__value-txt">
+                ${{ minimoCompra | number:'1.0-0':'es-CO' }}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+
+    <div *ngIf="productsLisGold.length > 0 && isProductsGoldListLoaded">
+
+      <div class="o-canvas">
+        <h2 class="o-title c-product-slider__title">EXCLUSIVOS PARA TI</h2>
+      </div>
+  
+      <div class="o-surface_gold">
+        <swiper-container [modules]="swiperModules" [slidesPerGroup]="3" [slidesPerView]="3" [loop]="true"
+          class="c-product-slider">
+          <swiper-slide class="c-product-slider__slide" *ngFor="let productObject of productsLisGold">
+            <app-product [isGold]="true" [productObject]="productObject"></app-product>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+  
+    </div>
+
+    <div *ngIf="productsListRecommended.length > 0 && isProductsRecomendedListLoaded">
+
+      <div class="o-canvas">
+        <h2 class="o-title c-product-slider__title">RECOMENDADOS</h2>
+      </div>
+  
+      <swiper-container *ngIf="isDataOK" [modules]="swiperModules" [slidesPerGroup]="3" [slidesPerView]="3" [loop]="true"
+        class="c-product-slider">
+        <swiper-slide class="c-product-slider__slide" *ngFor="let productObject of productsListRecommended">
+          <app-product [productObject]="productObject"></app-product>
+        </swiper-slide>
+      </swiper-container>
+  
+    </div>
+  
+    <!-- Data unloaded -->
+    <div *ngIf="!isProductsGoldListLoaded">
+      <div class="o-canvas">
+        <ion-skeleton-text 
+          [animated]="true" style="width: 80px; height: 13px;"></ion-skeleton-text>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+    <!-- End data unloaded -->
+  
+    <!-- Data unloaded -->
+    <div *ngIf="!isProductsRecomendedListLoaded">
+      <div class="o-canvas">
+        <ion-skeleton-text [animated]="true" style="width: 80px; height: 13px;"></ion-skeleton-text>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 117px; height: 165px; border-radius: 8px"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+    <!-- End data unloaded -->
+
+    <div *ngIf="isDataOK">
+      <app-list-products [reset]="resetRecomended"></app-list-products>
+    </div>
+
+    <ion-fab id="history-cart" (click)='resetHistoryModel()' style="bottom: 10%;" vertical="bottom" horizontal="end">
+      <div class="o-float-btn">
+        <ion-fab-button>
+          <span class="i-history-outline"></span>
+        </ion-fab-button>
+      </div>
+    </ion-fab>
+
+    <ion-fab id="causal-cart" vertical="bottom" horizontal="end">
+      <div class="o-float-btn o-float-btn_secondary">
+        <ion-fab-button>
+          <span class="i-cart_zero"></span>
+        </ion-fab-button>
+      </div>
+    </ion-fab>
+
+    <app-history-cart modalIdentifier="history-cart"></app-history-cart>
+
+    <ion-modal
+      trigger="causal-cart"
+      [initialBreakpoint]="1"
+      [breakpoints]="[0, 1]"
+    >
+      <ng-template>
+        <div class="block">
+          <div class="c-modal">
+            <!-- <button class="c-modal__close i-close"></button> -->
+            <h3 class="c-modal__title i-cart_zero">
+              ¿Cuéntanos por qué este cliente no compró esta vez?
+            </h3>
+
+            <div class="c-filter__box c-filter__box_row">
+              <div class="c-filter__group-pill c-filter__group-pill-causal">
+                <div class="c-filter__pill" *ngFor="let causal of listCausalNotOrder, let i = index">
+                  <input type="radio" [(ngModel)]="idCausal" id="{{ causal.idcausal }}" name="causal" value="{{ causal.idcausal }}">
+                  <label for="{{ causal.idcausal }}">{{ causal.detalle }}</label>
+                </div>
+              </div>
+            </div>
+    
+            <div class="c-modal__actions" *ngIf="idCausal">
+              <button
+                (click)="sendOrderNoCausal()"
+                class="o-button o-button_secondary"
+              >
+                Finalizar visita  
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+    <!-- CHANGE ORDER STATE MODAL -->
+    <ion-modal 
+      [isOpen]="isModalChangeStateOpen" 
+      [initialBreakpoint]="1"
+      [breakpoints]="[0, 1]"
+    >
+      <ng-template>
+        <div class="block">
+          <div class="c-modal">
+
+            <h3 class="c-modal__title">
+              Actualizar estado del pedido:
+            </h3>
+
+            <div class="c-filter__box c-filter__box_second c-filter__box_column">
+              <label class="o-bold c-indicator__title" for="">Marcar como {{ lastText }}</label>
+              <input class="c-filter__offert-input" [(ngModel)]="isPending" type="checkbox" (change)="changeCartState('modal')">
+              <ion-toggle [checked]="isPending" aria-label="Enable Notifications"></ion-toggle>
+            </div>
+    
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+  </div>
+</ion-content>
