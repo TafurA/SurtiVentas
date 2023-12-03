@@ -547,6 +547,17 @@
                       <strong class="c-detail__item-box c-detail__item-box_70">{{ this.newAddressValue }}</strong>
                     </li>
                   </section>
+
+                  <footer class="o-form__actions o-form__actions_right">
+
+                    <div class="o-form__actions-box">
+                      <button type="button" (click)="steps($event)" class="o-link o-link_primary"
+                        *ngIf="informacionStoreForm.valid">
+                        Guardar
+                      </button>
+                    </div>
+
+                  </footer>
                 </div>
 
               </div>
@@ -561,41 +572,21 @@
                 </h2>
 
                 <div class="o-checkout__products">
-                  <form class="o-form" enctype="multipart/form-data" method="POST">                    
-                    
-                    <button (click)="takePicture()">tomarr</button>
+                  <button class="o-form__file" (click)="takePicture()">Adjuntar Foto</button>
 
-                    <input type="file" name="imagen" (change)="onFileSelected($event)">
-                    
-                    <footer class="o-form__actions o-form__actions_right">
+                  <img id="supportImg" src="" alt="">
 
-                      <div class="o-form__actions-box">
-                        <button type="button" (click)="steps($event)" class="o-link o-link_primary"
-                          [disabled]="!selectedFile" *ngIf="selectedFile">
-                          Guardar
-                        </button>
-                      </div>
-
-                    </footer>
-
-                    <button
-                    class="o-button o-button_full" (click)="testd()">
-                    Dar de alta puea
-                  </button>
-
-                  </form>
                 </div>
 
               </div>
             </div>
 
             <div class="o-canvas">
-              <!-- <button
+              <button
                 *ngIf="informacionPersonalForm.valid && informacionContactoForm.valid && informacionStoreForm.valid && selectedFile"
                 class="o-button o-button_full" (click)="onSubmit()">
                 Dar de alta
-              </button> -->
-
+              </button>
             </div>
 
           </div>

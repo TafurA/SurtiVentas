@@ -44,26 +44,26 @@
     color: #727272;
   }
 
-  &::after {
-    content: "Seleccione una imagen de la galería";
-    font-size: 14px;
-    color: #727272;
-  }
+  // &::after {
+  //   content: "Seleccione una imagen de la galería";
+  //   font-size: 14px;
+  //   color: #727272;
+  // }
 
-  input {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-  }
+  // input {
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   opacity: 0;
+  // }
 
-  &.charged {
-    &::after {
-      content: "Imagen cargada";
-    }
-  }
+  // &.charged {
+  //   &::after {
+  //     content: "Imagen cargada";
+  //   }
+  // }
 }
 
 .o-form__field-wrap {

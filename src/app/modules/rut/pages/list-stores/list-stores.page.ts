@@ -333,6 +333,8 @@ export class ListStoresPage implements OnInit {
     console.log("QUE ES LA IMAGENN", image)
     this.selectedFile = image.dataUrl
 
+    document.querySelector("#supportImg")?.setAttribute("src", this.selectedFile)
+
     setTimeout(() => {
       this.modalController.dismiss()
     }, 1500);
@@ -609,56 +611,69 @@ export class ListStoresPage implements OnInit {
             const { response } = JSON.parse(res.data)
             if (response) {
               this.getGeolocation().finally(() => {
-                // this._storeService.createStore(docType, documentNumberValue?.value, nameStore, secondNameStore, lastName, secondLastName, phone, email, nameStoreForm, idSeller!, this.latLocated.toString(), this.longLocated.toString(), this.encodeAddressToSend(), this.selectedFile).subscribe({
-                //   next: (res) => {
-                //     console.log("que es el res ", res)
-                //     console.log("ANTES DE ENVIARLO", this.selectedFile)
-                //     let { response, message } = JSON.parse(res.data)
-                //     const typeAlert = response ? 'success' : 'error'
-                //     this.canDismissModalCreateStore = true
-                //     setTimeout(() => {
-                //       this.modalController.dismiss().then(() => {
-                //         this._alertService.showAlert(
-                //           'Creación de tienda',
-                //           message,
-                //           typeAlert
-                //         )
-                //       }).finally(() => {
-                //         if (typeAlert === 'success') {
-                //           this.informacionPersonalForm.reset()
-                //           this.informacionContactoForm.reset()
-                //           this.informacionStoreForm.reset()
-                //           this.isNitValue = false
-                //           this.isCcValue = false
+                this._storeService.createStore(
+                  docType,
+                  documentNumberValue?.value,
+                  nameStore,
+                  secondNameStore,
+                  lastName, secondLastName,
+                  phone, email,
+                  nameStoreForm,
+                  this.encodeAddressToSend(),
+                  idSeller!,
+                  this.latLocated.toString(),
+                  this.longLocated.toString(),
+                  this.selectedFile
+                ).subscribe({
+                  next: (res) => {
+                    console.log("que es el res ", res)
+                    console.log("ANTES DE ENVIARLO", this.selectedFile)
+                    let { response, message } = JSON.parse(res.data)
+                    const typeAlert = response ? 'success' : 'error'
+                    this.canDismissModalCreateStore = true
+                    setTimeout(() => {
+                      this.modalController.dismiss().then(() => {
+                        this._alertService.showAlert(
+                          'Creación de tienda',
+                          message,
+                          typeAlert
+                        )
+                      }).finally(() => {
+                        if (typeAlert === 'success') {
+                          this.informacionPersonalForm.reset()
+                          this.informacionContactoForm.reset()
+                          this.informacionStoreForm.reset()
+                          this.isNitValue = false
+                          this.isCcValue = false
 
-                //           const container = document.querySelectorAll(".js-container-clasification")
-                //           container.forEach(c => {
-                //             c.classList.add("is-hidden")
-                //           })
+                          const container = document.querySelectorAll(".js-container-clasification")
+                          container.forEach(c => {
+                            c.classList.add("is-hidden")
+                          })
 
-                //           document.querySelector("#basic")?.classList.add('is-dropdown-show')
-                //           document.querySelector("#basic")?.classList.remove('is-checked')
-                //           document.querySelector("#contact")?.classList.remove('is-dropdown-show')
-                //           document.querySelector("#contact")?.classList.remove('is-checked')
-                //           document.querySelector("#store")?.classList.remove('is-dropdown-show')
-                //           document.querySelector("#store")?.classList.remove('is-checked')
-                //           document.querySelector("#clasification")?.classList.remove('is-dropdown-show')
-                //           document.querySelector("#clasification")?.classList.remove('is-checked')
+                          document.querySelector("#basic")?.classList.add('is-dropdown-show')
+                          document.querySelector("#basic")?.classList.remove('is-checked')
+                          document.querySelector("#contact")?.classList.remove('is-dropdown-show')
+                          document.querySelector("#contact")?.classList.remove('is-checked')
+                          document.querySelector("#store")?.classList.remove('is-dropdown-show')
+                          document.querySelector("#store")?.classList.remove('is-checked')
+                          document.querySelector("#clasification")?.classList.remove('is-dropdown-show')
+                          document.querySelector("#clasification")?.classList.remove('is-checked')
 
-                //           this.isPlusRemove = true
-                //           localStorage.setItem("anotherStore", 'true')
-                //         }
-                //       })
-                //     }, 300);
-                //   },
-                //   complete: () => {
-                //     this.loaderElement.dismiss()
-                //     this.getRequestPendings()
-                //   },
-                //   error: (e) => {
-                //     console.log("QUEQ ERROR ", e)
-                //   }
-                // })
+                          this.isPlusRemove = true
+                          localStorage.setItem("anotherStore", 'true')
+                        }
+                      })
+                    }, 300);
+                  },
+                  complete: () => {
+                    this.loaderElement.dismiss()
+                    this.getRequestPendings()
+                  },
+                  error: (e) => {
+                    console.log("QUEQ ERROR ", e)
+                  }
+                })
               })
             }
           }
@@ -666,95 +681,6 @@ export class ListStoresPage implements OnInit {
 
       })
     }
-  }
-
-  // async convertToBase64(event: any) {
-  //   const previewImage = document.getElementById('previewImage') as HTMLImageElement;
-  //   const file = event.target.files?.[0];
-
-  //   console.log("fileee ", file);
-
-  //   if (file) {
-  //     try {
-  //       const tempDirectory = await Filesystem.getUri({
-  //         directory: Directory.Data, // Puedes probar con otros directorios como Temp o Data
-  //         path: 'temp',
-  //       });
-
-  //       console.log("DEREICTON", tempDirectory)
-
-  //       const result = await Filesystem.readFile({
-  //         path: `${tempDirectory.uri}/${file.name}`,
-  //         directory: Directory.Data,
-  //         // encoding: Encoding.Base64,
-  //       });
-
-  //       previewImage.src = 'data:image/jpeg;base64,' + result.data;
-  //       console.log('Base64:', result.data);
-  //     } catch (error) {
-  //       console.error("Error reading and converting to Base64:", error);
-  //     }
-  //   }
-  // }
-
-  testd() {
-
-    // console.log("IAMGE; ", imagen, " SELECTED ", this.selectedFile)
-
-    // if (this.selectedFile) {
-
-    this._storeService.createStore(this.selectedFile).subscribe({
-      next: (res) => {
-        console.log("EL PUTO RESS", res)
-      },
-      //     console.log("que es el res ", res)
-      //     console.log("ANTES DE ENVIARLO", this.selectedFile)
-      //     let { response, message } = JSON.parse(res.data)
-      //     const typeAlert = response ? 'success' : 'error'
-      //     this.canDismissModalCreateStore = true
-      //     setTimeout(() => {
-      //       this.modalController.dismiss().then(() => {
-      //         this._alertService.showAlert(
-      //           'Creación de tienda',
-      //           message,
-      //           typeAlert
-      //         )
-      //       }).finally(() => {
-      //         if (typeAlert === 'success') {
-      //           this.informacionPersonalForm.reset()
-      //           this.informacionContactoForm.reset()
-      //           this.informacionStoreForm.reset()
-      //           this.isNitValue = false
-      //           this.isCcValue = false
-
-      //           const container = document.querySelectorAll(".js-container-clasification")
-      //           container.forEach(c => {
-      //             c.classList.add("is-hidden")
-      //           })
-
-      //           document.querySelector("#basic")?.classList.add('is-dropdown-show')
-      //           document.querySelector("#basic")?.classList.remove('is-checked')
-      //           document.querySelector("#contact")?.classList.remove('is-dropdown-show')
-      //           document.querySelector("#contact")?.classList.remove('is-checked')
-      //           document.querySelector("#store")?.classList.remove('is-dropdown-show')
-      //           document.querySelector("#store")?.classList.remove('is-checked')
-      //           document.querySelector("#clasification")?.classList.remove('is-dropdown-show')
-      //           document.querySelector("#clasification")?.classList.remove('is-checked')
-
-      //           this.isPlusRemove = true
-      //           localStorage.setItem("anotherStore", 'true')
-      //         }
-      //       })
-      //     }, 300);
-      //   },
-      //   complete: () => {
-      //     this.loaderElement.dismiss()
-      //     this.getRequestPendings()
-      //   },
-      error: (e) => {
-        console.log("QUEQ ERROR ", e)
-      }
-    })
   }
 
   encodeAddressToSend() {
@@ -901,32 +827,8 @@ export class ListStoresPage implements OnInit {
     ).classList.toggle('is-dropdown-show');
   }
 
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-  }
 
-  uploadFileS(file: File) {
-    const formData = new FormData();
-    formData.append('file', file);
 
-    // return this.http.post('https://tu-servidor.com/tu-endpoint.php', formData);
-  }
-
-  // uploadFile() {
-  //   if (this.selectedFile) {
-  //     this.uploadFileS(this.selectedFile)
-  //       .subscribe(
-  //         (response: any) => {
-  //           console.log('Éxito:', response);
-  //         },
-  //         (error: any) => {
-  //           console.error('Error:', error);
-  //         }
-  //       );
-  //   } else {
-  //     console.warn('No se seleccionó ningún archivo.');
-  //   }
-  // }
 }
 
 

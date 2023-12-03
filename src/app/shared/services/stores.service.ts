@@ -68,49 +68,49 @@ export class StoresService {
     ))
   }
 
-  createStore(imagen: any) {
+  createStore(
+    tipo_doc: any,
+    nitcli_b: any,
+    nomcli_b: any, 
+    nom2cli_b: any,
+    ape1cli_b: any, 
+    ape2cli_b: any,
+    telcli_b: any,
+    emailcli_b: any,
+    empcli_b: any,
+    dircli_b: any,
+    idVendedor: any,
+    lat: any,
+    lon: any,
+    imagen: any
+  ) {
 
-    console.log("QUE LE LLEGA AL SERVICIO ", imagen)
     const headers = {
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'application/json',
       'Authorization': `Basic ${this.encodeTokenApi()}`,
     };
 
-    const bodyParams: any = {
-      nomcli_b: "123456789"
-    }
+    const bodyParams: any = [{
+      tipo_doc: tipo_doc,
+      nitcli_b: nitcli_b,
+      nomcli_b: nomcli_b,
+      nom2cli_b: nom2cli_b,
+      ape1cli_b: ape1cli_b,
+      ape2cli_b: ape2cli_b,
+      telcli_b: telcli_b,
+      emailcli_b: emailcli_b,
+      empcli_b: empcli_b,
+      dircli_b: dircli_b,
+      idVendedor: idVendedor,
+      lat: lat,
+      lon: lon,
+      imagen: imagen
+    }]
 
-    //   tipo_doc: tipo_doc,
-    //   nitcli_b: nitcli_b,
-    //   nomcli_b: nomcli_b,
-    //   nom2cli_b: nom2cli_b,
-    //   ape1cli_b: ape1cli_b,
-    //   ape2cli_b: ape2cli_b,
-    //   telcli_b: telcli_b,
-    //   emailcli_b: emailcli_b,
-    //   empcli_b: empcli_b,
-    //   idVendedor: idVendedor,
-    //   lat: lat,
-    //   lon: lon,
-    //   dircli_b: dircli_b,
-    //   imagen: imagen
-    // }
-
-    // Object.keys(bodyParams).forEach(key => {
-    //   formData.append(key, bodyParams[key]);
-    // });
-
-    const formData = new FormData();
-    formData.append('imagen', imagen);
-
-    console.log("DATOS A ENVIAARRR", bodyParams);
-
-    console.log("A VER ", this.http.getDataSerializer())
-    this.http.setDataSerializer('multipart')
-    console.log("A VER despues ", formData)
+    this.http.setDataSerializer('json')
     return from(this.http.post(
       `${environment.API_URL}${environment.API_PATH}/preRegistroClienteImg`,
-      formData,
+      bodyParams,
       headers,
     )).pipe(
       catchError(error => {
