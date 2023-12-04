@@ -4,4 +4,5 @@ export interface OrderModel {
   valped_b: number,
   fecha: number,
   estped_b?: string,
+  cashback?: number,
 }

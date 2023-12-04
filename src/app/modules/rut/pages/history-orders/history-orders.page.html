@@ -97,9 +97,13 @@
 
                       <div class="o-information__form">
 
-                        <label class="o-information__input">Fecha emición: <strong>{{ order.fecha }}</strong></label>
-                        <label class="o-information__input">Total de la compra: <strong>{{ order.valped_b }}</strong></label>
+                        <label class="o-information__input">Fecha emisión: <strong>{{ order.fecha }}</strong></label>
                         <label class="o-information__input">Total de productos: <strong>{{ order.productos }}</strong></label>
+                        <label class="o-information__input">Total de la compra: <strong>$ {{ order.valped_b }}</strong></label>
+                        <div *ngIf="order.cashback != 0">
+                          <label class="o-information__input o-information__input_green">Cashback: <strong>{{ order.cashback }}</strong></label>
+                          <label class="o-information__input">Subtotal de productos: <strong>${{ order.valped_b - order.cashback! }}</strong></label>
+                        </div>
 
                         <button
                           (click)="saveCurrentDetail(order)"

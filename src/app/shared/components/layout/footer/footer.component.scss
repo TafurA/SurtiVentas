@@ -51,7 +51,11 @@
       border-bottom: 0;
       background: $c-neutro;
       filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.06));
-    };
+    }
+
+    &.i-menu {
+      transform: rotate(180deg);
+    }
 
     &::before {
       position: relative;
@@ -59,9 +63,12 @@
       font-size: 32px;
       z-index: 10;
       color: $c-primary;
-    };
+    }
+
+    ;
   }
 }
+
 .c-footer__link-bg {
   overflow: visible !important;
   visibility: visible !important;

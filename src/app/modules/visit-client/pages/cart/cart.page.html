@@ -132,21 +132,16 @@
       <app-list-products [reset]="resetRecomended"></app-list-products>
     </div>
 
-    <ion-fab id="history-cart" (click)='resetHistoryModel()' style="bottom: 10%;" vertical="bottom" horizontal="end">
-      <div class="o-float-btn">
-        <ion-fab-button>
-          <span class="i-history-outline"></span>
-        </ion-fab-button>
-      </div>
-    </ion-fab>
+    <button
+      id="history-cart" (click)='resetHistoryModel()'
+      class="o-float-btn o-float-btn_top-adjust i-history-outline">
+    </button>
 
-    <ion-fab id="causal-cart" vertical="bottom" horizontal="end">
-      <div class="o-float-btn o-float-btn_secondary">
-        <ion-fab-button>
-          <span class="i-cart_zero"></span>
-        </ion-fab-button>
-      </div>
-    </ion-fab>
+    <button
+      id="causal-cart" (click)='resetHistoryModel()'
+      class="o-float-btn o-float-btn_secondary i-cart_zero">
+    </button>
+
 
     <app-history-cart modalIdentifier="history-cart"></app-history-cart>
 

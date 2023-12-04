@@ -43,6 +43,7 @@ export class OrdersListPage implements OnInit {
         const { data } = res
         const { APLICACIÓN } = JSON.parse(data).data
         this.orderListAplication = APLICACIÓN
+        console.log("EN ESTE MOSTRAR CAHSKBAC ", this.orderListAplication)
       },
       complete: () => {
         this.loadedAplication = true

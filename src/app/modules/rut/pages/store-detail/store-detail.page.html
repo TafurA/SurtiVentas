@@ -99,25 +99,34 @@
     </div>
 
     <div *ngIf="!isFormActive">
-      <ion-fab (click)="showEditForm()" slot="fixed" vertical="bottom" horizontal="end">
+      <!-- <ion-fab  slot="fixed" vertical="bottom" horizontal="end">
         <div class="o-float-btn">
           <ion-fab-button>
-            <!-- <ion-icon name="add"></ion-icon> -->
             <span [classList]="iconAction"></span>
           </ion-fab-button>
         </div>
-      </ion-fab>
+      </ion-fab> -->
+      <button
+        (click)="showEditForm()"
+        class="o-float-btn"
+      >
+        <span [classList]="iconAction"></span>
+      </button>
     </div>
 
     <div *ngIf="isFormActive && !messageError">
-      <ion-fab (click)="saveEditForm()" slot="fixed" vertical="bottom" horizontal="end">
+      <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end">
         <div class="o-float-btn">
           <ion-fab-button>
-            <!-- <ion-icon name="add"></ion-icon> -->
-            <span [classList]="iconAction"></span>
           </ion-fab-button>
         </div>
-      </ion-fab>
+      </ion-fab> -->
+      <button
+        (click)="saveEditForm()"
+        class="o-float-btn"
+      >
+        <span [classList]="iconAction"></span>
+      </button>
     </div>
 
   </div>

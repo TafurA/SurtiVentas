@@ -84,13 +84,18 @@
       </div>
     </section>
 
-    <ion-fab id="modal-create-store" (click)="checkStepsForms()" vertical="bottom" horizontal="end">
+    <!-- <ion-fab  vertical="bottom" horizontal="end">
       <div class="o-float-btn">
         <ion-fab-button>
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </div>
-    </ion-fab>
+    </ion-fab> -->
+
+    <button
+      [routerLink]="['/client-visit/discounts']" 
+      class="o-float-btn o-float-btn_secondary i-plus">
+    </button>
 
     <ion-modal 
       trigger="modal-create-store" 

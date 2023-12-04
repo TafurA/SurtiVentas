@@ -39,6 +39,7 @@ export class HistoryOrdersPage implements OnInit {
         const { INTRANET } = dataObject.data
         this.arrayDataOrders.push(...INTRANET)
         this.loaded = true
+        console.log("EN ESTE MOSTRAR CAHSKBAC ", this.arrayDataOrders)
 
         if (this.arrayDataOrders.length === 0) {
           this.isEmpty = true

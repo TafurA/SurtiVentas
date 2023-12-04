@@ -35,8 +35,12 @@
               <label class="o-information__input">Cliente: <strong>{{ order.nomcli_b }}</strong></label>
               <label class="o-information__input">Contacto: <strong>{{ order.telcli_b }}</strong></label>
               <label class="o-information__input">Fecha emisión: <strong>{{ order.fecha }}</strong></label>
-              <label class="o-information__input">Total de la compra: <strong>$ {{ order.valped_b }}</strong></label>
               <label class="o-information__input">Vendedor responsable: <strong>{{ order.venped_b }}</strong></label>
+              <label class="o-information__input">Total de la compra: <strong>$ {{ order.valped_b }}</strong></label>
+              <div *ngIf="order.cashback?.toString() != 0">
+                <label class="o-information__input o-information__input_green">Cashback: <strong>{{ order.cashback }}</strong></label>
+                <label class="o-information__input">Subtotal de la compra: <strong>{{ order.valped_b - order.cashback! }}</strong></label>
+              </div>
 
               <a
                 class="o-link o-link_secondary"
@@ -131,8 +135,12 @@
               <label class="o-information__input">Cliente: <strong>{{ order.nomcli_b }}</strong></label>
               <label class="o-information__input">Contacto: <strong>{{ order.telcli_b }}</strong></label>
               <label class="o-information__input">Fecha emisión: <strong>{{ order.fecha }}</strong></label>
-              <label class="o-information__input">Total de la compra: <strong>$ {{ order.valped_b }}</strong></label>
               <label class="o-information__input">Vendedor responsable: <strong>{{ order.venped_b }}</strong></label>
+              <label class="o-information__input">Total de la compra: <strong>$ {{ order.valped_b }}</strong></label>
+              <div *ngIf="order.cashback?.toString() != 0.00">
+                <label class="o-information__input o-information__input_green">Cashback: <strong>{{ order.cashback }}</strong></label>
+                <label class="o-information__input">Subtotal de la compra: <strong>$ {{ order.valped_b - order.cashback! }}</strong></label>
+              </div>
 
               <a
                 class="o-link o-link_secondary"

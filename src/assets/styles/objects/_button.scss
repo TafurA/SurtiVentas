@@ -132,17 +132,40 @@
 }
 
 .o-float-btn {
-  width: 100%;
-  height: 100%;
   border-radius: 50%;
   background-color: $c-neutro;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  width: 56px;
+  height: 56px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 24px;
+  display: flex;
+  color: #013D7E;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
 
-  ion-fab-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
+  &::before {
+    position: relative;
+    z-index: 10000;
+    font-size: 24px;
+    color: #013D7E;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    background: rgba(1, 61, 126, 0.2);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: block;
   }
 }
 
@@ -156,10 +179,16 @@ ion-fab-button::part(native) {
 }
 
 .o-float-btn_secondary {
-  ion-fab-button::part(native) {
+  &:before {
     color: $c-secondary;
+  }
+  &::after {
     background: rgba($c-secondary, 0.2);
   }
+}
+
+.o-float-btn_top-adjust {
+  bottom: 62px;
 }
 
 ion-fab-button::part(native):hover::after {

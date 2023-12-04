@@ -83,12 +83,16 @@ export class LoginPagePage implements OnInit {
       if (info.version !== this.NUMBER_PUBLIC_VERSION) {
         this._alertService.alertUnUpdatedVersion(
           '¡Actualizar aplicación!',
-          'Si ve este mensaje, verifique que tenga la aplicación actualizada, gracias',
+          `Si ve este mensaje, verifique que tenga la aplicación actualizada (su versión actual es ${info.version}), gracias`,
           'error'
         )
         this.currentVersion = false
       } else {
-        this.validateLogin()
+        if (this.cookie.get("sessionToken")) {
+          this.validateLogin()
+        } else {
+          this.router.navigate(['/', 'auth'])
+        }
       }
     });
   }
