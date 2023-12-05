@@ -1,0 +1,174 @@
+<ion-content [fullscreen]="true">
+  <div class="o-layout-page-small">
+
+    <app-back-button></app-back-button>
+
+    <div class="o-canvas">
+
+      <header class="o-headline">
+        <h1 class="o-heading">Métricas </h1>
+        <p class="o-text o-text_fs-14">
+          En esta sección encuentras gráficas con mediciones por mes o diarias de diferentes procesos que se
+          manejan.
+        </p>
+      </header>
+
+      <section>
+
+        <div class="c-metric-filter">
+          <label for="casa" class="o-bold">Casa:</label>
+          <select name="casa" id="casa" (change)="filterDataByProvider($event)">
+            <option value="general">GENERAL</option>
+            <option 
+              value="{{ provider }}"
+              *ngFor="let provider of providersList"
+            >
+              {{ provider }}
+            </option>
+          </select>
+        </div>
+
+        <div *ngIf="generalMetric" class="c-card-metric__wrap">
+
+          <div *ngIf="isDataLoaded" class="c-card-metric">
+            <h3>Periodo Anterior</h3>
+            <div class="c-card-metric__content">
+              <h4>Volumen</h4>
+              <p class="c-card-metric__num o-bold">${{ this.dataForMesAnterior.VOLMESANTERIOR }}</p>
+              <p class="c-card-metric__cat o-bold">"{{ this.dataForMesAnterior.CATEMESANTERIOR }}"</p>
+            </div>
+          </div>
+
+          <div *ngIf="!isDataLoaded" class="c-card-metric">
+            <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
+            <div class="c-card-metric__content">
+              <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 50px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 80%; height: 19px;"></ion-skeleton-text>
+            </div>
+          </div>
+
+          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_blue">
+            <h3>Periodo Actual</h3>
+            <div class="c-card-metric__content">
+              <h4>Volumen</h4>
+              <p class="c-card-metric__num o-bold">${{ this.dataForMesActual.VOLMESACTUAL }}</p>
+              <p class="c-card-metric__cat o-bold">"{{ this.dataForMesActual.CATEMESACTUAL }}"</p>
+            </div>
+          </div>
+
+          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_blue">
+            <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
+            <div class="c-card-metric__content">
+              <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 50px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 80%; height: 19px;"></ion-skeleton-text>
+            </div>
+          </div>
+
+          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_full c-card-metric_green">
+            <h3>Proyección</h3>
+            <div class="c-card-metric__content">
+              <div>
+                <h4>Volumen</h4>
+                <p class="c-card-metric__num o-bold">${{ this.dataProjection.VOLMESACTUALPROYEC }}</p>
+              </div>
+              <div>
+                <h4>Faltante</h4>
+                <p class="c-card-metric__num">{{ this.dataProjection.FALTANTE }}</p>
+              </div>
+              <p class="c-card-metric__cat o-bold">"{{ this.dataProjection.CATEPROYEC }}"</p>
+            </div>
+          </div>
+
+          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_full c-card-metric_green">
+            <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
+            <div class="c-card-metric__content">
+              <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 50px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 80%; height: 19px;"></ion-skeleton-text>
+            </div>
+          </div>
+
+        </div>
+
+        <div [ngClass]="{'is-hidden':!generalMetric}" id="chart-metrics"></div>
+
+        <div class="c-table">
+          <header>
+            <h4 class="o-bold">Mes Anterior</h4>
+            <h4 class="o-bold">Mes Actual</h4>
+          </header>
+          
+          <p class="c-table__title o-bold">Resumen de Devolución ($)</p>
+
+          <div class="c-table__box">
+
+            <div class="c-table__col">
+              <p class="o-bold">${{ this.dataMesAnterior.totalDevolucion }}</p>
+            </div>
+            <div class="c-table__col">
+              <p class="o-bold">${{ this.dataMesActual.totalDevolucion }}</p>
+            </div>
+
+          </div>
+
+          <p class="c-table__title o-bold">Resumen de Devolución (%)</p>
+
+          <div class="c-table__box c-table__box_grey">
+
+            <div class="c-table__col">
+              <p>{{ this.dataMesAnterior.porcentajeDevolucion }}%</p>
+            </div>
+            <div class="c-table__col">
+              <p>{{ this.dataMesActual.porcentajeDevolucion }}%</p>
+            </div>
+
+          </div>
+
+          <p class="c-table__title o-bold">Volumen</p>
+
+          <div class="c-table__box">
+
+            <div class="c-table__col">
+              <p>${{ this.dataMesAnterior.volumen }}</p>
+            </div>
+            <div class="c-table__col">
+              <p>${{ this.dataMesActual.volumen }}</p>
+            </div>
+
+          </div>
+
+          <p class="c-table__title o-bold">Impactos</p>
+
+          <div class="c-table__box c-table__box_grey">
+
+            <div class="c-table__col">
+              <p>{{ this.dataMesAnterior.impactos }}</p>
+            </div>
+            <div class="c-table__col">
+              <p>{{ this.dataMesActual.impactos }}</p>
+            </div>
+
+          </div>
+
+          <p class="c-table__title o-bold">Pedidos</p>
+
+          <div class="c-table__box">
+
+            <div class="c-table__col">
+              <p>{{ this.dataMesAnterior.pedidos }}</p>
+            </div>
+            <div class="c-table__col">
+              <p>{{ this.dataMesActual.pedidos }}</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+  </div>
+</ion-content>

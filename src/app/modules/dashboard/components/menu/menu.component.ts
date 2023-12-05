@@ -50,13 +50,13 @@ export class MenuComponent implements OnInit {
         pathModule: '/history/list-orders',
         color: '#57CB6B',
       },
-      // {
-      //   ico: 'graph-box',
-      //   title: 'MÉTRICAS',
-      //   description: 'Mediciones',
-      //   pathModule: 'client-visit',
-      //   color: '#399CEC',
-      // },
+      {
+        ico: 'graph-box',
+        title: 'MÉTRICAS',
+        description: 'Mediciones',
+        pathModule: '/metrics/list',
+        color: '#399CEC',
+      },
       {
         ico: 'catalog',
         title: 'CATÁLOGOS',

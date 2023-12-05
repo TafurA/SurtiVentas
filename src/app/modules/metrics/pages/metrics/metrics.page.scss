@@ -1,0 +1,98 @@
+.c-card-metric__wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.c-card-metric {
+  flex: 1 45%;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: #EBEBEB;
+}
+
+.c-card-metric_blue {
+  background-color: #C7E1F1;
+}
+
+.c-card-metric_green {
+  background-color: #CEEEDC;
+}
+
+.c-card-metric_full {
+  flex: 1 100%;
+}
+
+.c-metric-filter {
+  select {
+    display: block;
+    margin-top: 8px;
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+    border: none;
+  }
+}
+
+.c-card-metric__content {
+  background: white;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 8px;
+
+  h4 {
+    font-size: 14px;
+  }
+
+  .c-card-metric_full & {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.c-card-metric__cat {
+  margin: 8px 0;
+  text-align: center;
+  font-size: 12px;
+}
+
+.c-table {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+.c-table__title {
+  text-align: center;
+  font-size: 14px;
+}
+
+.c-table__box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  padding: 8px;
+}
+
+.c-table__box_grey {
+  background: #f9f6f6;
+}
+
+.c-table__col {
+  h4 {
+    color: #C9C9C9;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+}

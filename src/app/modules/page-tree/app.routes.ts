@@ -35,6 +35,10 @@ export const routes: Routes = [
     loadChildren: () => import('../incentivo/incentivo.module').then( m => m.IncentivoModule)
   },
   {
+    path: 'metrics',
+    loadChildren: () => import('../metrics/metrics.module').then( m => m.MetricsModule)
+  },
+  {
     path: '**',
     redirectTo: '/dashboard'
   },
