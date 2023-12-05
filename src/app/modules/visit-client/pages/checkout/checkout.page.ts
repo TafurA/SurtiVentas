@@ -295,7 +295,7 @@ export class CheckoutPage implements OnInit {
       this.order[0].lon = longitud
     }).catch((error) => {
       console.log("Error al obtener la ubicación: ", error);
-    }).finally(() => { console.log("POR AUQI PASO") })
+    })
   }
 
 }

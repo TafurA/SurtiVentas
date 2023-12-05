@@ -108,7 +108,6 @@ export class AuthService {
   }
 
   editDataUser(idVendedor: string, emailVendedor: string) {
-    console.log(idVendedor, emailVendedor)
     return from(this.http.get(
       `${environment.API_URL}${environment.API_PATH}/updateInformationSeller?idVendedor=${idVendedor}&emaVendedor=${emailVendedor}`,
       '',
@@ -125,7 +124,6 @@ export class AuthService {
   }
 
   updatePassword$(idVendedor: string, password: string) {
-    console.log("servide", idVendedor, password)
     return from(this.http.get(
       `${environment.API_URL}${environment.API_PATH}/Changepassword?idVendedor=${idVendedor}&password=${password}`,
       '',

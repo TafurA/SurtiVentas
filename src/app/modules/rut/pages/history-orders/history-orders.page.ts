@@ -39,7 +39,6 @@ export class HistoryOrdersPage implements OnInit {
         const { INTRANET } = dataObject.data
         this.arrayDataOrders.push(...INTRANET)
         this.loaded = true
-        console.log("EN ESTE MOSTRAR CAHSKBAC ", this.arrayDataOrders)
 
         if (this.arrayDataOrders.length === 0) {
           this.isEmpty = true
@@ -61,8 +60,6 @@ export class HistoryOrdersPage implements OnInit {
         newListOrders.push(element)
       });
 
-      console.log(term)
-      console.log(this.arrayDataOrders)
 
       this.listFiltered = newListOrders
         .filter(item => item.idpedido.toLowerCase().indexOf(term.toLowerCase()) >= 0);
@@ -102,7 +99,6 @@ export class HistoryOrdersPage implements OnInit {
   }
 
   saveCurrentDetail(order: OrderModel) {
-    console.log(order)
     const orderTemp = {
       pedidoId: order.idpedido,
       productos: order.productos,

@@ -42,19 +42,13 @@ export class StoreDetailPage implements OnInit {
   }
 
   geocodeAddress() {
-    console.log(this.store)
     const address = `${this.store.dircli_b}, ${this.store.barcli_b} ${this.store.ciudad}`;
-    console.log("address, ", address)
-    // const latitude = Number(this.store.latcli_b)
-    // const longitude = Number(this.store.loncli_b)
 
     const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
       address
     )}&key=${this.apiKey}`;
 
     // const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${this.apiKey}`;
-
-    console.log("oe:", geocodeUrl)
 
     fetch(geocodeUrl)
       .then((response) => response.json())
@@ -75,9 +69,6 @@ export class StoreDetailPage implements OnInit {
       };
       const map = new google.maps.Map(document.getElementById('map')!, mapOptions);
 
-      console.log(data.results[0]);
-      console.log(mapOptions.center.lat, mapOptions.center.lng);
-
       const marker = new google.maps.Marker({
         position: { lat, lng },
         map: map,
@@ -89,7 +80,6 @@ export class StoreDetailPage implements OnInit {
       });
 
     } else {
-      console.log("esa gonorrea ome", data.status)
       const errorElement = document.createElement('p');
       errorElement.textContent = `Error: ${data.status}`;
     }
@@ -149,7 +139,6 @@ export class StoreDetailPage implements OnInit {
     } else {
       this._storeService.updateDataStore$(this.store.codcli_b, this.store.emacli_b, this.store.telcli_b, this.store.empcli_b).subscribe({
         next: (res) => {
-          console.log("que me trae el res ", res)
           const { message } = JSON.parse(res.data)
           this._alertService.showAlert('¡Datos editados correctamente!', message, 'success')
           this.iconAction = 'i-pencil'

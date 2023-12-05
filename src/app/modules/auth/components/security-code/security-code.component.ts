@@ -108,7 +108,6 @@ export class SecurityCodeComponent implements AfterViewInit {
 
     this._authService.serviceCredentialValidate$(this.getCredentialString()).subscribe({
       next: (res) => {
-        console.log(res)
         this.removeLoader()
         this.timer()
         this.isTimerStop = false

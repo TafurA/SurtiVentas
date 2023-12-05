@@ -42,7 +42,6 @@ export class UpdatePasswordPage implements OnInit {
     let { newPassword } = this.formUpdatePassword.value
 
     const tempUser = localStorage.getItem('currentUserToForgotPass') ? this.userId = localStorage.getItem('currentUserToForgotPass') : this.userId = localStorage.getItem('codemp_b')
-    console.log(tempUser)
 
     this._authService.updatePassword$(this.userId, newPassword).subscribe((res) => {
       const { data } = res

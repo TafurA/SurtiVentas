@@ -76,9 +76,6 @@ export class LoginPagePage implements OnInit {
     // this.validateVersion()
 
     App["getInfo"]().then((info: any) => {
-      console.log('Nombre de la aplicación:', info.name);
-      console.log('ID de la aplicación:', info.id);
-      console.log('Versión de la aplicación:', info.version);
       this.currentNumberVersion = info.version
       if (info.version !== this.NUMBER_PUBLIC_VERSION) {
         this._alertService.alertUnUpdatedVersion(
@@ -98,7 +95,6 @@ export class LoginPagePage implements OnInit {
   }
 
   validateVersion() {
-    console.log("EMTRAAAA")
     this.appVersion.getVersionNumber().then((uploadNumberVersion) => {
       this.currentNumberVersion = uploadNumberVersion
       if (uploadNumberVersion != this.NUMBER_PUBLIC_VERSION) {

@@ -60,15 +60,11 @@ export class ForgotPasswordPage implements OnInit {
   public async validateUserCredential() {
     const dataForm = this.validateCredentialForm.value;
 
-    console.log(dataForm)
-    console.log(dataForm.credential)
-
     this.showLoader()
 
     if (dataForm.credential != null) {
       await this._authService.serviceCredentialValidate$(dataForm.credential).subscribe({
         next: (res) => {
-          console.log(res)
           const { response, datos, message } = JSON.parse(res.data)
           if (response) {
             this.stepOne = true

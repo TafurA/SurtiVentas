@@ -37,48 +37,56 @@
           <h1 class="o-title">Solicitudes de cliente</h1>
         </header>
 
-        <div class="o-checkout__dropdown" *ngFor="let requestTi of getRequestState()">
-
-          <h3 (click)="toggleDropdown($event)" *ngIf="requestTi === '2'"
-            class="o-title c-product-slider__title i-after-arrow-down">CREADAS</h3>
-          <h3 (click)="toggleDropdown($event)" *ngIf="requestTi === '1'"
-            class="o-title c-product-slider__title i-after-arrow-down">RECHAZADAS</h3>
-          <h3 (click)="toggleDropdown($event)" *ngIf="requestTi === '0'"
-            class="o-title c-product-slider__title i-after-arrow-down">PENDIENTES</h3>
-
-          <div>
-            <div class="o-checkout__products">
-              <ul>
-                <li *ngFor="let request of getProductGroup(requestTi)" class="c-card-detail c-card-detail_space"
-                  ngClass="is-{{ request.codcli_b }}">
-                  <header class="c-card-detail__header">
-                    <p class="o-text o-bold c-card-detail__grey">
-                      {{ request.feccli_b }}</p>
-                    <p class="o-text o-bold">Tel:
-                      {{ request.telcli_b }}</p>
-                  </header>
-                  <div class="c-card-detail__content">
-                    <p *ngIf="request.nomcli_b" class="o-text">
-                      {{ request.nomcli_b }}
-                      {{ request.ape1cli_b }}
-                      {{ request.ape2cli_b }}
-                    </p>
-                    <p *ngIf="!request.nomcli_b" class="o-text">
-                      {{ request.empcli_b }}
-                    </p>
-                    <p class="o-text">Dirección:
-                      <span class="c-card-detail__causal">{{ request.dircli_b }}</span>
-                    </p>
-                  </div>
-                  <footer *ngIf="request.destab_b" class="rta-service">
-                    <p>Observación:</p>
-                    <p>{{ request.destab_b }}</p>
-                  </footer>
-                </li>
-              </ul>
+        <div *ngIf="isPendingRequest">
+          <div class="o-checkout__dropdown" *ngFor="let requestTi of getRequestState()">
+  
+            <h3 (click)="toggleDropdown($event)" *ngIf="requestTi === '2'"
+              class="o-title c-product-slider__title i-after-arrow-down">CREADAS</h3>
+            <h3 (click)="toggleDropdown($event)" *ngIf="requestTi === '1'"
+              class="o-title c-product-slider__title i-after-arrow-down">RECHAZADAS</h3>
+            <h3 (click)="toggleDropdown($event)" *ngIf="requestTi === '0'"
+              class="o-title c-product-slider__title i-after-arrow-down">PENDIENTES</h3>
+  
+            <div>
+              <div class="o-checkout__products">
+                <ul>
+                  <li *ngFor="let request of getProductGroup(requestTi)" class="c-card-detail c-card-detail_space"
+                    ngClass="is-{{ request.codcli_b }}">
+                    <header class="c-card-detail__header">
+                      <p class="o-text o-bold c-card-detail__grey">
+                        {{ request.feccli_b }}</p>
+                      <p class="o-text o-bold">Tel:
+                        {{ request.telcli_b }}</p>
+                    </header>
+                    <div class="c-card-detail__content">
+                      <p *ngIf="request.nomcli_b" class="o-text">
+                        {{ request.nomcli_b }}
+                        {{ request.ape1cli_b }}
+                        {{ request.ape2cli_b }}
+                      </p>
+                      <p *ngIf="!request.nomcli_b" class="o-text">
+                        {{ request.empcli_b }}
+                      </p>
+                      <p class="o-text">Dirección:
+                        <span class="c-card-detail__causal">{{ request.dircli_b }}</span>
+                      </p>
+                    </div>
+                    <footer *ngIf="request.destab_b" class="rta-service">
+                      <p>Observación:</p>
+                      <p>{{ request.destab_b }}</p>
+                    </footer>
+                  </li>
+                </ul>
+              </div>
             </div>
+  
           </div>
+        </div>
 
+        <div *ngIf="!isPendingRequest">
+          <div class="o-message o-message_info">
+            <h2 class="o-message__title i-info">En el momento no se encuentran datos registrados.</h2>
+          </div>
         </div>
 
       </div>
@@ -93,7 +101,8 @@
     </ion-fab> -->
 
     <button
-      [routerLink]="['/client-visit/discounts']" 
+      id="modal-create-store"
+      (click)="checkStepsForms()"
       class="o-float-btn o-float-btn_secondary i-plus">
     </button>
 

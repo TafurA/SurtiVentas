@@ -131,7 +131,7 @@ export class CheckoutConfirmationPage implements OnInit {
     localStorage.setItem('goToCheckoutConfirmation', 'true')
     setTimeout(() => {
       console.log(localStorage.getItem('goToCheckoutConfirmation'))
-      this.router.navigate(['/', 'client-visit', 'list-stores'])
+      this.router.navigate(['/', 'dashboard'])
     }, 500)
 
   }

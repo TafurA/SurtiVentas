@@ -138,7 +138,6 @@ export class DiscountsPage implements OnInit {
     this.discont.obsdes_b = this.encodeDescriptionToSend()
     this._orderService.setDiscounts(this.discont.idpedido, this.discont.idVendedor, this.discont.idGrupo, this.discont.obsdes_b).subscribe({
       next: (res: any) => {
-        console.log(res)
         const { response, message } = JSON.parse(res.data)
         const state = response ? 'success' : 'error'
         this._alertService.showAlert('Enviar descuento', message, state)

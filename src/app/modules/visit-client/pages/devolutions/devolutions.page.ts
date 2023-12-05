@@ -39,7 +39,6 @@ export class DevolutionsPage implements OnInit {
             if (clave !== 'response') {
               // Recorre el arreglo de objetos correspondiente
               for (const objetoDeArreglo of arregloDeObjetos) {
-                console.log("ESTOS SON LOS DATOS", objetoDeArreglo)
                 const tempData: any = {
                   id: objetoDeArreglo.numFactura,
                   productos: arregloDeObjetos.length,

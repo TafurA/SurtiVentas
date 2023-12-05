@@ -97,7 +97,6 @@ export class ListPage implements OnInit {
   }
 
   filterList(): void {
-    console.log("ENTRA AQIOOS")
     this.searchTerm$.subscribe((term: any) => {
       let newListProducts: any[] = []
       this.productsList.forEach(element => {
@@ -106,7 +105,6 @@ export class ListPage implements OnInit {
 
       this.listFiltered = newListProducts
         .filter(item => {
-          console.log("ITEM", item)
           let tempData: any = ''
           if (item.palabrasClaves != null) {
             tempData = item.palabrasClaves.toLowerCase().indexOf(term.toLowerCase()) >= 0

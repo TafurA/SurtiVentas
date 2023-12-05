@@ -26,6 +26,7 @@ export class ListStoresPage implements OnInit {
   currentRout: any = ''
   isRoutLoaded: boolean = false
   pendingRequest: any[] = []
+  isPendingRequest: boolean = false
 
   @ViewChild('accordionGroup', { static: false }) accordionGroup!: IonAccordionGroup;
   // Define los dos grupos de campos usando FormGroup
@@ -254,18 +255,13 @@ export class ListStoresPage implements OnInit {
           // directory: Directory.Data,
         });
 
-        console.log("SAPO HP RESULT", result)
-
         const base64String = result.data;
-
-        console.log("SAPO HP RESULT 2", base64String)
 
         // Sanitize the base64 string to use in img src
         this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
           'data:image/jpeg;base64,' + base64String
         );
 
-        console.log("URL HP ", this.fileUrl)
       } catch (error) {
         console.error('Error reading file:', error);
       }
@@ -277,7 +273,15 @@ export class ListStoresPage implements OnInit {
     this._storeService.getRequestClient(localStorage.getItem('codemp_b')!).subscribe({
       next: (res) => {
         const { data } = JSON.parse(res.data)
-        this.pendingRequest.push(...data)
+        if (data) {
+          this.pendingRequest.push(...data)
+        }
+      }, complete: () => {
+        if (this.pendingRequest.length > 0) {
+          this.isPendingRequest = true
+        } else {
+          this.isPendingRequest = false
+        }
       }
     })
   }
@@ -330,7 +334,6 @@ export class ListStoresPage implements OnInit {
       resultType: CameraResultType.DataUrl
     })
 
-    console.log("QUE ES LA IMAGENN", image)
     this.selectedFile = image.dataUrl
 
     document.querySelector("#supportImg")?.setAttribute("src", this.selectedFile)
@@ -626,8 +629,6 @@ export class ListStoresPage implements OnInit {
                   this.selectedFile
                 ).subscribe({
                   next: (res) => {
-                    console.log("que es el res ", res)
-                    console.log("ANTES DE ENVIARLO", this.selectedFile)
                     let { response, message } = JSON.parse(res.data)
                     const typeAlert = response ? 'success' : 'error'
                     this.canDismissModalCreateStore = true

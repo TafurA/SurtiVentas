@@ -33,7 +33,6 @@ export class AlertService {
           text: 'Actualizar',
           cssClass: 'o-button o-button_small',
           handler: () => {
-            console.log("entroo")
             setTimeout(() => {
               window.location.href = "https://play.google.com/store/apps/details?id=com.surtilider.SurtiTienda&rdid=com.surtilider.SurtiTienda&feature=md&offerId"
             }, 200);

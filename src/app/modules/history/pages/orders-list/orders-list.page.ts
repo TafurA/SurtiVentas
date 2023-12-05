@@ -43,7 +43,6 @@ export class OrdersListPage implements OnInit {
         const { data } = res
         const { APLICACIÓN } = JSON.parse(data).data
         this.orderListAplication = APLICACIÓN
-        console.log("EN ESTE MOSTRAR CAHSKBAC ", this.orderListAplication)
       },
       complete: () => {
         this.loadedAplication = true
@@ -85,9 +84,6 @@ export class OrdersListPage implements OnInit {
         newListOrders.push(element)
       });
 
-      console.log(term)
-      console.log(this.orderListAplication)
-
       this.listFilteredAplication = newListOrders
         .filter(item => item.nomcli_b.toLowerCase().indexOf(term.toLowerCase()) >= 0);
 
@@ -110,9 +106,6 @@ export class OrdersListPage implements OnInit {
       this.orderListIntranet.forEach((element: any) => {
         newListOrders.push(element)
       });
-
-      console.log(term)
-      console.log(this.orderListIntranet)
 
       this.listFilteredIntranet = newListOrders
         .filter(item => item.nomcli_b.toLowerCase().indexOf(term.toLowerCase()) >= 0);

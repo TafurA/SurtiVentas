@@ -217,14 +217,11 @@ export class CartPage implements OnInit {
     this.productsLisGold = []
     await this._productService.getGoldProductsList$(this.groupId, this.cartId).subscribe({
       next: (res) => {
-        console.log("GOLD", res)
         const { data } = JSON.parse(res.data)
         this.productsLisGold.push(...data)
       },
       complete: () => {
         this.isProductsGoldListLoaded = true;
-        console.log("this.productsLisGold")
-        console.log(this.productsLisGold)
       }
     })
   }
