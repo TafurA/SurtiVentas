@@ -1,28 +1,269 @@
 <ion-content [fullscreen]="true">
-
   <div class="o-layout-page-small">
 
+    <app-back-button></app-back-button>
+
     <div class="o-canvas">
-      <header class="o-headline" style="margin-top: 80px;">
+      <header class="o-headline" style="margin-bottom: 24px">
         <h1 class="o-heading">
-          Aplicaciónes para incentivos
+          Incentivos
         </h1>
-        <span style="font-size: 18px;">Ingresa a las siguientes aplicaciones para obtener mas información</span>
+        <span style="font-size: 18px;">Aquí podrás ver el progreso de cada una de las metas que debes cumplir, se
+          encuentran divididas por casas.</span>
       </header>
+
+      <div *ngIf="listLoaded">
+
+        <div *ngFor="let provider of listProviders" class="c-provider o-checkout__dropdown">
+
+          <button class="o-bold c-provider__button i-after-arrow-down" (click)="toggleDropdown($event)">
+            {{ provider.name }}
+          </button>
+
+          <div class="o-checkout__products">
+
+            <div class="c-concurso {{ provider.cssClass }}" *ngFor="let concurso of provider.concursos">
+
+              <h4 class="c-concurso__title">
+                Concurso:
+                <strong>{{ concurso.concurso }}</strong>
+              </h4>
+
+              <div class="js-table">
+                <button class="c-concurso__button o-bold i-after-arrow-down"
+                  (click)="toggleDropdownTable($event)">Resultados del concurso</button>
+                <div class="o-table-list">
+                  <div class="c-table">
+
+                    <div class="c-table__box c-table__box_grey">
+
+                      <div class="c-table__col">
+                        <p class="c-table__col-label">Imp. Realizados</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.impacto }}</p>
+                      </div>
+                      <div class="c-table__col">
+                        <p class="c-table__col-label">Imp. Cuota</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.cimpacto }}</p>
+                      </div>
+                      <div class="c-table__col"
+                        *ngIf="convertirYRestar(concurso.data.cimpacto, concurso.data.impacto) > 0 else otroCaso">
+                        <p class="c-table__col-label">Imp. Faltante</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.impacto - concurso.data.cimpacto }}</p>
+                      </div>
+                      <ng-template #otroCaso>
+                        <!-- Contenido cuando la condición es falsa -->
+                        <div class="c-table__col">
+                          <p class="c-table__col-value o-bold">0</p>
+                        </div>
+                      </ng-template>
+
+                    </div>
+
+                    <div class="c-table__box">
+
+                      <div class="c-table__col">
+                        <p class="c-table__col-label">Ped. Realizados</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.pedido }}</p>
+                      </div>
+                      <div class="c-table__col">
+                        <p class="c-table__col-label">Ped. Cuota</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.cpedido }}</p>
+                      </div>
+                      <div class="c-table__col"
+                        *ngIf="convertirYRestar(concurso.data.cpedido, concurso.data.pedido) > 0 else otroCaso">
+                        <p class="c-table__col-label">Ped. Faltante</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.pedido - concurso.data.cpedido }}</p>
+                      </div>
+                      <ng-template #otroCaso>
+                        <!-- Contenido cuando la condición es falsa -->
+                        <div class="c-table__col">
+                          <p class="c-table__col-value o-bold">0</p>
+                        </div>
+                      </ng-template>
+
+                    </div>
+
+                    <div class="c-table__box c-table__box_grey">
+
+                      <div class="c-table__col">
+                        <p class="c-table__col-label">Vol. Realizados</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.volumen }}</p>
+                      </div>
+                      <div class="c-table__col">
+                        <p class="c-table__col-label">Vol. Cuota</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.cvolumen }}</p>
+                      </div>
+                      <div class="c-table__col"
+                        *ngIf="convertirYRestar(concurso.data.cvolumen, concurso.data.volumen) > 0 else otroCaso">
+                        <p class="c-table__col-label">Vol. Faltante</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.volumen - concurso.data.cvolumen }}</p>
+                      </div>
+                      <ng-template #otroCaso>
+                        <!-- Contenido cuando la condición es falsa -->
+                        <div class="c-table__col">
+                          <p class="c-table__col-value o-bold">0</p>
+                        </div>
+                      </ng-template>
+
+                    </div>
+
+                    <div class="c-table__box">
+
+                      <div class="c-table__col">
+                        <p class="c-table__col-label">Und. Realizada</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.unidad }}</p>
+                      </div>
+                      <div class="c-table__col">
+                        <p class="c-table__col-label">Und. Cuota</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.cunidad }}</p>
+                      </div>
+                      <div class="c-table__col"
+                        *ngIf="convertirYRestar(concurso.data.cunidad, concurso.data.unidad) > 0 else otroCaso">
+                        <p class="c-table__col-label">Und. Faltante</p>
+                        <p class="c-table__col-value o-bold">{{ concurso.data.unidad - concurso.data.cunidad }}</p>
+                      </div>
+                      <ng-template #otroCaso>
+                        <!-- Contenido cuando la condición es falsa -->
+                        <div class="c-table__col">
+                          <p class="c-table__col-value o-bold">0</p>
+                        </div>
+                      </ng-template>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="!listLoaded">
+
+        <div class="c-provider o-checkout__dropdown">
+          <ion-skeleton-text [animated]="true" style="width: 120px; height: 20px;"></ion-skeleton-text>
+
+          <div>
+
+            <h4 class="c-concurso__title">
+              <ion-skeleton-text [animated]="true" style="width: 40px; height: 13px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+            </h4>
+
+            <div class="js-table">
+              <ion-skeleton-text [animated]="true" style="width: 40px; height: 13px;"></ion-skeleton-text>
+              <div class="c-table">
+
+                <div class="c-table__box c-table__box_grey">
+
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                </div>
+
+                <div class="c-table__box c-table__box_grey">
+
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                </div>
+
+                <div class="c-table__box c-table__box_grey">
+
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                </div>
+
+                <div class="c-table__box c-table__box_grey">
+
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                  <div class="c-table__col">
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" style="width: 20px; height: 13px;"></ion-skeleton-text>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
     </div>
 
-    <div class="o-canvas button-incentivos-wrap">
-
-      <a class="button-incentivos" target="_blank"
-        href="https://play.google.com/store/apps/details?id=com.amdp.easyfiel">
-        Aplicación de C10
-      </a>
-
-      <a class="button-incentivos" target="_blank" href=" https://planpremios.co/">
-        Aplicación Plan Premios
-      </a>
-
-    </div>
   </div>
 
 </ion-content>
+
+<button id="apps-incentivos" class="o-float-btn">
+  <ion-icon name="apps-outline"></ion-icon>
+</button>
+
+<ion-modal trigger="apps-incentivos" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ng-template>
+    <div class="block">
+      <div class="c-modal">
+        <!-- <button class="c-modal__close i-close"></button> -->
+        <h3 class="c-modal__title">
+          Aplicaciones para Incentivos
+        </h3>
+
+        <div class="box-buttons">
+          <a class="button-incentivos" target="_blank"
+            href="https://play.google.com/store/apps/details?id=com.amdp.easyfiel">
+            Aplicación de C10
+          </a>
+
+          <a class="button-incentivos" target="_blank" href=" https://planpremios.co/">
+            Aplicación Plan Premios
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>

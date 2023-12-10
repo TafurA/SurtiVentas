@@ -157,10 +157,21 @@ export class MetricsPage implements OnInit {
         opacity: 1
       },
       tooltip: {
-        custom: function ({ series, seriesIndex, dataPointIndex, w }: any) {
-          console.log(dataPointIndex, seriesIndex, series, w)
+        custom: ({ series, seriesIndex, dataPointIndex, w }: any) => {
+          // Accede al valor del punto de datos
+          const value = w.globals.series[seriesIndex][dataPointIndex];
 
-          return 'asd';
+          // Formatea el valor según tus necesidades
+          const formattedValue = `$${value.toFixed(2)}`; // Ejemplo de formato
+
+          // Retorna el valor formateado para mostrar en el tooltip
+          return '<div class="c-tooltip">' +
+            '<h4 class="c-tooltip__title">' + 'Volumen' + '</h4>' +
+            '<div class="c-tooltip__content">' +
+            '<span class="c-tooltip__txt">Periodo Anterior: ' + this.dataForMesAnterior.VOLMESANTERIOR + '</span class="c-tooltip__txt">' +
+            '<span class="c-tooltip__txt">Periodo Actual: ' + this.dataForMesActual.VOLMESACTUAL + '</span class="c-tooltip__txt">' +
+            '</div>' +
+            '</div>';
         }
       },
     };

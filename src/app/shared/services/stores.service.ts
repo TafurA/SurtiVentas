@@ -164,4 +164,12 @@ export class StoresService {
       environment.headers
     ))
   }
+
+  getIncentivos(idVendedor: any, idGrupo: any) {
+    return from(this.http.get(
+      `${environment.API_URL}${environment.API_PATH}/getIncentivoVendedor?idVendedor=${idVendedor}&idGrupo=${idGrupo}`,
+      '',
+      environment.headers
+    ))
+  }
 }

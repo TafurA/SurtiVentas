@@ -95,3 +95,41 @@
     margin-bottom: 4px;
   }
 }
+
+.c-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+.c-table__title {
+  text-align: center;
+  font-size: 14px;
+}
+
+.c-table__box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  padding: 8px;
+}
+
+.c-table__box_grey {
+  background: #f9f6f6;
+}
+
+.c-table__col {
+  h4 {
+    color: #C9C9C9;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+}

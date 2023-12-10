@@ -30,30 +30,12 @@
 
         <div *ngIf="generalMetric" class="c-card-metric__wrap">
 
-          <div *ngIf="isDataLoaded" class="c-card-metric">
+          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_blue">
             <h3>Periodo Anterior</h3>
             <div class="c-card-metric__content">
               <h4>Volumen</h4>
               <p class="c-card-metric__num o-bold">${{ this.dataForMesAnterior.VOLMESANTERIOR }}</p>
               <p class="c-card-metric__cat o-bold">"{{ this.dataForMesAnterior.CATEMESANTERIOR }}"</p>
-            </div>
-          </div>
-
-          <div *ngIf="!isDataLoaded" class="c-card-metric">
-            <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
-            <div class="c-card-metric__content">
-              <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
-              <ion-skeleton-text [animated]="true" style="width: 50px; height: 19px;"></ion-skeleton-text>
-              <ion-skeleton-text [animated]="true" style="width: 80%; height: 19px;"></ion-skeleton-text>
-            </div>
-          </div>
-
-          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_blue">
-            <h3>Periodo Actual</h3>
-            <div class="c-card-metric__content">
-              <h4>Volumen</h4>
-              <p class="c-card-metric__num o-bold">${{ this.dataForMesActual.VOLMESACTUAL }}</p>
-              <p class="c-card-metric__cat o-bold">"{{ this.dataForMesActual.CATEMESACTUAL }}"</p>
             </div>
           </div>
 
@@ -66,7 +48,25 @@
             </div>
           </div>
 
-          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_full c-card-metric_green">
+          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_blue-30">
+            <h3 style="color: #fff">Periodo Actual</h3>
+            <div class="c-card-metric__content">
+              <h4>Volumen</h4>
+              <p class="c-card-metric__num o-bold">${{ this.dataForMesActual.VOLMESACTUAL }}</p>
+              <p class="c-card-metric__cat o-bold">"{{ this.dataForMesActual.CATEMESACTUAL }}"</p>
+            </div>
+          </div>
+
+          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_blue-30">
+            <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
+            <div class="c-card-metric__content">
+              <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 50px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 80%; height: 19px;"></ion-skeleton-text>
+            </div>
+          </div>
+
+          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_full">
             <h3>Proyección</h3>
             <div class="c-card-metric__content">
               <div>
@@ -81,7 +81,7 @@
             </div>
           </div>
 
-          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_full c-card-metric_green">
+          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_full">
             <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
             <div class="c-card-metric__content">
               <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
