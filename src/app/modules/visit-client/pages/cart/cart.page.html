@@ -86,7 +86,8 @@
   
     </div>
 
-    <div *ngIf="productsListRecommended.length > 0 && isProductsRecomendedListLoaded">
+    <!-- recomendados -->
+    <div *ngIf="productsLisGold.length == 0 && isProductsGoldListLoaded && productsListRecommended.length > 0 && isProductsRecomendedListLoaded">
 
       <div class="o-canvas">
         <h2 class="o-title c-product-slider__title">RECOMENDADOS</h2>
@@ -116,7 +117,7 @@
     <!-- End data unloaded -->
   
     <!-- Data unloaded -->
-    <div *ngIf="!isProductsRecomendedListLoaded">
+    <div *ngIf="!isProductsRecomendedListLoaded && !isProductsGoldListLoaded">
       <div class="o-canvas">
         <ion-skeleton-text [animated]="true" style="width: 80px; height: 13px;"></ion-skeleton-text>
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">

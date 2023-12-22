@@ -196,18 +196,19 @@ export class CartPage implements OnInit {
     });
   }
 
-  async getRecommendedProductsList() {
+  getRecommendedProductsList() {
     this.isProductsRecomendedListLoaded = false;
     this.productsListRecommended = []
-    await this._productService.getRecommendedProductsList$(this.cartId, this.bodega).subscribe({
+    this._productService.getRecommendedProductsList$(this.cartId, this.bodega).subscribe({
       next: (res) => {
-        if (res.length > 5) {
-          const { data } = JSON.parse(res.data)
-          this.productsListRecommended.push(...data)
-        }
+        const { data } = JSON.parse(res.data)
+        this.productsListRecommended.push(...data)
       },
       complete: () => {
         this.isProductsRecomendedListLoaded = true;
+      },
+      error: (e) => {
+        console.log("e ", e)
       }
     })
   }
@@ -250,7 +251,7 @@ export class CartPage implements OnInit {
 
     this.isStateFull = true
 
-    if(action === "modal") {
+    if (action === "modal") {
       setTimeout(() => {
         this.modalController.dismiss()
       }, 10);
