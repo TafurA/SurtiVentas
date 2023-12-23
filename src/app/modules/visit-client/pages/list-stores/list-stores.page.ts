@@ -121,9 +121,8 @@ export class ListStoresPage implements OnInit {
     })
   }
 
-  startClientVisit(idStore:any, nameStore:any, idPedido:any, metaCurrent:any, estped_b:any, address:any, ultimacompra:any) {
-    console.log("AQUIIIm ", idStore, nameStore, idPedido, metaCurrent, estped_b, address, ultimacompra)
-    this.router.navigate(['/', 'client-visit', 'cart']).then(() => {
+  startClientVisit(idStore: any, idPedido: any, nameStore: any, estped_b: any, metaCurrent: any,  address: any, ultimacompra: any) {
+    setTimeout(() => {
       localStorage.setItem('CartStoreID', idStore)
       localStorage.setItem('nameStoreId', nameStore)
       localStorage.setItem('idPedidoCurrentOrderPend', idPedido)
@@ -131,7 +130,10 @@ export class ListStoresPage implements OnInit {
       localStorage.setItem('currentOrderState', estped_b)
       localStorage.setItem('currentOrderAddress', address)
       localStorage.setItem('ultimacompra', ultimacompra)
-    })
+    }, 50)
+    setTimeout(() => {
+      this.router.navigate(['/', 'client-visit', 'cart'])
+    }, 100)
   }
 
   saveCurrentDetail(idPedido: string) {
