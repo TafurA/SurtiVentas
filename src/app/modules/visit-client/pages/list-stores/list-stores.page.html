@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="c-list-store__item-actions">
-                  <button id="modal-visit-{{i}}" class="o-link o-link_primary i-after-arrow-right">
+                  <button (click)="startClientVisit(store.codcli_b, store.idpedido, store.nomcli_b, store.estped_b, store.meta, store.dircli_b, store.ultimacompra)" class="o-link o-link_primary i-after-arrow-right">
                     <span *ngIf="store.estped_b === 'PEND'">Continuar Visita</span>
                     <span *ngIf="!store.estped_b">Iniciar visita</span>
                   </button>
