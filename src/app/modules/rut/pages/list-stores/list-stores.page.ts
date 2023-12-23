@@ -331,7 +331,10 @@ export class ListStoresPage implements OnInit {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
-      resultType: CameraResultType.DataUrl
+      resultType: CameraResultType.DataUrl,
+      promptLabelHeader: 'Adjuntar evidencia',
+      promptLabelPhoto: "Seleccionar de la galería",
+      promptLabelPicture: "Tomar evidencia instantanea"
     })
 
     this.selectedFile = image.dataUrl
