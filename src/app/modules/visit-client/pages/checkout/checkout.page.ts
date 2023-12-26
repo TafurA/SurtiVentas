@@ -82,6 +82,7 @@ export class CheckoutPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getGeolocation()
   }
 
   ionViewDidEnter() {

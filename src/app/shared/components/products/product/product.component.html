@@ -12,12 +12,15 @@
 
     <!-- Image and title -->
     <figure class="c-product__figure">
-
-      <img src="{{ productObject.img_prod }}" alt="" class="c-product__img">
-
+       <img src="{{ productObject.img_prod }}" alt="" class="c-product__img">
       <figcaption class="c-product__title" *ngIf="productObject.nameProduct !== null">
         {{ productObject.nameProduct }}
       </figcaption>
+      <p 
+        style="font-size: 12px; color: #000; margin-top: 6px;"
+      >
+        Código: {{ productObject.codeProduct }}
+      </p>
 
     </figure>
 
