@@ -18,4 +18,5 @@ export interface StoreModel {
   ultimacompra?: string,
   barcli_b?: string
   ciudad?: string,
+  tipoPG?: string,
 }
