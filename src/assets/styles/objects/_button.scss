@@ -191,6 +191,10 @@ ion-fab-button::part(native) {
   bottom: 62px;
 }
 
+.o-float-btn_bottom-40 {
+  bottom: 40px;
+}
+
 ion-fab-button::part(native):hover::after {
   background-color: #06235d;
 }

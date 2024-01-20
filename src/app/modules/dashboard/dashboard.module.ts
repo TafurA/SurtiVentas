@@ -15,10 +15,11 @@ import { RankingSellerComponent } from './components/ranking-seller/ranking-sell
 import { RankingSellerService } from './services/ranking-seller.service';
 import { BackButtonComponent } from '@shared/components/back-button/back-button.component';
 import { SharedModule } from '@shared/shared.module';
+import { MetricsPgComponent } from './components/metrics-pg/metrics-pg.component';
 
 
 @NgModule({
-  declarations: [MetricsComponent, RankingWeeklyComponent, MenuComponent, RankingSellerComponent],
+  declarations: [MetricsComponent, RankingWeeklyComponent, MenuComponent, RankingSellerComponent, MetricsPgComponent],
   imports: [
     CommonModule,
     IonicModule.forRoot(),
@@ -34,6 +35,6 @@ import { SharedModule } from '@shared/shared.module';
     RankingSellerService,
     BackButtonComponent
   ],
-  exports: [MetricsComponent, RankingWeeklyComponent, MenuComponent, RankingSellerComponent]
+  exports: [MetricsComponent, RankingWeeklyComponent, MenuComponent, RankingSellerComponent, MetricsPgComponent]
 })
 export class DashboardModule { }

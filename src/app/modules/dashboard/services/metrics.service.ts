@@ -21,6 +21,9 @@ export class MetricsService {
   public dataForMesActual: any = []
   public dataProjection: any = []
   public dataForMetricsRentabilityLoaded: boolean = false
+  public dataMINIS: any = []
+  public dataOTHERS: any = []
+  public dataTAT: any = []
 
   constructor(private http: HTTP) { }
 
@@ -66,6 +69,22 @@ export class MetricsService {
       this.dataForMesAnterior = dataAnterior
       this.dataForMesActual = dataActual
       this.dataProjection = dataProyectada
+    })
+  }
+
+  async getTypologyMetrics(idVendedor: any) {
+    console.log(idVendedor)
+    await this.http.get(
+      `${environment.API_URL}${environment.API_PATH}/consultarMetricasTipologia?idVendedor=${idVendedor}`
+      ,
+      '',
+      environment.headers
+    ).then((res) => {
+      const { data } = JSON.parse(res.data)
+      const { MINIS, OTROS, TAT } = data
+      this.dataMINIS = MINIS
+      this.dataOTHERS = OTROS
+      this.dataTAT = TAT
     })
   }
 }
