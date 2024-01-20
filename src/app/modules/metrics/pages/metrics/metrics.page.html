@@ -30,7 +30,18 @@
 
         <div *ngIf="generalMetric" class="c-card-metric__wrap">
 
-          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_blue">
+          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_primary c-card-metric_full">
+            <h3 style="color: #fff">Objetivo del mes</h3>
+            <div class="c-card-metric__content">
+              <div>
+                <h4>Volumen</h4>
+                <p class="c-card-metric__num o-bold">${{ this.dataObjetivo.VOLOBJETIVO }}</p>
+              </div>
+              <p class="c-card-metric__cat o-bold">"{{ this.dataObjetivo.CATEOBJETIVO2 }}"</p>
+            </div>
+          </div>
+
+          <div *ngIf="isDataLoaded" class="c-card-metric">
             <h3>Periodo Anterior</h3>
             <div class="c-card-metric__content">
               <h4>Volumen</h4>
@@ -39,7 +50,8 @@
             </div>
           </div>
 
-          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_blue">
+          <!-- loader -->
+          <div *ngIf="!isDataLoaded" class="c-card-metric">
             <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
             <div class="c-card-metric__content">
               <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
@@ -48,7 +60,7 @@
             </div>
           </div>
 
-          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_blue-30">
+          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_primary">
             <h3 style="color: #fff">Periodo Actual</h3>
             <div class="c-card-metric__content">
               <h4>Volumen</h4>
@@ -57,7 +69,8 @@
             </div>
           </div>
 
-          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_blue-30">
+          <!-- loader -->
+          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_primary">
             <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
             <div class="c-card-metric__content">
               <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
@@ -66,7 +79,43 @@
             </div>
           </div>
 
-          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_full">
+          <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_primary">
+            <h3 style="color: #fff">Proyección</h3>
+            <div class="c-card-metric__content">
+              <h4>Volumen</h4>
+              <p class="c-card-metric__num o-bold">${{ this.dataProjection.VOLMESACTUALPROYEC }}</p>
+              <p class="c-card-metric__cat o-bold">"{{ this.dataProjection.CATEPROYEC }}"</p>
+            </div>
+          </div>
+
+          <!-- loader -->
+          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_primary">
+            <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
+            <div class="c-card-metric__content">
+              <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 50px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 80%; height: 19px;"></ion-skeleton-text>
+            </div>
+          </div>
+
+          <div style="height: 100%;" *ngIf="isDataLoaded" class="c-card-metric">
+            <h3>Faltante</h3>
+            <div class="c-card-metric__content">
+              <p class="c-card-metric__num o-bold">${{ this.dataProjection.FALTANTE }}</p>
+            </div>
+          </div>
+
+          <!-- loader -->
+          <div *ngIf="!isDataLoaded" class="c-card-metric">
+            <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
+            <div class="c-card-metric__content">
+              <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 50px; height: 19px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 80%; height: 19px;"></ion-skeleton-text>
+            </div>
+          </div>
+
+          <!-- <div *ngIf="isDataLoaded" class="c-card-metric c-card-metric_full">
             <h3>Proyección</h3>
             <div class="c-card-metric__content">
               <div>
@@ -79,17 +128,7 @@
               </div>
               <p class="c-card-metric__cat o-bold">"{{ this.dataProjection.CATEPROYEC }}"</p>
             </div>
-          </div>
-
-          <div *ngIf="!isDataLoaded" class="c-card-metric c-card-metric_full">
-            <ion-skeleton-text [animated]="true" style="width: 162px; height: 19px;"></ion-skeleton-text>
-            <div class="c-card-metric__content">
-              <ion-skeleton-text [animated]="true" style="width: 80px; height: 19px;"></ion-skeleton-text>
-              <ion-skeleton-text [animated]="true" style="width: 50px; height: 19px;"></ion-skeleton-text>
-              <ion-skeleton-text [animated]="true" style="width: 80%; height: 19px;"></ion-skeleton-text>
-            </div>
-          </div>
-
+          </div> -->
         </div>
 
         <div [ngClass]="{'is-hidden':!generalMetric}" id="chart-metrics"></div>

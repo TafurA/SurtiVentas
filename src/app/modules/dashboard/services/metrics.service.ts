@@ -20,6 +20,7 @@ export class MetricsService {
   public dataForMesAnterior: any = []
   public dataForMesActual: any = []
   public dataProjection: any = []
+  public dataObjetivo: any = []
   public dataForMetricsRentabilityLoaded: boolean = false
   public dataMINIS: any = []
   public dataOTHERS: any = []
@@ -65,10 +66,11 @@ export class MetricsService {
       environment.headers
     ).then((res) => {
       const { data } = JSON.parse(res.data)
-      const { dataAnterior, dataActual, dataProyectada } = data
+      const { dataAnterior, dataActual, dataProyectada, dataObjetivo } = data
       this.dataForMesAnterior = dataAnterior
       this.dataForMesActual = dataActual
       this.dataProjection = dataProyectada
+      this.dataObjetivo = dataObjetivo
     })
   }
 

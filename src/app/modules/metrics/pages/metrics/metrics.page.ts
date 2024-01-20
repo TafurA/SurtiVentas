@@ -19,6 +19,7 @@ export class MetricsPage implements OnInit {
   public dataForMesAnterior: any = []
   public dataForMesActual: any = []
   public dataProjection: any = []
+  public dataObjetivo: any = []
   public providersList: any = []
   public dataMesActual = {
     totalDevolucion: '',
@@ -56,6 +57,7 @@ export class MetricsPage implements OnInit {
       this.dataForMesAnterior = this._metricsService.dataForMesAnterior
       this.dataForMesActual = this._metricsService.dataForMesActual
       this.dataProjection = this._metricsService.dataProjection
+      this.dataObjetivo = this._metricsService.dataObjetivo
     })
   }
 
