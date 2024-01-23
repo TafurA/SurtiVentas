@@ -23,7 +23,11 @@ export class CartService {
     goalAmount: 0,
     ProgressAmount: 0,
     BarProgressAmount: 0,
-    RestantAmount: 0
+    RestantAmount: 0,
+    goalAmountNumber: 0,
+    ProgressAmountNumber: 0,
+    BarProgressAmountNumber: 0,
+    RestantAmountNumber: 0
   }
   private count = 0
   public countCart$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -37,6 +41,11 @@ export class CartService {
   public restanteAmountCart$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public goalAmountCart$: BehaviorSubject<number> = new BehaviorSubject<number>(0)
   public barGoalsAmount$: BehaviorSubject<any> = new BehaviorSubject<any>("0")
+
+  public currentAmountCartNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public restanteAmountCartNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public goalAmountCartNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(0)
+  public barGoalsAmountNumber$: BehaviorSubject<any> = new BehaviorSubject<any>("0")
 
   public storeId: any = ''
   public nameStore$: BehaviorSubject<string> = new BehaviorSubject<string>("")
@@ -189,7 +198,7 @@ export class CartService {
       this.getRunTicketAsyncProduct()
     })
 
-    if(this.currentAmountCart$.getValue() === 0) {
+    if (this.currentAmountCart$.getValue() === 0) {
       this.router.navigate(['/', 'client-visit', 'cart'])
     }
   }
@@ -373,6 +382,15 @@ export class CartService {
     const formatProgresBar = 1 - progresBar
     this.barGoalsAmount$.next(formatProgresBar)
     this.getCalification()
+
+    const totalProducts = JSON.parse(this.getProductsCartList()).length
+    this.goalAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!))
+    this.restanteAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!) - totalProducts)
+    this.currentAmountCartNumber$.next(totalProducts)
+
+    const progresBarSKU = 1 - (totalProducts / parseInt(localStorage.getItem("sku")!))
+    const formatProgresBarSKU = 1 - progresBarSKU
+    this.barGoalsAmountNumber$.next(formatProgresBarSKU)
   }
 
   saveCartProgressInCart() {
@@ -383,6 +401,12 @@ export class CartService {
     this.currentCartStore.ProgressAmount = this.currentAmountCart$.value
     this.currentCartStore.RestantAmount = this.restanteAmountCart$.value
     this.currentCartStore.BarProgressAmount = this.barGoalsAmount$.value
+
+    this.currentCartStore.goalAmountNumber = this.goalAmountCartNumber$.value
+    this.currentCartStore.ProgressAmountNumber = this.currentAmountCartNumber$.value
+    this.currentCartStore.RestantAmountNumber = this.restanteAmountCartNumber$.value
+    this.currentCartStore.BarProgressAmountNumber = this.barGoalsAmountNumber$.value
+
     localStorage.setItem(`cartProgress-${this.storeId}`, JSON.stringify(this.currentCartStore));
   }
 
@@ -396,11 +420,17 @@ export class CartService {
     this.currentCartStore.RestantAmount = this.restanteAmountCart$.value
     this.currentCartStore.BarProgressAmount = this.barGoalsAmount$.value
 
+    this.currentCartStore.goalAmountNumber = this.goalAmountCartNumber$.value
+    this.currentCartStore.ProgressAmountNumber = this.currentAmountCartNumber$.value
+    this.currentCartStore.RestantAmountNumber = this.restanteAmountCartNumber$.value
+    this.currentCartStore.BarProgressAmountNumber = this.barGoalsAmountNumber$.value
+
     localStorage.setItem(`cartProgress-${this.storeId}`, JSON.stringify(this.currentCartStore));
 
     setTimeout(() => {
       this.currentAmountCart$.next(0)
       this.restanteAmountCart$.next(this.goalAmountCart$.value)
+      this.restanteAmountCartNumber$.next(this.goalAmountCartNumber$.value)
       this.barGoalsAmount$.next(0)
       this.productsList = []
       if (this.iconCart) {

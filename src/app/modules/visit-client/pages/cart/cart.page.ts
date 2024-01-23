@@ -80,7 +80,9 @@ export class CartPage implements OnInit {
     const cartProgress = localStorage.getItem(`cartProgress-${localStorage.getItem('CartStoreID')}`)
     const parentIcon = this.iconCart!.closest(".js-target-iconCart")
     const meta = localStorage.getItem('metaCurrentPedido') ? localStorage.getItem('metaCurrentPedido')!.replace('.', '') : 0
+    const metaNumber = localStorage.getItem('sku') ? localStorage.getItem('sku') : 0
     this._cartService.goalAmountCart$.next(Number(meta))
+    this._cartService.goalAmountCartNumber$.next(Number(metaNumber))
     // Fix the goal data
     localStorage.setItem("metaTemporal", meta.toString())
     this.currentOrderState = localStorage.getItem('currentOrderState')
@@ -99,11 +101,15 @@ export class CartPage implements OnInit {
     }
 
     if (cartProgress) {
-      let { ProgressAmount, RestantAmount, cartIconCount, goalAmount, BarProgressAmount } = JSON.parse(cartProgress)
+      let { ProgressAmount, RestantAmount, cartIconCount, goalAmount, BarProgressAmount, goalAmountNumber, ProgressAmountNumber, BarProgressAmountNumber, RestantAmountNumber } = JSON.parse(cartProgress)
       this._cartService.currentAmountCart$.next(ProgressAmount)
       this._cartService.restanteAmountCart$.next(RestantAmount)
       this._cartService.goalAmountCart$.next(goalAmount)
       this._cartService.barGoalsAmount$.next(BarProgressAmount)
+      this._cartService.currentAmountCartNumber$.next(ProgressAmountNumber)
+      this._cartService.restanteAmountCartNumber$.next(RestantAmountNumber)
+      this._cartService.goalAmountCartNumber$.next(goalAmountNumber)
+      this._cartService.barGoalsAmountNumber$.next(BarProgressAmountNumber)
       if (cartIconCount == 0) {
         this.storeId = localStorage.getItem("CartStoreID")
         const productList = JSON.parse(localStorage.getItem(`ProductsCart-${this.storeId}`)!)
@@ -122,8 +128,11 @@ export class CartPage implements OnInit {
       this.iconCart!.innerHTML = cartIconCount
     } else {
       this._cartService.currentAmountCart$.next(0)
+      this._cartService.currentAmountCartNumber$.next(0)
       this._cartService.restanteAmountCart$.next(this._cartService.goalAmountCart$.getValue())
+      this._cartService.restanteAmountCartNumber$.next(this._cartService.goalAmountCartNumber$.getValue())
       this._cartService.barGoalsAmount$.next(0)
+      this._cartService.barGoalsAmountNumber$.next(0)
       this._cartService.numberProductsCart$.next(0)
       parentIcon!.classList.add("is-hidden")
       this.iconCart!.innerHTML = '0'

@@ -3,7 +3,11 @@ export interface CartStoreModel {
   nameStore: string,
   cartIconCount: number,
   goalAmount: number,
-  ProgressAmount: number
-  BarProgressAmount: number
-  RestantAmount: number
+  ProgressAmount: number,
+  BarProgressAmount: number,
+  RestantAmount: number,
+  goalAmountNumber: number,
+  ProgressAmountNumber: number,
+  BarProgressAmountNumber: number,
+  RestantAmountNumber: number
 }

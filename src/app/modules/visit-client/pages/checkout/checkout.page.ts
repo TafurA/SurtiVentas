@@ -160,6 +160,11 @@ export class CheckoutPage implements OnInit {
     currentCart.ProgressAmount = this._cartService.currentAmountCart$.getValue()
     currentCart.RestantAmount = this._cartService.restanteAmountCart$.getValue()
     currentCart.BarProgressAmount = this._cartService.barGoalsAmount$.getValue()
+    
+    currentCart.ProgressAmountNumber = this._cartService.currentAmountCartNumber$.getValue()
+    currentCart.RestantAmountNumber = this._cartService.restanteAmountCartNumber$.getValue()
+    currentCart.BarProgressAmountNumber = this._cartService.barGoalsAmountNumber$.getValue()
+    currentCart.ProgressAmountNumber = this._cartService.currentAmountCartNumber$.getValue()
 
     this.totalAmount = this._cartService.currentAmountCart$.getValue()
     localStorage.setItem(`cartProgress-${this.storeId}`, JSON.stringify(currentCart))

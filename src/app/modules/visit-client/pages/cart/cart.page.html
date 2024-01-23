@@ -48,6 +48,30 @@
               <span class="c-indicator__value-txt">${{ this._cartService.restanteAmountCart$ | async | number:'1.0-0':'es-CO' }}</span>
             </li>
           </ul>
+          <ion-progress-bar
+            class="c-indicator__bar"
+            value="{{ this._cartService.barGoalsAmountNumber$ | async }}">
+          </ion-progress-bar>
+          <ul class="c-indicator___values">
+            <li class="c-indicator__value">
+              <h3 class="c-indicator__value-title">Meta</h3>
+              <span
+                class="c-indicator__value-txt"
+              >
+                {{ this._cartService.goalAmountCartNumber$ | async }}
+              </span>
+            </li>
+            <li class="c-indicator__value">
+              <h3 class="c-indicator__value-title">Progreso</h3>
+              <span class="c-indicator__value-txt">
+                {{ this._cartService.currentAmountCartNumber$ | async }}
+              </span>
+            </li>
+            <li class="c-indicator__value">
+              <h3 class="c-indicator__value-title">Restante</h3>
+              <span class="c-indicator__value-txt">{{ this._cartService.restanteAmountCartNumber$ | async }}</span>
+            </li>
+          </ul>
           <ul class="c-indicator___values c-indicator___values_double">
             <li class="c-indicator__value">
               <h3 class="c-indicator__value-title">Valor ultima compra</h3>

@@ -16,6 +16,7 @@ export interface StoreModel {
   loncli_b?: string,
   ndicli_b?: string,
   ultimacompra?: string,
+  skuMeta?: string,
   barcli_b?: string
   ciudad?: string,
   tipoPG?: string,
