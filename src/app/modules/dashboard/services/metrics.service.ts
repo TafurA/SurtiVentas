@@ -17,11 +17,13 @@ import { GraphicRentabilityModel } from '@core/models/graphic_rentability_model'
 export class MetricsService {
 
   public dataForMetricsRentability: any = []
+  public dataForMetricsRentabilityBox: any = []
   public dataForMesAnterior: any = []
   public dataForMesActual: any = []
   public dataProjection: any = []
   public dataObjetivo: any = []
   public dataForMetricsRentabilityLoaded: boolean = false
+  public dataForMetricsRentabilityLoadedBox: boolean = false
   public dataMINIS: any = []
   public dataOTHERS: any = []
   public dataTAT: any = []
@@ -42,6 +44,7 @@ export class MetricsService {
     ).then((data) => {
       const dataService = JSON.parse(data.data)
       this.dataForMetricsRentability = []
+      this.dataForMetricsRentabilityBox = []
       for (let key in dataService.data) {
         const { casa, ventabruta, ventaneta } = dataService.data[key]
         if (ventabruta !== "0" || ventaneta !== "0") {
@@ -53,8 +56,16 @@ export class MetricsService {
           this.dataForMetricsRentability.push(dataObjectTemp)
         }
       }
+      const { Faltante, ObjetivoDiario, VentaActual } = dataService.datos
+      const dataObjectTempBox: any = {
+        faltante: Faltante,
+        objetivoDiario: ObjetivoDiario,
+        ventaActual: VentaActual
+      }
+      this.dataForMetricsRentabilityBox.push(dataObjectTempBox)
     }).finally(() => {
       this.dataForMetricsRentabilityLoaded = true
+      this.dataForMetricsRentabilityLoadedBox = true
     })
   }
 

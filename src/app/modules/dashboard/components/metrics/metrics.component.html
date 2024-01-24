@@ -12,6 +12,27 @@
   </div>
   <!-- End data loaded -->
 
+  <div class="c-tooltip__box" *ngIf="dataForMetricsRentabilityLoaded">
+    <div class="c-tooltip">
+      <h4 class="c-tooltip__title c-tooltip__title_gray o-bold"> Venta Actual </h4>
+      <div class="c-tooltip__content">
+        <span class="c-tooltip__txt">$ {{ this.dataRentabilityMetricsBox[0].ventaActual }} </span>
+      </div>
+    </div>
+    <div class="c-tooltip">
+      <h4 class="c-tooltip__title c-tooltip__title_blue o-bold"> Objetivo Diario </h4>
+      <div class="c-tooltip__content">
+        <span class="c-tooltip__txt">$ {{ this.dataRentabilityMetricsBox[0].objetivoDiario }} </span>
+      </div>
+    </div>
+    <div class="c-tooltip">
+      <h4 class="c-tooltip__title c-tooltip__title_red o-bold"> Faltante Diario </h4>
+      <div class="c-tooltip__content">
+        <span class="c-tooltip__txt">$ {{ this.dataRentabilityMetricsBox[0].faltante }} </span>
+      </div>
+    </div>
+  </div>
+
   <!-- Data unloaded -->
   <div>
 

@@ -1,0 +1,35 @@
+.c-tooltip__box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.c-tooltip {
+  .c-tooltip__box & {
+    flex: 1;
+    border: 0.5px solid #D7D7D7;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
+
+.c-tooltip__box {
+  .c-tooltip__title {
+    padding: 8px;
+    border-bottom: 0.5px solid #D7D7D7;
+
+    &.c-tooltip__title_gray {
+      background-color: #ECEFF1;
+    }
+
+    &.c-tooltip__title_blue {
+      background-color: #B0D4F2;
+    }
+
+    &.c-tooltip__title_red {
+      background-color: #FFA7A7;
+    }
+
+  }
+}

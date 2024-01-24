@@ -10,6 +10,7 @@ import { MetricsService } from '@modules/dashboard/services/metrics.service';
 })
 export class MetricsComponent implements OnInit {
   private dataRentabilityMetrics: any = "";
+  public dataRentabilityMetricsBox: any = "";
   public dataForMetricsRentabilityLoaded: boolean = false;
   public dataForMetricsRentabilityLoadedTwo: boolean = false;
   public chart: any;
@@ -28,7 +29,9 @@ export class MetricsComponent implements OnInit {
     const idVendedor = localStorage.getItem("codemp_b");
     this._metricsService.consultRentability(idVendedor).then(() => {
       this.dataRentabilityMetrics = []
+      this.dataRentabilityMetricsBox = []
       this.dataRentabilityMetrics = this._metricsService.dataForMetricsRentability;
+      this.dataRentabilityMetricsBox = this._metricsService.dataForMetricsRentabilityBox;
       this.setDataForGraphicAndInit();
     });
   }
