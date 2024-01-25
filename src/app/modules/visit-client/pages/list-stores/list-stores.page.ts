@@ -130,6 +130,7 @@ export class ListStoresPage implements OnInit {
       localStorage.setItem('currentOrderState', s.estped_b!)
       localStorage.setItem('currentOrderAddress', s.dircli_b!)
       localStorage.setItem('ultimacompra', s.ultimacompra!)
+      localStorage.setItem('encuesta', s.encuesta!)
       localStorage.setItem('sku', s.skuMeta!)
 
       if (localStorage.getItem("idPedidoCurrentOrderPend") == 'null') {

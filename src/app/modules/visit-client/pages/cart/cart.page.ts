@@ -49,6 +49,7 @@ export class CartPage implements OnInit {
   public currentText: string = ""
   public lastText: string = ""
   public ultimacompra: any = ""
+  public hasEncuesta: number = 1
 
   constructor(
     public _cartService: CartService,
@@ -70,6 +71,7 @@ export class CartPage implements OnInit {
 
   ionViewDidEnter() {
     this.nameStoreId = localStorage.getItem('nameStoreId')
+    this.hasEncuesta = Number(localStorage.getItem('encuesta'))
     this.reInitCart()
     this.getListCausalNotOrder()
   }

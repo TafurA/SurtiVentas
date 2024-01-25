@@ -15,11 +15,12 @@ import { ProductService } from '@shared/services/product.service';
 import { CartService } from '@shared/services/cart.service';
 import { HistoryCartComponent } from './components/history-cart/history-cart.component';
 import { OrdersService } from '@modules/rut/services/orders.service';
+import { TipographyFormComponent } from './components/tipography-form/tipography-form.component';
 
 registerLocaleData(localeEsCo, 'es-CO');
 
 @NgModule({
-  declarations: [HistoryCartComponent],
+  declarations: [HistoryCartComponent, TipographyFormComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -33,7 +34,8 @@ registerLocaleData(localeEsCo, 'es-CO');
     IonicModule,
     FormsModule,
     SharedModule,
-    HistoryCartComponent
+    HistoryCartComponent,
+    TipographyFormComponent
   ],
   providers: [
     HTTP,

@@ -167,8 +167,11 @@
       class="o-float-btn o-float-btn_secondary i-cart_zero">
     </button>
 
-
     <app-history-cart modalIdentifier="history-cart"></app-history-cart>
+
+    <div *ngIf="hasEncuesta == 0">
+      <app-tipography-form></app-tipography-form>
+    </div>
 
     <ion-modal
       trigger="causal-cart"

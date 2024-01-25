@@ -20,4 +20,5 @@ export interface StoreModel {
   barcli_b?: string
   ciudad?: string,
   tipoPG?: string,
+  encuesta?: string,
 }

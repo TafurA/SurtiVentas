@@ -1,0 +1,79 @@
+<ion-button expand="block" (click)="setOpen(true)">Open</ion-button>
+
+<ion-modal 
+  [isOpen]="isModalOpen" 
+  [initialBreakpoint]="1" 
+  [breakpoints]="[0, 1]"
+>
+  <ng-template>
+    <div class="block">
+      <div class="o-modal-create">
+
+        <!-- <button class="o-link o-link_secondary o-modal-create__link-close" (click)="closeModal()">Cerrar</button> -->
+
+        <div class="o-canvas">
+          <!-- <button class="c-modal__close i-close"></button> -->
+          <header class="o-headline">
+            <h1 class="o-heading">Clasificación tienda</h1>
+            <p class="o-text">Actualiza la información tipográfica del cliente</p>
+          </header>
+        </div>
+
+        <div id="clasification">
+
+          <form class="o-form">
+
+            <div id="{{question.id}}" *ngFor="let question of questionClasificationForm, let i = index"
+              class="is-hidden js-container-clasification">
+
+              <p class="c-clasification__title">{{ i+1 }} - {{ question.question }}</p>
+
+              <div class="o-form__radio-custom">
+                <div class="o-form__radio-custom__field">
+                  <input (change)="changeClasification($event, question)" type="radio" id="yes"
+                    name="{{question.id}}" value="SI" checked>
+                  <label for="SI">SI</label>
+                </div>
+                <div class="o-form__radio-custom__field">
+                  <input (change)="changeClasification($event, question)" type="radio" id="no"
+                    name="{{question.id}}" value="NO">
+                  <label for="NO">NO</label>
+                </div>
+              </div>
+
+            </div>
+
+            <footer class="o-form__actions o-form__actions_right">
+
+              <div *ngIf="topographicCategory" style="text-align: center; width: 100%;">
+                <p>Categoría de la tienda</p>
+                <strong>{{ topographicCategory.toUpperCase() }}</strong>
+              </div>
+
+              <div class="o-form__actions-box_tp">
+                <button type="button" (click)="saveClasification()" class="o-link o-link_primary">
+                  Guardar clasificación
+                </button>
+                <button
+                  *ngIf="topographicCategory"
+                  class="o-button o-button_full o-button_small"
+                  (click)="sendEditForm()" 
+                >
+                  Guardar datos
+                </button>
+              </div>
+
+            </footer>
+
+          </form>
+
+        </div>
+
+        <div class="o-canvas">
+
+        </div>
+
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>
