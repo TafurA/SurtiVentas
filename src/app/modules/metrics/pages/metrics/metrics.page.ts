@@ -149,7 +149,7 @@ export class MetricsPage implements OnInit {
         colors: ['transparent']
       },
       xaxis: {
-        categories: ['Periodo Anterior', 'Periodo Actual'],
+        categories: ['Mes Anterior', 'Mes Actual'],
       },
       yaxis: {
         show: false,
