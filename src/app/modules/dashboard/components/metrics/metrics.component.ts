@@ -27,7 +27,8 @@ export class MetricsComponent implements OnInit {
    */
   loadDataAll(): void {
     const idVendedor = localStorage.getItem("codemp_b");
-    this._metricsService.consultRentability(idVendedor).then(() => {
+    const idGroup = localStorage.getItem("group");
+    this._metricsService.consultRentability(idVendedor, idGroup).then(() => {
       this.dataRentabilityMetrics = []
       this.dataRentabilityMetricsBox = []
       this.dataRentabilityMetrics = this._metricsService.dataForMetricsRentability;

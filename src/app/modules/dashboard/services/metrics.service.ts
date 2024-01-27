@@ -35,9 +35,9 @@ export class MetricsService {
    * de cada una de las casas por vendedor
    * @memberof MetricsService
    */
-  async consultRentability(idVendedor: any) {
+  async consultRentability(idVendedor: any, idGrupo: any) {
     await this.http.get(
-      `${environment.API_URL}${environment.API_PATH}/consultaRentabilidad?idVendedor=${idVendedor}`
+      `${environment.API_URL}${environment.API_PATH}/consultaRentabilidad?idVendedor=${idVendedor}&idGrupo=${idGrupo}`
       ,
       '',
       environment.headers
