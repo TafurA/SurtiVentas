@@ -122,7 +122,7 @@ export class CartService {
     this.addCartProduct(this.currentProduct) //- Add new product into Cart
     // Reset cart
     this.changeQuantityCurrentProduct(0)
-    this.calculateValueAmount() //- Calculate current amount cart
+    this.calculateValueAmount(1) //- Calculate current amount cart
     this.saveCartProgressInCart()
     const iconCart = document.querySelector('#headerActions')
     if (iconCart?.classList.contains('is-opacity')) {
@@ -177,18 +177,18 @@ export class CartService {
     this.productsList = []
   }
 
-  removeCartProductButton(currentProduct: any) {
+  removeCartProductButton(currentProduct: ProductModel) {
     this.storeId = localStorage.getItem("CartStoreID")
     const productList = JSON.parse(this.getProductsCartList())
-    const newProductsCart = productList.filter((product: ProductModel) => product.codeProduct !== currentProduct);
-
+    const newProductsCart = productList.filter((product: ProductModel) => product.codeProduct !== currentProduct.codeProduct);
+    this.currentProduct = currentProduct
     this.productsList = newProductsCart
     this.setProductsCartList(newProductsCart)
-    this.calculateValueAmount() //- Calculate current amount cart
+    this.calculateValueAmount(0) //- Calculate current amount cart
     this.updateQuantityProductsIntoCart(0)
 
     this._alertService.showAlert('¡Carrito actualizado!', 'Producto eliminado correctamente', 'success')
-    const productCurrent = document.querySelector(`#productCheckout-${currentProduct}`)
+    const productCurrent = document.querySelector(`#productCheckout-${currentProduct.codeProduct}`)
     const tagExlcusive = document.querySelector(`#exclusive-tag`)
     productCurrent?.classList.add("is-hidden")
     tagExlcusive?.classList.add("is-hidden")
@@ -276,7 +276,7 @@ export class CartService {
     // Reset cart
     this.countCart$.next(0)
     this.count = 0
-    this.calculateValueAmount() //- Calculate current amount cart
+    this.calculateValueAmount(0) //- Calculate current amount cart
     this.updateQuantityProductsIntoCart(0)
     this.saveCartProgressInCart()
 
@@ -349,7 +349,7 @@ export class CartService {
     return newArray;
   }
 
-  calculateValueAmount() {
+  calculateValueAmount(operacion: number) {
     const productList = JSON.parse(this.getProductsCartList())
     const quantityAmount = productList.map((p: ProductModel) => {
       const numFormated = p.totalValue.toString().replace('.', '')
@@ -364,33 +364,49 @@ export class CartService {
     //     cantidadCart: updatedQuantity
     //   };
     // });
-    this.calculateGoalCart()
+    this.calculateGoalCart(operacion)
   }
 
-  calculateGoalCart() {
-    this.goalAmountCart$.next(Number(localStorage.getItem("metaTemporal")))
-    const goalAmount = this.goalAmountCart$.value; // Redondear hacia abajo para obtener un número entero
-    const restanteAmount = goalAmount - this.currentAmountCart$.value; // Redondear hacia abajo para obtener un número entero
+  calculateGoalCart(operacion: number) {
+    if (operacion !== 2) {
+      let resultadoOperacion = 0
+      let VARIABLE_GLOBAL_JULI = 0
 
-    if (restanteAmount >= 0) {
-      this.restanteAmountCart$.next(restanteAmount);
-    } else {
-      this.restanteAmountCart$.next(0);
+      if (localStorage.getItem("TempVG") && VARIABLE_GLOBAL_JULI == 0) {
+        VARIABLE_GLOBAL_JULI = Number(localStorage.getItem("TempVG"))
+      }
+
+      if (operacion == 0) {
+        resultadoOperacion = VARIABLE_GLOBAL_JULI -= Number(this.currentProduct.cantidadMeta)
+      } else if (operacion == 1) {
+        resultadoOperacion = VARIABLE_GLOBAL_JULI += Number(this.currentProduct.cantidadMeta)
+      }
+
+      localStorage.setItem('TempVG', resultadoOperacion.toString())
+      this.goalAmountCart$.next(Number(localStorage.getItem("metaTemporal")))
+      const goalAmount = this.goalAmountCart$.value; // Redondear hacia abajo para obtener un número entero
+      const restanteAmount = goalAmount - this.currentAmountCart$.value; // Redondear hacia abajo para obtener un número entero
+
+      if (restanteAmount >= 0) {
+        this.restanteAmountCart$.next(restanteAmount);
+      } else {
+        this.restanteAmountCart$.next(0);
+      }
+
+      const progresBar = 1 - (this.currentAmountCart$.value / goalAmount)
+      const formatProgresBar = 1 - progresBar
+      this.barGoalsAmount$.next(formatProgresBar)
+      this.getCalification()
+
+      const totalProducts = resultadoOperacion
+      this.goalAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!))
+      this.restanteAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!) - totalProducts)
+      this.currentAmountCartNumber$.next(totalProducts)
+
+      const progresBarSKU = 1 - (totalProducts / parseInt(localStorage.getItem("sku")!))
+      const formatProgresBarSKU = 1 - progresBarSKU
+      this.barGoalsAmountNumber$.next(formatProgresBarSKU)
     }
-
-    const progresBar = 1 - (this.currentAmountCart$.value / goalAmount)
-    const formatProgresBar = 1 - progresBar
-    this.barGoalsAmount$.next(formatProgresBar)
-    this.getCalification()
-
-    const totalProducts = JSON.parse(this.getProductsCartList()).length
-    this.goalAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!))
-    this.restanteAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!) - totalProducts)
-    this.currentAmountCartNumber$.next(totalProducts)
-
-    const progresBarSKU = 1 - (totalProducts / parseInt(localStorage.getItem("sku")!))
-    const formatProgresBarSKU = 1 - progresBarSKU
-    this.barGoalsAmountNumber$.next(formatProgresBarSKU)
   }
 
   saveCartProgressInCart() {
@@ -464,7 +480,7 @@ export class CartService {
 
   goToCheckout() {
     this.storeId = localStorage.getItem("CartStoreID")
-    this.calculateValueAmount()
+    this.calculateValueAmount(2)
 
     const productList = JSON.parse(this.getProductsCartList())
     let count = productList.length > 0 ? productList.length : 0

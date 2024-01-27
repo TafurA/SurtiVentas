@@ -21,6 +21,7 @@ export interface ProductModel {
   proveedor?: string,
   providerProduct?: string,
   cantidadCart?: number,
+  cantidadMeta?: number,
   cantidad?: number,
   palabrasClaves?: string,
 }

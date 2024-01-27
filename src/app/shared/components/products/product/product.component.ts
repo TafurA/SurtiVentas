@@ -39,9 +39,9 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.calculateAmount()
-    if (this.productObject.codeProduct == '191179') {
-      console.log("NOMBRE ORODUCTO: ", this.productObject)
-    }
+    // if (this.productObject.codeProduct == '191179') {
+    //   console.log("NOMBRE ORODUCTO: ", this.productObject)
+    // }
   }
 
   cancel() {
@@ -82,7 +82,7 @@ export class ProductComponent implements OnInit {
     this._cartService.openCartModal(this.productObject)
   }
 
-  removeCartProduct(idProduct: string) {
+  removeCartProduct(idProduct: ProductModel) {
     this._cartService.removeCartProductButton(idProduct)
   }
 
