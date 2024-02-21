@@ -16,7 +16,7 @@
       <section class="o-section">
         <div class="c-indicator">
           <div class="c-indicator__wrap">
-            <h2 class="c-indicator__title">Objetivo de la visita</h2>
+            <h2 class="c-indicator__title">Objetivo venta de la visita</h2>
             <div class="c-filter__box c-filter__box_column">
               <p style="align-self='baseline'" class="o-bold">Estado del pedido</p>
               <input class="c-filter__offert-input" [(ngModel)]="isPending" type="checkbox" (change)="changeCartState('')">
@@ -48,6 +48,7 @@
               <span class="c-indicator__value-txt">${{ this._cartService.restanteAmountCart$ | async | number:'1.0-0':'es-CO' }}</span>
             </li>
           </ul>
+          <h2 style="margin-top: 16px;" class="c-indicator__title">Objetivo SKU de la visita</h2>
           <ion-progress-bar
             class="c-indicator__bar"
             value="{{ this._cartService.barGoalsAmountNumber$ | async }}">

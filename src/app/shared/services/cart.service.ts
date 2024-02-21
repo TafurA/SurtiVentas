@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 
 import { ProductModel } from '@core/models/product_model';
@@ -123,6 +123,7 @@ export class CartService {
     // Reset cart
     this.changeQuantityCurrentProduct(0)
     this.calculateValueAmount(1) //- Calculate current amount cart
+    localStorage.removeItem("TempVG")
     this.saveCartProgressInCart()
     const iconCart = document.querySelector('#headerActions')
     if (iconCart?.classList.contains('is-opacity')) {
@@ -369,20 +370,7 @@ export class CartService {
 
   calculateGoalCart(operacion: number) {
     if (operacion !== 2) {
-      let resultadoOperacion = 0
-      let VARIABLE_GLOBAL_JULI = 0
 
-      if (localStorage.getItem("TempVG") && VARIABLE_GLOBAL_JULI == 0) {
-        VARIABLE_GLOBAL_JULI = Number(localStorage.getItem("TempVG"))
-      }
-
-      if (operacion == 0) {
-        resultadoOperacion = VARIABLE_GLOBAL_JULI -= Number(this.currentProduct.cantidadMeta)
-      } else if (operacion == 1) {
-        resultadoOperacion = VARIABLE_GLOBAL_JULI += Number(this.currentProduct.cantidadMeta)
-      }
-
-      localStorage.setItem('TempVG', resultadoOperacion.toString())
       this.goalAmountCart$.next(Number(localStorage.getItem("metaTemporal")))
       const goalAmount = this.goalAmountCart$.value; // Redondear hacia abajo para obtener un número entero
       const restanteAmount = goalAmount - this.currentAmountCart$.value; // Redondear hacia abajo para obtener un número entero
@@ -398,15 +386,47 @@ export class CartService {
       this.barGoalsAmount$.next(formatProgresBar)
       this.getCalification()
 
-      const totalProducts = resultadoOperacion
-      this.goalAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!))
-      this.restanteAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!) - totalProducts)
-      this.currentAmountCartNumber$.next(totalProducts)
+      const cartStoreId = localStorage.getItem('CartStoreID')!
+      let response: any = ""
+      this.validationForProductSkuGoal$(cartStoreId, this.currentProduct.codeProduct).subscribe({
+        next: (res) => {
+          response = JSON.parse(res.data)
+        },
+        complete: () => {
+          if (response.response == 1) {
+            let resultadoOperacion = 0
+            let VARIABLE_GLOBAL_JULI = 0
 
-      const progresBarSKU = 1 - (totalProducts / parseInt(localStorage.getItem("sku")!))
-      const formatProgresBarSKU = 1 - progresBarSKU
-      this.barGoalsAmountNumber$.next(formatProgresBarSKU)
+            if (localStorage.getItem("TempVG") && VARIABLE_GLOBAL_JULI == 0) {
+              VARIABLE_GLOBAL_JULI = Number(localStorage.getItem("TempVG"))
+            }
+
+            if (operacion == 0) {
+              resultadoOperacion = VARIABLE_GLOBAL_JULI -= Number(this.currentProduct.cantidadMeta)
+            } else if (operacion == 1) {
+              resultadoOperacion = VARIABLE_GLOBAL_JULI += Number(this.currentProduct.cantidadMeta)
+            }
+
+            localStorage.setItem('TempVG', resultadoOperacion.toString())
+            const totalProducts = resultadoOperacion
+            this.goalAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!))
+            this.restanteAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!) - totalProducts)
+            this.currentAmountCartNumber$.next(totalProducts)
+            const progresBarSKU = 1 - (totalProducts / parseInt(localStorage.getItem("sku")!))
+            const formatProgresBarSKU = 1 - progresBarSKU
+            this.barGoalsAmountNumber$.next(formatProgresBarSKU)
+          }
+        }
+      })
     }
+  }
+
+  validationForProductSkuGoal$(idclient: string, producto: string): Observable<any> {
+    return from(this.http.get(
+      `${environment.API_URL}${environment.API_PATH}/productoVenta?cliente=${idclient}&producto=${producto}`,
+      '',
+      environment.headers
+    ))
   }
 
   saveCartProgressInCart() {
