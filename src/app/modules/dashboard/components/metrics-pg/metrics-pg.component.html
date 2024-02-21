@@ -45,36 +45,74 @@
                 <div class="c-card-metric c-card-metric_primary">
                   <ul class="c-card-metric__content">
                     <li>
-                      <h4>Objetivo</h4>
-                      <p class="c-card-metric__num o-bold">${{ this.data.valortotal }}</p>
+                      <h4>Objetivo Venta</h4>
+                      <p class="c-card-metric__num o-bold">${{ this.data.objetivo_volumen }}</p>
                     </li>
                     <li class="separator"></li>                    
                     <li>
-                      <h4>Venta neta</h4>
+                      <h4>Venta Actual</h4>
                       <p class="c-card-metric__num o-bold">${{ this.data.volumen }}</p>
                     </li>
                     <li class="separator"></li>                    
                     <li>
-                      <h4>SKU</h4>
-                      <p class="c-card-metric__num o-bold">{{ this.data.sku }}</p>
+                      <h4>Faltante de Venta</h4>
+                      <p class="c-card-metric__num o-bold">
+                        {{ this.data.resta_objetivo_volumen }}
+                      </p>
                     </li>                    
                   </ul>
                 </div>
                 <div class="c-card-metric c-card-metric_primary">
                   <ul class="c-card-metric__content">
                     <li>
-                      <h4>Pedidos</h4>
-                      <p class="c-card-metric__num o-bold">{{ this.data.pedidos }}</p>
+                      <h4>Objetivo SKU</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.objetivo_sku }}</p>
                     </li>
                     <li class="separator"></li>                    
                     <li>
-                      <h4>Impactos</h4>
+                      <h4>Ventas SKU</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.sku }}</p>
+                    </li>                    
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Faltante SKU</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.resta_objetivo_sku }}</p>
+                    </li>                    
+                  </ul>
+                </div>
+                <div class="c-card-metric c-card-metric_primary">
+                  <ul class="c-card-metric__content">
+                    <li>
+                      <h4>Objetivo Pedidos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.objetivo_pedidos }}</p>
+                    </li>
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Ventas Pedidos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.pedidos }}</p>
+                    </li>                    
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Faltante Pedidos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.resta_objetivo_pedidos }}</p>
+                    </li>                    
+                  </ul>
+                </div>
+                <div class="c-card-metric c-card-metric_primary">
+                  <ul class="c-card-metric__content">
+                    <li>
+                      <h4>Objetivo Impactos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.objetivo_impactos }}</p>
+                    </li>
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Ventas Impactos</h4>
                       <p class="c-card-metric__num o-bold">{{ this.data.impactos }}</p>
                     </li>                    
                     <li class="separator"></li>                    
                     <li>
-                      <h4>Total devolución</h4>
-                      <p class="c-card-metric__num o-bold">${{ this.data.totalDevolucion }}</p>
+                      <h4>Faltante Impactos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.resta_objetivo_impactos }}</p>
                     </li>                    
                   </ul>
                 </div>
@@ -96,36 +134,74 @@
                 <div class="c-card-metric c-card-metric_primary">
                   <ul class="c-card-metric__content">
                     <li>
-                      <h4>Objetivo</h4>
-                      <p class="c-card-metric__num o-bold">${{ this.data.valortotal }}</p>
+                      <h4>Objetivo Venta</h4>
+                      <p class="c-card-metric__num o-bold">${{ this.data.objetivo_volumen }}</p>
                     </li>
-                    <li class="separator"></li>      
-                    <li>
-                      <h4>Venta neta</h4>
-                      <p class="c-card-metric__num o-bold">${{ this.data.volumen }}</p>
-                    </li>              
                     <li class="separator"></li>                    
                     <li>
-                      <h4>SKU</h4>
-                      <p class="c-card-metric__num o-bold">{{ this.data.sku }}</p>
+                      <h4>Venta Actual</h4>
+                      <p class="c-card-metric__num o-bold">${{ this.data.volumen }}</p>
+                    </li>
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Faltante de Venta</h4>
+                      <p class="c-card-metric__num o-bold">
+                        {{ this.data.resta_objetivo_volumen }}
+                      </p>
                     </li>                    
                   </ul>
                 </div>
                 <div class="c-card-metric c-card-metric_primary">
                   <ul class="c-card-metric__content">
                     <li>
-                      <h4>Pedidos</h4>
-                      <p class="c-card-metric__num o-bold">{{ this.data.pedidos }}</p>
+                      <h4>Objetivo SKU</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.objetivo_sku }}</p>
                     </li>
                     <li class="separator"></li>                    
                     <li>
-                      <h4>Impactos</h4>
+                      <h4>Ventas SKU</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.sku }}</p>
+                    </li>                    
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Faltante SKU</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.resta_objetivo_sku }}</p>
+                    </li>                    
+                  </ul>
+                </div>
+                <div class="c-card-metric c-card-metric_primary">
+                  <ul class="c-card-metric__content">
+                    <li>
+                      <h4>Objetivo Pedidos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.objetivo_pedidos }}</p>
+                    </li>
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Ventas Pedidos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.pedidos }}</p>
+                    </li>                    
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Faltante Pedidos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.resta_objetivo_pedidos }}</p>
+                    </li>                    
+                  </ul>
+                </div>
+                <div class="c-card-metric c-card-metric_primary">
+                  <ul class="c-card-metric__content">
+                    <li>
+                      <h4>Objetivo Impactos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.objetivo_impactos }}</p>
+                    </li>
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Ventas Impactos</h4>
                       <p class="c-card-metric__num o-bold">{{ this.data.impactos }}</p>
                     </li>                    
                     <li class="separator"></li>                    
                     <li>
-                      <h4>Total devolución</h4>
-                      <p class="c-card-metric__num o-bold">${{ this.data.totalDevolucion }}</p>
+                      <h4>Faltante Impactos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.resta_objetivo_impactos }}</p>
                     </li>                    
                   </ul>
                 </div>
@@ -144,36 +220,74 @@
                 <div class="c-card-metric c-card-metric_primary">
                   <ul class="c-card-metric__content">
                     <li>
-                      <h4>Objetivo</h4>
-                      <p class="c-card-metric__num o-bold">${{ this.data.valortotal }}</p>
+                      <h4>Objetivo Venta</h4>
+                      <p class="c-card-metric__num o-bold">${{ this.data.objetivo_volumen }}</p>
                     </li>
                     <li class="separator"></li>                    
-                      <li>
-                        <h4>Venta neta</h4>
-                        <p class="c-card-metric__num o-bold">${{ this.data.volumen }}</p>
-                      </li>
+                    <li>
+                      <h4>Venta Actual</h4>
+                      <p class="c-card-metric__num o-bold">${{ this.data.volumen }}</p>
+                    </li>
                     <li class="separator"></li>                    
                     <li>
-                      <h4>SKU</h4>
-                      <p class="c-card-metric__num o-bold">{{ this.data.sku }}</p>
+                      <h4>Faltante de Venta</h4>
+                      <p class="c-card-metric__num o-bold">
+                        {{ this.data.resta_objetivo_volumen }}
+                      </p>
                     </li>                    
                   </ul>
                 </div>
                 <div class="c-card-metric c-card-metric_primary">
                   <ul class="c-card-metric__content">
                     <li>
-                      <h4>Pedidos</h4>
-                      <p class="c-card-metric__num o-bold">{{ this.data.pedidos }}</p>
+                      <h4>Objetivo SKU</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.objetivo_sku }}</p>
                     </li>
                     <li class="separator"></li>                    
                     <li>
-                      <h4>Impactos</h4>
+                      <h4>Ventas SKU</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.sku }}</p>
+                    </li>                    
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Faltante SKU</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.resta_objetivo_sku }}</p>
+                    </li>                    
+                  </ul>
+                </div>
+                <div class="c-card-metric c-card-metric_primary">
+                  <ul class="c-card-metric__content">
+                    <li>
+                      <h4>Objetivo Pedidos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.objetivo_pedidos }}</p>
+                    </li>
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Ventas Pedidos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.pedidos }}</p>
+                    </li>                    
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Faltante Pedidos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.resta_objetivo_pedidos }}</p>
+                    </li>                    
+                  </ul>
+                </div>
+                <div class="c-card-metric c-card-metric_primary">
+                  <ul class="c-card-metric__content">
+                    <li>
+                      <h4>Objetivo Impactos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.objetivo_impactos }}</p>
+                    </li>
+                    <li class="separator"></li>                    
+                    <li>
+                      <h4>Ventas Impactos</h4>
                       <p class="c-card-metric__num o-bold">{{ this.data.impactos }}</p>
                     </li>                    
                     <li class="separator"></li>                    
                     <li>
-                      <h4>Total devolución</h4>
-                      <p class="c-card-metric__num o-bold">${{ this.data.totalDevolucion }}</p>
+                      <h4>Faltante Impactos</h4>
+                      <p class="c-card-metric__num o-bold">{{ this.data.resta_objetivo_impactos }}</p>
                     </li>                    
                   </ul>
                 </div>
