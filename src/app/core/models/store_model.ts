@@ -19,6 +19,7 @@ export interface StoreModel {
   skuMeta?: string,
   barcli_b?: string
   ciudad?: string,
+  lista_productos?: string,
   tipoPG?: string,
   encuesta?: string,
 }

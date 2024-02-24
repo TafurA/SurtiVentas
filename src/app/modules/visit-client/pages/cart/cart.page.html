@@ -209,9 +209,45 @@
       </ng-template>
     </ion-modal>
 
+    <!-- PRODUCTS SIN VENDER -->
+    <ion-modal
+      trigger="products-no-seller"
+      [initialBreakpoint]="1"
+      [isOpen]="isModalChangeStateOpenProductsNoSeller"
+      [breakpoints]="[0, 1]"
+    >
+      <ng-template>
+        <div class="block">
+          <div class="c-modal">
+            <!-- <button class="c-modal__close i-close"></button> -->
+            <header style="display:flex; align-items: center;" class="c-modal__title i-new-car">
+              <div>
+                <h3 class="o-bold">
+                  ¡Explora lo Inexplorado!
+                </h3>
+                <p class="o-text o-text_fs-12 o-color-light">
+                  Productos que esperan ser descubiertos
+                </p>
+              </div>
+            </header>
+
+            <div 
+              style="height: 50vh; overflow: auto;" 
+              *ngFor="let productObject of productsListProductosSinVender"
+            >
+              <div [ngStyle]="{'border-left': '5px solid' + product.color_vendido}" class="c-product-sinseller__table" *ngFor="let product of productObject">
+                <app-product [isSinVender]="true" [productObject]="product"></app-product>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+
     <!-- CHANGE ORDER STATE MODAL -->
     <ion-modal 
-      [isOpen]="isModalChangeStateOpen" 
+      [isOpen]="isModalChangeStateOpen"
       [initialBreakpoint]="1"
       [breakpoints]="[0, 1]"
     >

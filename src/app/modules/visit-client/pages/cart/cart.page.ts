@@ -26,7 +26,9 @@ export class CartPage implements OnInit {
   resetRecomended = false
   public isProductsGoldListLoaded: boolean = false;
   public isProductsRecomendedListLoaded: boolean = false;
+  public isProductsSinVenderLoaded: boolean = false;
   @Input() productsListRecommended: ProductModel[] = []
+  @Input() productsListProductosSinVender: any[] = []
   @Input() productsLisGold: ProductModel[] = []
   private bodega: any = localStorage.getItem('bodega')
   private cartId: any = localStorage.getItem('CartStoreID')
@@ -42,6 +44,7 @@ export class CartPage implements OnInit {
   public isPending: boolean = false
   public isDataOK: boolean = false
   public isModalChangeStateOpen: boolean = false
+  public isModalChangeStateOpenProductsNoSeller: boolean = false
   public isStateFull: boolean = false
   private latNoCausal: any = ''
   private lonNoCausal: any = ''
@@ -74,6 +77,7 @@ export class CartPage implements OnInit {
     this.hasEncuesta = Number(localStorage.getItem('encuesta'))
     this.reInitCart()
     this.getListCausalNotOrder()
+    this.getProductsSinVender()
   }
 
   reInitCart() {
@@ -212,6 +216,7 @@ export class CartPage implements OnInit {
     this.productsListRecommended = []
     this._productService.getRecommendedProductsList$(this.cartId, this.bodega).subscribe({
       next: (res) => {
+        console.log("RECOMEDNADED ", res)
         const { data } = JSON.parse(res.data)
         this.productsListRecommended.push(...data)
       },
@@ -221,6 +226,24 @@ export class CartPage implements OnInit {
       error: (e) => {
         console.log("e ", e)
       }
+    })
+  }
+
+  getProductsSinVender() {
+    this._productService.getProductsSinVender$(this.cartId).subscribe({
+      next: (res) => {
+        const { data } = JSON.parse(res.data)
+        this.productsListProductosSinVender.push(data)
+      },
+      complete: () => {
+        const lista_productos = localStorage.getItem("lista_productos")
+        this.isProductsSinVenderLoaded = true;
+        if (this.productsListProductosSinVender.length > 0) {
+          if (lista_productos == "SI") {
+            this.showModalForProductsSinVender(true)
+          }
+        }
+      },
     })
   }
 
@@ -271,6 +294,10 @@ export class CartPage implements OnInit {
 
   showModalForChangeStateOrder(state: boolean) {
     this.isModalChangeStateOpen = state
+  }
+
+  showModalForProductsSinVender(state: boolean) {
+    this.isModalChangeStateOpenProductsNoSeller = state
   }
 
   goBack() {

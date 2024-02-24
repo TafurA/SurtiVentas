@@ -1,24 +1,16 @@
 <!-- GENERAL PRODUCT -->
-<article
-  *ngIf="!isCheckout && !isCatalog && !isBonification"
-  class="c-product"
-  [style.border-top]="'5px solid #' + productObject.color_champions"
->
+<article *ngIf="!isSinVender && !isCheckout && !isCatalog && !isBonification" class="c-product"
+  [style.border-top]="'5px solid #' + productObject.color_champions">
 
-  <a
-    [routerLink]="['/client-visit/product-detail', productObject.codeProduct]"
-    class="c-product__wrap"
-  >
+  <a [routerLink]="['/client-visit/product-detail', productObject.codeProduct]" class="c-product__wrap">
 
     <!-- Image and title -->
     <figure class="c-product__figure">
-       <img src="{{ productObject.img_prod }}" alt="" class="c-product__img">
+      <img src="{{ productObject.img_prod }}" alt="" class="c-product__img">
       <figcaption class="c-product__title" *ngIf="productObject.nameProduct !== null">
         {{ productObject.nameProduct }}
       </figcaption>
-      <p 
-        style="font-size: 12px; color: #000; margin-top: 6px;"
-      >
+      <p style="font-size: 12px; color: #000; margin-top: 6px;">
         Código: {{ productObject.codeProduct }}
       </p>
 
@@ -49,8 +41,8 @@
 
 </article>
 
-<ion-modal *ngIf="!isCheckout && !isCatalog && !isBonification" trigger="{{ productObject.codeProduct  }}" [initialBreakpoint]="1"
-  [breakpoints]="[0, 1]">
+<ion-modal *ngIf="!isSinVender && !isCheckout && !isCatalog && !isBonification" trigger="{{ productObject.codeProduct  }}"
+  [initialBreakpoint]="1" [breakpoints]="[0, 1]">
   <ng-template>
     <div class="block">
 
@@ -84,12 +76,10 @@
 <!-- GENERAL PRODUCT -->
 
 <!-- CHECKOUT PRODUCT -->
-<article id="productCheckout-{{ productObject.codeProduct }}" *ngIf="isCheckout && !isCatalog" class="c-product c-product_checkout">
+<article id="productCheckout-{{ productObject.codeProduct }}" *ngIf="isCheckout && !isCatalog"
+  class="c-product c-product_checkout">
 
-  <a
-    [routerLink]="['/client-visit/product-detail', productObject.codeProduct]"
-    class="c-product__wrap"
-  >
+  <a [routerLink]="['/client-visit/product-detail', productObject.codeProduct]" class="c-product__wrap">
 
     <!-- Image and title -->
     <figure class="c-product__figure">
@@ -121,7 +111,7 @@
         </span>
 
         <div class="c-product__quantity">
-          
+
           <strong>
             $ {{ calculateAmount() | number:'1.0-0':'es-CO' }}
           </strong>
@@ -151,11 +141,9 @@
 <!-- CHECKOUT PRODUCT -->
 
 <!-- BONIFICATION PRODUCT -->
-<article id="productCheckout-{{ productObject.codpro_b }}" *ngIf="isBonification && !isCatalog && !isCheckout" class="c-product c-product_checkout">
-  <a
-    [routerLink]="['/client-visit/product-detail', productObject.codpro_b]"
-    class="c-product__wrap"
-  >
+<article id="productCheckout-{{ productObject.codpro_b }}" *ngIf="isBonification && !isCatalog && !isCheckout"
+  class="c-product c-product_checkout">
+  <a [routerLink]="['/client-visit/product-detail', productObject.codpro_b]" class="c-product__wrap">
 
     <!-- Image and title -->
     <figure class="c-product__figure">
@@ -184,7 +172,7 @@
         </span> -->
 
         <div class="c-product__quantity">
-          
+
           <!-- <strong>
             $ {{ calculateAmount() | number:'1.0-0':'es-CO' }}
           </strong> -->
@@ -202,12 +190,10 @@
 <!-- BONIFICATION PRODUCT -->
 
 <!-- CATALOG PRODUCT -->
-<article id="productCatalog-{{ productObject.codeProduct }}" *ngIf="isCatalog && !isCheckout" class="c-product c-product_checkout c-product_catalog">
+<article id="productCatalog-{{ productObject.codeProduct }}" *ngIf="isCatalog && !isCheckout"
+  class="c-product c-product_checkout c-product_catalog">
 
-  <a
-    [routerLink]="['/client-visit/product-detail', productObject.codeProduct]"
-    class="c-product__wrap"
-  >
+  <a [routerLink]="['/client-visit/product-detail', productObject.codeProduct]" class="c-product__wrap">
 
     <!-- Image and title -->
     <figure class="c-product__figure">
@@ -223,8 +209,7 @@
       </p>
 
       <div *ngIf="productObject.porcDescuento !== '0.00' && productObject.porcDescuento !== '0'"
-        class="c-product__ico c-product__detailed-offert c-product__ico_discount"
-      >
+        class="c-product__ico c-product__detailed-offert c-product__ico_discount">
         <span class="c-product__ico_discount-txt i-star">
           <span class="c-product__ico_discount-txt-txt">{{ productObject.porcDescuento }}</span>
         </span>
@@ -243,3 +228,64 @@
 
 </article>
 <!-- CATALOG PRODUCT -->
+
+<article *ngIf="isSinVender && !isCheckout && !isCatalog && !isBonification" class="c-product-sinseller"
+  [style.border-top]="'5px solid #' + productObject.color_champions">
+  <a [routerLink]="['/client-visit/product-detail', productObject.codeProduct]" class="c-product-sinseller__wrap">
+
+    <!-- Image and title -->
+    <figure class="c-product-sinseller__figure">
+      <img src="{{ productObject.img_prod }}" alt="" class="c-product-sinseller__img">
+    </figure>
+
+    <!-- Value and discount -->
+    <div class="c-product-sinseller__content">
+      <figcaption class="c-product-sinseller__title" *ngIf="productObject.nameProduct !== null">
+        {{ productObject.nameProduct }}
+      </figcaption>
+      <p class="c-product-sinseller__code">
+        Código: {{ productObject.codeProduct }}
+      </p>
+      <span class="c-product-sinseller__amount">
+        ${{ productObject.totalValue }}
+      </span>
+
+      <!-- <div *ngIf="productObject.porcDescuento !== '0.00' && productObject.porcDescuento !== '0'"
+        class="c-product__ico c-product__ico_discount i-star">
+        <span class="c-product__ico_discount-txt">{{ productObject.porcDescuento }}</span>
+        <span class="c-product__ico-txt">${{ productObject.precioSinDcto }}</span>
+      </div> -->
+
+    </div>
+
+  </a>
+
+  <!-- Add to favorite and Add to cart -->
+  <footer class="c-product-sinseller__footer">
+
+    <button 
+      class="c-product-sinseller__cta"
+      [ngClass]="isShowUpdate ? 'i-refresh' : 'i-plus'"
+      *ngIf="!expression" 
+      (click)="addToCartProductWithoutSeller()"
+    ></button>
+
+    <div class="c-add-car__box-wrap"  *ngIf="expression">
+      <div class="c-add-car__box">
+        <button class="c-add-car__btn" (click)="quantityProductSinVender(0)">-</button>
+        <input class="c-add-car__number" [(ngModel)]="cartCount" (input)="_cartService.quantityIntoInput(cartCount)">
+        <button class="c-add-car__btn c-add-car__btn_primary"
+          (click)="quantityProductSinVender(1)">+</button>
+      </div>
+    </div>
+
+    <button 
+      *ngIf="(this._cartService.maxNumExceded | async) === false && hasProductSellerCount == true" 
+      (click)="confirmToggleButton()"
+      class="o-link o-link_primary link-mio"
+    >
+      Seguir comprando
+    </button>
+
+  </footer>
+</article>

@@ -100,6 +100,24 @@ export class CartService {
     }
   }
 
+  showButtonsToCarProduct(productObject: ProductModel) {
+    this.currentProduct = productObject
+    this.storeId = localStorage.getItem("CartStoreID")
+    this.nameStore$.next(localStorage.getItem("nameStoreId")!)
+
+    if (this.isProductExistIntoCart(this.currentProduct)) {
+      this.regenerateProductQunatity() // Actualizar la cantidad del producto
+    } else {
+      if (this.count > 0) {
+        this.count = 0
+        this.countCart$.next(0)
+      }
+      // Agregar por primera vez
+      this.changeQuantityCurrentProduct(this.increment())
+      this.currentProduct.cantidadCart = this.countCart$.value
+    }
+  }
+
   regenerateProductQunatity() {
     let productList = JSON.parse(this.getProductsCartList())
     productList = productList.find((p: ProductModel) => {

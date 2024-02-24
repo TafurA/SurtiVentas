@@ -51,6 +51,14 @@ export class ProductService {
     ))
   }
 
+  getProductsSinVender$(clientId: string) {
+    return from(this.http.get(
+      `${environment.API_URL}${environment.API_PATH}/HistorialProductos?cliente=${clientId}`,
+      '',
+      environment.headers
+    ))
+  }
+
   getProductDetail$(codeProductId: string) {
     return from(this.http.get(
       `${environment.API_URL}${environment.API_PATH}/getProductoDetail?producto=${codeProductId}`,

@@ -133,3 +133,10 @@
     font-size: 14px;
   }
 }
+
+.c-product-sinseller__table {
+  padding: 8px;
+  &:nth-child(odd){
+    background-color: #F8F8F8;
+  }
+}

@@ -242,3 +242,13 @@
     content: $i-sorter-za; 
   }
 }
+.i-refresh {
+  &:before {
+    content: $i-refresh; 
+  }
+}
+.i-new-car {
+  &:before {
+    content: $i-new-car; 
+  }
+}

@@ -24,8 +24,12 @@ export class ProductComponent implements OnInit {
   };
   @Input() isCheckout: boolean = false;
   @Input() isCatalog: boolean = false;
+  @Input() isSinVender: boolean = false;
+  @Input() expression: boolean = false;
+  @Input() hasProductSellerCount: boolean = false;
   @Input() isBonification: boolean = false;
   @Input() isGold: boolean = false;
+  @Input() isShowUpdate: boolean = false;
   @ViewChild(IonModal) modal!: IonModal;
 
   name!: string;
@@ -54,6 +58,14 @@ export class ProductComponent implements OnInit {
     this.calculateAmount()
   }
 
+  confirmToggleButton() {
+    this.expression = false
+    this.isShowUpdate = true
+    this.hasProductSellerCount = false
+    this._cartService.closeCartModal()
+    this.calculateAmount()
+  }
+
   calculateAmount() {
     let totalAmount = 0
     if (this.productObject.totalValue) {
@@ -75,11 +87,37 @@ export class ProductComponent implements OnInit {
     }
   }
 
+  quantityProductSinVender(op: number) {
+    if (op === 0) {
+      this._cartService.quantityIntoModal(0)
+    } else {
+      this._cartService.quantityIntoModal(1)
+    }
+    this.cartCount = this._cartService.countCart$.getValue()
+
+    if (this.cartCount == 0) {
+      this.expression = false
+      this.hasProductSellerCount = false
+      this.isShowUpdate = false
+    } else {
+      this.hasProductSellerCount = true
+    }
+  }
+
   openModalCart() {
     this.productObject.cant_nort = "45"
     this.productObject.cant_sur = "25"
     this.productObject.isGold = this.isGold
     this._cartService.openCartModal(this.productObject)
+  }
+
+  addToCartProductWithoutSeller() {
+    this.productObject.cant_nort = "45"
+    this.productObject.cant_sur = "25"
+    this.productObject.isGold = this.isGold
+    this._cartService.showButtonsToCarProduct(this.productObject)
+    this.expression = true
+    this.hasProductSellerCount = true
   }
 
   removeCartProduct(idProduct: ProductModel) {
