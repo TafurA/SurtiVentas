@@ -168,6 +168,13 @@
       class="o-float-btn o-float-btn_secondary i-cart_zero">
     </button>
 
+    <button 
+      id="products-no-seller" 
+      class="o-float-btn o-float-btn_bottom-100 i-new-car"
+      *ngIf="localStorageLista == 'SI'"
+    >
+    </button>
+
     <app-history-cart modalIdentifier="history-cart"></app-history-cart>
 
     <div *ngIf="hasEncuesta == 0">

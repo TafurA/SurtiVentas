@@ -53,6 +53,7 @@ export class CartPage implements OnInit {
   public lastText: string = ""
   public ultimacompra: any = ""
   public hasEncuesta: number = 1
+  public localStorageLista: string = ''
 
   constructor(
     public _cartService: CartService,
@@ -216,9 +217,13 @@ export class CartPage implements OnInit {
     this.productsListRecommended = []
     this._productService.getRecommendedProductsList$(this.cartId, this.bodega).subscribe({
       next: (res) => {
-        console.log("RECOMEDNADED ", res)
-        const { data } = JSON.parse(res.data)
-        this.productsListRecommended.push(...data)
+        const { response } = JSON.parse(res.data)
+        if (!response) {
+          this.isProductsRecomendedListLoaded = false;
+        } else {
+          const { data } = JSON.parse(res.data)
+          this.productsListRecommended.push(...data)
+        }
       },
       complete: () => {
         this.isProductsRecomendedListLoaded = true;
@@ -230,13 +235,16 @@ export class CartPage implements OnInit {
   }
 
   getProductsSinVender() {
+    this.productsListProductosSinVender = []
+
     this._productService.getProductsSinVender$(this.cartId).subscribe({
       next: (res) => {
         const { data } = JSON.parse(res.data)
         this.productsListProductosSinVender.push(data)
       },
       complete: () => {
-        const lista_productos = localStorage.getItem("lista_productos")
+        const lista_productos = localStorage.getItem("lista_productos")!
+        this.localStorageLista = lista_productos
         this.isProductsSinVenderLoaded = true;
         if (this.productsListProductosSinVender.length > 0) {
           if (lista_productos == "SI") {
@@ -252,8 +260,13 @@ export class CartPage implements OnInit {
     this.productsLisGold = []
     await this._productService.getGoldProductsList$(this.groupId, this.cartId).subscribe({
       next: (res) => {
-        const { data } = JSON.parse(res.data)
-        this.productsLisGold.push(...data)
+        const { response } = JSON.parse(res.data)
+        if (!response) {
+          this.isProductsGoldListLoaded = false
+        } else {
+          const { data } = JSON.parse(res.data)
+          this.productsLisGold.push(...data)
+        }
       },
       complete: () => {
         this.isProductsGoldListLoaded = true;
