@@ -415,8 +415,8 @@ export class CartService {
             let resultadoOperacion = 0
             let VARIABLE_GLOBAL_JULI = 0
 
-            if (localStorage.getItem("TempVG") && VARIABLE_GLOBAL_JULI == 0) {
-              VARIABLE_GLOBAL_JULI = Number(localStorage.getItem("TempVG"))
+            if (this.currentAmountCartNumber$.value > 0) {
+              VARIABLE_GLOBAL_JULI = this.currentAmountCartNumber$.value
             }
 
             if (operacion == 0) {
@@ -425,7 +425,6 @@ export class CartService {
               resultadoOperacion = VARIABLE_GLOBAL_JULI += Number(this.currentProduct.cantidadMeta)
             }
 
-            localStorage.setItem('TempVG', resultadoOperacion.toString())
             const totalProducts = resultadoOperacion
             this.goalAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!))
             this.restanteAmountCartNumber$.next(parseInt(localStorage.getItem("sku")!) - totalProducts)
