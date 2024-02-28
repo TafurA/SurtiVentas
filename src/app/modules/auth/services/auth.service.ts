@@ -81,7 +81,8 @@ export class AuthService {
       nitemp_b,
       foto,
       cdi,
-      Minimo_compra
+      Minimo_compra,
+      diferenciador
     } = this.DECODE_DATA_SESSION
     // Global data
     localStorage.setItem('codemp_b', codemp_b)
@@ -100,6 +101,7 @@ export class AuthService {
     this.userModel.nitEmp = nitemp_b
     this.userModel.numBodega = bodemp_b
     this.userModel.foto = foto
+    this.userModel.diferenciador = diferenciador
   }
 
   getDataSessionStorage() {

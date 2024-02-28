@@ -8,5 +8,6 @@ export interface UserSellerModel {
   grupo?: string,
   numBodega?: string,
   nitEmp?: string,
-  foto?: string
+  foto?: string,
+  diferenciador?: string,
 }

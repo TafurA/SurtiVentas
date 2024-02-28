@@ -19,7 +19,8 @@ export class DashboardPagePage implements OnInit {
     userId: '',
     name: '',
     lastName: '',
-    foto: ''
+    foto: '',
+    diferenciador: ''
   }
 
   constructor(private _authService: AuthService) { }
@@ -32,8 +33,9 @@ export class DashboardPagePage implements OnInit {
   }
 
   protected getSellerData() {
-    const { name, lastName, foto } = this._authService.getDataSessionStorage()
+    const { name, lastName, foto, diferenciador } = this._authService.getDataSessionStorage()
     this.userModel.name = `${name} ${lastName}`
     this.userModel.foto = foto
+    this.userModel.diferenciador = diferenciador
   }
 }

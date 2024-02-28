@@ -29,7 +29,7 @@
     <!-- Ranking seller component -->
     <app-ranking-seller></app-ranking-seller>
 
-    <app-metrics-pg></app-metrics-pg>
+    <app-metrics-pg *ngIf="userModel.diferenciador == 'E'"></app-metrics-pg>
 
   </div>
 </ion-content>
