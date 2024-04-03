@@ -53,8 +53,8 @@ export class MenuPage implements OnInit {
     ]
   }
 
-  ngOnInit() {}
-  
+  ngOnInit() { }
+
   ionViewDidEnter() {
     this.getSellerData()
   }

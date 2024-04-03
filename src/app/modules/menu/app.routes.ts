@@ -16,5 +16,13 @@ export const routes: Routes = [
     path: 'frequent-question',
     loadComponent: () => import('./pages/frequent-question/frequent-question.page').then(m => m.FrequentQuestionPage),
     canActivate: [HideBothMenusGuard]
+  },
+  {
+    path: 'oportunity',
+    loadComponent: () => import('./pages/oportunity/oportunity.page').then( m => m.OportunityPage)
+  },
+  {
+    path: 'semaforo-impact',
+    loadComponent: () => import('./pages/semaforo-impact/semaforo-impact.page').then( m => m.SemaforoImpactPage)
   }
 ];
