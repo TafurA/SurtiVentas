@@ -32,9 +32,7 @@ export class CheckoutConfirmationPage implements OnInit {
   productsCount = 0
   productsTotalValue = 0
 
-  constructor(private router: Router) {
-
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() { }
 

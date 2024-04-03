@@ -4,6 +4,7 @@ export interface StoreModel {
   ape1cli_b?: string,
   ape2cli_b?: string,
   empcli_b?: string,
+  nitcli_b?: string,
   telcli_b?: string,
   emacli_b?: string,
   dircli_b?: string,

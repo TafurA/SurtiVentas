@@ -52,6 +52,7 @@ export class FooterComponent implements OnInit {
   }
 
   getRouts() {
+    this.routList = []
     const codEmp = localStorage.getItem('codemp_b')!
     this._storeService.getRoutList$(codEmp).subscribe({
       next: (res: any) => {

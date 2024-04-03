@@ -80,11 +80,17 @@ export class ListStoreComponent implements OnInit {
         newListOrders.push(element)
       });
 
-      this.listFiltered = newListOrders
-        .filter(
-          item => item.nomcli_b.toLowerCase().indexOf(term.toLowerCase()) >= 0
-          || item.dircli_b.toLowerCase().indexOf(term.toLowerCase()) >= 0
-        );
+      // this.listFiltered = newListOrders
+      //   .filter(
+      //     item => item.nomcli_b.toLowerCase().indexOf(term.toLowerCase()) >= 0
+      //     || item.dircli_b.toLowerCase().indexOf(term.toLowerCase()) >= 0
+      //   );
+      this.listFiltered = newListOrders.filter(item => {
+        return Object.values(item).some(value => {
+          console.log("value ", value, " term: ", term, " item ", item)
+          return typeof value === 'string' && value.toLowerCase().indexOf(term.toLowerCase()) >= 0;
+        });
+      });
 
       if (term.length >= 3) {
         this.storesByVisit = this.listFiltered

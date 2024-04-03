@@ -69,8 +69,6 @@ export class CartPage implements OnInit {
 
   ngOnInit() {
     this.resetRecomended = true
-    this.getRecommendedProductsList()
-    this.getGoldProductsList()
   }
 
   ionViewDidEnter() {
@@ -79,6 +77,8 @@ export class CartPage implements OnInit {
     this.reInitCart()
     this.getListCausalNotOrder()
     this.getProductsSinVender()
+    this.getGoldProductsList()
+    this.getRecommendedProductsList()
   }
 
   reInitCart() {

@@ -24,7 +24,10 @@
             <h4 class="c-list-store__item-title o-title o-bold">{{ store.nomcli_b }}</h4>
             <ul style="margin-top: 8px; margin-left: 16px;">
               <li style="font-size:12px; margin-top: 4px;" class="o-text">
-                {{ store.codcli_b }}
+                COD: {{ store.codcli_b }}
+              </li>
+              <li style="font-size:12px; margin-top: 4px;" class="o-text">
+                NIT: {{ store.nitcli_b }}
               </li>
               <li style="font-size:12px; margin-top: 4px;" class="o-text">
                 {{ store.empcli_b }}
@@ -56,7 +59,10 @@
             <h4 class="c-list-store__item-title o-title o-bold">{{ store.nomcli_b }}</h4>
             <ul style="margin-top: 8px; margin-left: 16px;">
               <li style="font-size:12px; margin-top: 4px;" class="o-text">
-                {{ store.codcli_b }}
+                COD: {{ store.codcli_b }}
+              </li>
+              <li style="font-size:12px; margin-top: 4px;" class="o-text">
+                NIT: {{ store.nitcli_b }}
               </li>
               <li style="font-size:12px; margin-top: 4px;" class="o-text">
                 {{ store.empcli_b }}
@@ -80,8 +86,13 @@
           </div>
 
           <!-- Modal visit client -->
-          <app-start-visit style="position: absolute;" modalIdentifier="modal-visit-{{i}}"
-            idStore="{{ store.codcli_b }}" nameStore="{{ store.nomcli_b }}"></app-start-visit>
+          <app-start-visit 
+            style="position: absolute;" 
+            modalIdentifier="modal-visit-{{i}}"
+            idStore="{{ store.codcli_b }}" 
+            nameStore="{{ store.nomcli_b }}"
+          >
+          </app-start-visit>
 
         </li>
       </ul>

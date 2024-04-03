@@ -34,7 +34,7 @@ export class AlertService {
           cssClass: 'o-button o-button_small',
           handler: () => {
             setTimeout(() => {
-              window.location.href = "https://play.google.com/store/apps/details?id=com.surtilider.SurtiTienda&rdid=com.surtilider.SurtiTienda&feature=md&offerId"
+              window.location.href = "https://play.google.com/store/apps/details?id=com.surtilider.SurtiVentas"
             }, 200);
           },
         },

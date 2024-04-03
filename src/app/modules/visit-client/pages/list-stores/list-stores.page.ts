@@ -159,11 +159,15 @@ export class ListStoresPage implements OnInit {
       this.storesByVisit.forEach((element: any) => {
         newListOrders.push(element)
       });
-
-      this.listFiltered = newListOrders
-        .filter(
-          item => item.nomcli_b.toLowerCase().indexOf(term.toLowerCase()) >= 0
-            || item.dircli_b.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+      // this.listFiltered = newListOrders
+      //   .filter(
+      //     item => this.validateFieldToSearch(item.nomcli_b, term)
+      //       || item.dircli_b.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+      this.listFiltered = newListOrders.filter(item => {
+        return Object.values(item).some(value => {
+          return typeof value === 'string' && value.toLowerCase().indexOf(term.toLowerCase()) >= 0;
+        });
+      });
 
       if (term.length >= 2) {
         this.storesByVisit = this.listFiltered

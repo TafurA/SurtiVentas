@@ -240,7 +240,9 @@ export class CheckoutPage implements OnInit {
                 localStorage.setItem("currentOrderId", this.order[0].idOrder)
                 localStorage.setItem("currentOrderDetail", JSON.stringify(this.order))
                 localStorage.setItem(`currentOrderProducts-${this.storeId}`, JSON.stringify(this.groupProductsMix))
-                this.router.navigate(['/', 'client-visit', 'checkout-confirmation'])
+                this.router.navigate(['/', 'client-visit', 'checkout-confirmation']).finally(() => {
+                  this._alertService.showAlert("Realizar pedido", message, 'success')
+                })
               }
             }
           },
