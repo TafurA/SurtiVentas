@@ -21,7 +21,7 @@ const { App } = Plugins;
 })
 export class LoginPagePage implements OnInit {
 
-  private NUMBER_PUBLIC_VERSION = "5.5";
+  private NUMBER_PUBLIC_VERSION = "5.8";
   currentVersion: boolean = true;
   currentNumberVersion: string = '';
 
