@@ -25,6 +25,8 @@ export class HideBothMenusGuard implements CanActivate {
         || window.location.pathname.includes("product-detail")
         || window.location.pathname.includes("billing-time")
         || window.location.pathname.includes("frequent-question")
+        || window.location.pathname.includes("oportunity")
+        || window.location.pathname.includes("semaforo-impact")
         || window.location.pathname.includes("devolutions")
         || window.location.pathname.includes("discounts")
         || window.location.pathname.includes("forgot-password")

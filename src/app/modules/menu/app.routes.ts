@@ -19,10 +19,12 @@ export const routes: Routes = [
   },
   {
     path: 'oportunity',
-    loadComponent: () => import('./pages/oportunity/oportunity.page').then( m => m.OportunityPage)
+    loadComponent: () => import('./pages/oportunity/oportunity.page').then( m => m.OportunityPage),
+    canActivate: [HideBothMenusGuard]
   },
   {
     path: 'semaforo-impact',
-    loadComponent: () => import('./pages/semaforo-impact/semaforo-impact.page').then( m => m.SemaforoImpactPage)
+    loadComponent: () => import('./pages/semaforo-impact/semaforo-impact.page').then( m => m.SemaforoImpactPage),
+    canActivate: [HideBothMenusGuard]
   }
 ];

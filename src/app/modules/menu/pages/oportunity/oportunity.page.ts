@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+
+import { MenuModule } from '@modules/menu/menu.module';
 
 @Component({
   selector: 'app-oportunity',
   templateUrl: './oportunity.page.html',
   styleUrls: ['./oportunity.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [MenuModule]
 })
 export class OportunityPage implements OnInit {
 
