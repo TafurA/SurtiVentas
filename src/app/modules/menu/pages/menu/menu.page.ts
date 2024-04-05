@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemNavigationMenu } from '@core/models/item_navigation_menu.model';
+import { CookieService } from 'ngx-cookie-service';
 
 import { UserSellerModel } from '@core/models/user_seller_model';
 import { AuthService } from '@modules/auth/services/auth.service';
 import { MenuModule } from '@modules/menu/menu.module';
-import { CookieService } from 'ngx-cookie-service';
+import { TagOfNewFeatures } from '@shared/util/tag-of-new-features';
 
 @Component({
   selector: 'app-menu',
@@ -32,7 +33,7 @@ export class MenuPage implements OnInit {
   constructor(
     private _authService: AuthService,
     private _cookie: CookieService,
-    private router: Router
+    private router: Router,
   ) {
     this.NAVIGATION_MENU = [
       {
@@ -53,7 +54,9 @@ export class MenuPage implements OnInit {
     ]
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.newTagOfConsultPages()
+  }
 
   ionViewDidEnter() {
     this.getSellerData()
@@ -75,6 +78,13 @@ export class MenuPage implements OnInit {
     sessionStorage.clear()
     this._cookie.deleteAll()
     this.router.navigate(['/', 'auth', 'login'])
+  }
+
+  newTagOfConsultPages() {
+    // Instanciar la clase TagOfNewFeatures con una fecha de inicio
+    const tagFeatures = new TagOfNewFeatures('2024-04-05');
+    // Llamar al método init() de la clase
+    tagFeatures.init();
   }
 
 }
