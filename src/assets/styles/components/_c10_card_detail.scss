@@ -1,4 +1,3 @@
-
 $c-success: #57D78F;
 $c-secondary: #FF0000;
 
@@ -33,9 +32,17 @@ $c-secondary: #FF0000;
   align-items: center;
 }
 
+.c-card-detail__header_inline {
+  display: block;
+}
+
 .c-card-detail__header,
 .c-card-detail__content {
   margin: 14px;
+}
+
+.c-card-detail__content_pb14 {
+  padding-bottom: 14px;
 }
 
 .c-card-detail__footer {
@@ -52,4 +59,11 @@ $c-secondary: #FF0000;
 
 .c-card-detail__footer {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.c-card-col__items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
 }

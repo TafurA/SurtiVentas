@@ -11,6 +11,151 @@
         <h1 class="o-heading">Oportunidad Surtilider</h1>
       </header>
 
+      <ng-container>
+        <form id="search-component" class="c-header__search">
+          <input 
+            id="search-term" 
+            type="text" 
+            class="c-header__search-input js-input-search" 
+            placeholder="Buscar oportunidad Surtilider..." 
+            (keyup)="sendWord$($event)"
+          >
+          <label class="c-header__search-label i-search" for="" *ngIf="!isTerm"></label>
+          <label class="c-header__search-label i-close" (click)="getOportunityList('close')" for="" *ngIf="isTerm"></label>
+        </form>
+      </ng-container>
+
+      <ng-container *ngIf="isOportunityLoaded">
+        <ul>
+          <li *ngFor="let item of oportunityList" class="c-card-detail" [style.border-color]="item.color">
+            <header class="c-card-detail__header c-card-detail__header_inline">
+              <h3 class="o-bold">{{ item.nomcli_b }}</h3>
+              <div class="c-card-col__items">
+                <div>
+                  <span class="o-text o-color-light-25">Teléfono: </span>
+                  <span class="o-text o-bold"> {{ item.telcli_b }}</span>
+                </div>
+                <div>
+                  <span class="o-text o-color-light-25">Cédula: </span>
+                  <span class="o-text o-bold"> {{ item.nitcli_b }}</span>
+                </div>
+              </div>
+            </header>
+            <div class="c-card-detail__content c-card-detail__content_pb14">
+              <div>
+                <span class="o-text o-color-light-25">Barrio: </span>
+                <span class="o-text o-bold"> {{ item.barcli_b }}</span>
+              </div>
+              <p class="o-text">{{ item.dircli_b }}</p>
+              <div class="c-card-col__items">
+                <div>
+                  <span class="o-text o-color-light-25">Fecha: </span>
+                  <span class="o-text o-bold"> {{ item.fecha }}</span>
+                </div>
+                <div>
+                  <span class="o-text o-color-light-25">Valor: </span>
+                  <span class="o-text o-bold">$ {{ item.promedio }}</span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+
+      <!-- Data unloaded -->
+      <ul class="c-list-store__list" *ngIf="!isOportunityLoaded">
+        <li class="c-card-detail">
+          <header class="c-card-detail__header c-card-detail__header_inline">
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 19px;"></ion-skeleton-text>
+            <div class="c-card-col__items">
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+            </div>
+          </header>
+
+          <div class="c-card-detail__content c-card-detail__content_pb14">
+            <div>
+              <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+            </div>
+            <div>
+              <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+            </div>
+            <div class="c-card-col__items">
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="c-card-detail">
+          <header class="c-card-detail__header c-card-detail__header_inline">
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 19px;"></ion-skeleton-text>
+            <div class="c-card-col__items">
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+            </div>
+          </header>
+
+          <div class="c-card-detail__content c-card-detail__content_pb14">
+            <div>
+              <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+            </div>
+            <div>
+              <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+            </div>
+            <div class="c-card-col__items">
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="c-card-detail">
+          <header class="c-card-detail__header c-card-detail__header_inline">
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 19px;"></ion-skeleton-text>
+            <div class="c-card-col__items">
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+            </div>
+          </header>
+
+          <div class="c-card-detail__content c-card-detail__content_pb14">
+            <div>
+              <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+            </div>
+            <div>
+              <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+            </div>
+            <div class="c-card-col__items">
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+              <div>
+                <ion-skeleton-text [animated]="true" style="width: 200px; height: 19px;"></ion-skeleton-text>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
     </div>
 
   </div>

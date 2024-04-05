@@ -86,5 +86,4 @@ export class MenuPage implements OnInit {
     // Llamar al método init() de la clase
     tagFeatures.init();
   }
-
 }
