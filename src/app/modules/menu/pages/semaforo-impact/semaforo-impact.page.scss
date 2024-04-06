@@ -1,0 +1,125 @@
+.c-form-date {
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: #F5F5F5;
+}
+
+.c-form-date__col {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  input {
+    border-radius: 16px;
+    border: none;
+    background: white;
+    padding: 6px 8px;
+    width: 130px;
+    color: #818181;
+    font-weight: 600;
+    font-size: 14px;
+
+    &:disabled {
+      opacity: .5;
+    }
+  }
+}
+
+.c-form-date__actions {
+  margin-top: 16px;
+
+  .o-button {
+    padding: 16px;
+    margin-bottom: 8px;
+  }
+
+  .o-link {
+    justify-content: center;
+  }
+}
+
+.error-date {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+  color: red;
+}
+
+.c-card-metric {
+  &:not(&:last-of-type) {
+    margin-bottom: 8px;
+  }
+}
+
+.c-card-metric__content {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  margin-top: 0;
+  text-align: left;
+
+  .separator {
+    width: 1px;
+    position: relative;
+    left: -18px;
+    height: auto;
+    border: 0;
+    background: #D7D7D7;
+  }
+
+  li {
+    &:not(.separator) {
+      margin: auto;
+      flex: 1 1;
+    }
+  }
+
+  h4 {
+    font-size: 10px;
+  }
+}
+
+.c-card-metric__num {
+  font-size: 10px;
+}
+
+.o-checkout__button {
+  display: block;
+  padding: 0;
+  text-align: center;
+  width: max-content;
+  margin: 8px auto 0 auto;
+  background: transparent;
+  text-decoration: none;
+  color: white;
+  font-size: 10px;
+
+  &::after {
+    display: inline-block;
+    margin-left: 8px;
+    transition: all .2s ease-in;
+
+    .is-dropdown-show & {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.o-checkout__products {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  .is-dropdown-show & {
+    margin-top: 8px;
+    padding-top: 0;
+    border-color: transparent;
+  }
+}

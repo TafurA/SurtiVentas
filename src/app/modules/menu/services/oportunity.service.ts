@@ -18,4 +18,13 @@ export class OportunityService {
       environment.headers
     ))
   }
+
+  getSemaforoImpacts(IdVendedor: string, IdGrupo: string, fecha_inicial: any, fecha_final: any) {
+    return from(this.http.get(
+      `${environment.API_URL}${environment.API_PATH}/ConsultaSemaforoVendedores?IdVendedor=${IdVendedor}&IdGrupo=${IdGrupo}&fecha_inicial=${fecha_inicial}&fecha_final=${fecha_final}`,
+      '',
+      environment.headers
+    ))
+  }
+
 }

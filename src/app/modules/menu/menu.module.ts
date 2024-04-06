@@ -10,6 +10,7 @@ import { SharedModule } from '@shared/shared.module';
 import { MenuRoutingModule } from './menu-routing.module';
 import { SupportService } from './services/support.service';
 import { OportunityService } from './services/oportunity.service';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,12 +19,14 @@ import { OportunityService } from './services/oportunity.service';
     CommonModule,
     IonicModule,
     MenuRoutingModule,
+    FormsModule,
     SharedModule,
     RouterLink
   ],
   exports: [
     CommonModule,
     IonicModule,
+    FormsModule,
     SharedModule,
     RouterLink
   ]

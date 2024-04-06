@@ -5,13 +5,166 @@
     <app-back-button></app-back-button>
 
     <div class="o-canvas">
-
       <!-- Header -->
       <header class="o-headline">
-        <h1 class="o-heading">Semaforo de Impactos</h1>
+        <h1 class="o-heading">🚦 Semáforo de Impactos</h1>
+        <p class="o-text o-text_fs-14">
+          Consultar filtrando por un rango de fechas.
+        </p>
       </header>
-
     </div>
 
+    <form class="c-form-date">
+      <div class="o-canvas">
+        <div class="c-form-date__col">
+          <div class="form-group">
+            <label for="fecha-inicial">Fecha de inicio:</label>
+            <input 
+              (change)="isFinishIsMoreThanStart()" 
+              type="date" id="fecha-inicial" 
+              name="fechaInicial" 
+              [(ngModel)]="fechaInicial" 
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label for="fecha-final">Fecha de finalización:</label>
+            <input 
+              (change)="isFinishIsMoreThanStart()" 
+              [disabled]="!fechaInicial" 
+              type="date" 
+              id="fecha-final" 
+              name="fechaFinal" 
+              [(ngModel)]="fechaFinal" 
+              required
+            >
+          </div>
+        </div>
+        <p class="error-date" *ngIf="isErrorDate">La fecha de inicio no puede ser mayor que la de finalización</p>
+        <div *ngIf="!isErrorDate" class="c-form-date__actions">
+          <button 
+            [disabled]="!fechaInicial" 
+            type="submit" 
+            (click)="getSemaforoImpactsList()" 
+            class="o-button o-button_full"
+          >
+            Consultar
+          </button>
+          <button 
+            [disabled]="!fechaInicial" 
+            type="reset"
+            (click)="resetList()"
+            class="o-link o-link_secondary o-button_full"
+          >
+            Limpiar Resultados
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div [innerHTML]="htmlTable"></div>
+
+    <!-- <div>
+      <ul style="display: flex; align-items: center; justify-content: space-between;">
+        <li style="flex: 1 1; font-size: 12px; padding: 8px; background-color: #9BF08C;">
+          <span style="font-size: 8px; background-color: rgba(255, 255, 255, .5); padding: 3px 3px; border-radius: 8px; width: 100%; display: block; text-align: center;">Grupo / Cliente: A</span>
+          <div style="margin-top: 8px; display: flex; align-items: center; font-size: 9px; justify-content: space-between;">
+            <span>Base:</span>
+            <span style="font-weight: 700;">Mayor 60</span>
+          </div>
+        </li>
+        <li style="flex: 1 1; font-size: 12px; padding: 8px; background-color: #ECE975;">
+          <span style="font-size: 8px; background-color: rgba(255, 255, 255, .5); padding: 3px 3px; border-radius: 8px; width: 100%; display: block; text-align: center;">Grupo / Cliente: B</span>
+          <div style="margin-top: 8px; display: flex; align-items: center; font-size: 9px; justify-content: space-between;">
+            <span>Base:</span>
+            <span style="font-weight: 700;">Mayor 50</span>
+          </div>
+        </li>
+        <li style="flex: 1 1; font-size: 12px; padding: 8px; background-color: #EB7475;">
+          <span style="font-size: 8px; background-color: rgba(255, 255, 255, .5); padding: 3px 3px; border-radius: 8px; width: 100%; display: block; text-align: center;">Grupo / Cliente: C</span>
+          <div style="margin-top: 8px; display: flex; align-items: center; font-size: 9px; justify-content: space-between;">
+            <span>Base:</span>
+            <span style="font-weight: 700;">Mayor 40</span>
+          </div>
+        </li>
+        <li style="flex: 1 1; font-size: 12px; padding: 8px; background-color: #EEEEEE;">
+          <span style="font-size: 8px; background-color: rgba(255, 255, 255, .5); padding: 3px 3px; border-radius: 8px; width: 100%; display: block; text-align: center;">Grupo / Cliente: D</span>
+          <div style="margin-top: 8px; display: flex; align-items: center; font-size: 9px; justify-content: space-between;">
+            <span>Base:</span>
+            <span style="font-weight: 700;">Mayor 0</span>
+          </div>
+        </li>
+      </ul>
+      <ul style="display: flex; align-items: center; justify-content: space-between;" class="list-inline-letter">
+        <li style="text-align: center; flex: 1 1;padding: 8px;" class="list-inline-letter__item">
+          <p style="font-size: 11px; color: #383838; margin: 0;" class="list-inline-letter__item-txt">Escala 1</p>
+          <p style="margin-top: 8px; text-align: center; font-weight: 700; color: #013D7E;" class="list-inline-letter__item-number">300 - 350</p>
+        </li>
+        <li style="text-align: center; flex: 1 1;padding: 8px;" class="list-inline-letter__item">
+          <p style="font-size: 11px; color: #383838; margin: 0;" class="list-inline-letter__item-txt">Escala 2</p>
+          <p style="margin-top: 8px; text-align: center; font-weight: 700; color: #013D7E;" class="list-inline-letter__item-number">350 - 360</p>
+        </li>
+        <li style="text-align: center; flex: 1 1;padding: 8px;" class="list-inline-letter__item">
+          <p style="font-size: 11px; color: #383838; margin: 0;" class="list-inline-letter__item-txt">Escala 3</p>
+          <p style="margin-top: 8px; text-align: center; font-weight: 700; color: #013D7E;" class="list-inline-letter__item-number">361 - 413</p>
+        </li>
+        <li style="text-align: center; flex: 1 1;padding: 8px;" class="list-inline-letter__item">
+          <p style="font-size: 11px; color: #383838; margin: 0;" class="list-inline-letter__item-txt">Escala 1</p>
+          <p style="margin-top: 8px; text-align: center; font-weight: 700; color: #013D7E;" class="list-inline-letter__item-number">414 - ></p>
+        </li>
+      </ul>
+    </div> -->
+
+    <div class="o-canvas">
+      <div 
+        *ngFor="let item of dataList" 
+        class="c-card-metric c-card-metric_primary"
+        [style.background-color]="item.color"
+      >
+        <ul class="c-card-metric__content">
+          <li>
+            <h4>Día:</h4>
+            <p class="c-card-metric__num o-bold">{{ item.diarut_b1 }}</p>
+          </li>
+          <li class="separator"></li>                    
+          <li>
+            <h4>Ruta:</h4>
+            <p class="c-card-metric__num o-bold">{{ item.zona }}</p>
+          </li>
+          <li class="separator"></li>                    
+          <li>
+            <h4>Zona:</h4>
+            <p class="c-card-metric__num o-bold">
+              {{ item.nombre_rut }}
+            </p>
+          </li>                    
+        </ul>
+        <div class="o-checkout__dropdown">
+          <button class="o-checkout__button i-after-arrow-down" (click)="toggleDropdown($event)">Desplegar detalles</button>
+          <div>
+            <div class="o-checkout__products">
+              <ul class="c-card-metric__content">
+                <li>
+                  <h4>UNI clientes:</h4>
+                  <p class="c-card-metric__num o-bold">{{ item.universo }}</p>
+                </li>
+                <li class="separator"></li>                    
+                <li>
+                  <h4>Cli IMP:</h4>
+                  <p class="c-card-metric__num o-bold">{{ item.impactos }}</p>
+                </li>
+                <li class="separator"></li>                    
+                <li>
+                  <h4>Efectividad:</h4>
+                  <p class="c-card-metric__num o-bold">
+                    {{ item.efectividad }}
+                  </p>
+                </li>                    
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>
