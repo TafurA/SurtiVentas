@@ -59,6 +59,7 @@
   padding: 10px;
   color: #C9C9C9;
   transition: all 0.2s ease-in-out;
+  background-color: #FFF;
 }
 
 .c-header__search-input::placeholder {
@@ -136,7 +137,8 @@
 
 .c-product-sinseller__table {
   padding: 8px;
-  &:nth-child(odd){
+
+  &:nth-child(odd) {
     background-color: #F8F8F8;
   }
 }
