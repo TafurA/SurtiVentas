@@ -83,6 +83,7 @@ export class CartPage implements OnInit {
 
   reInitCart() {
     this.cartId = localStorage.getItem('CartStoreID')
+    this._cartService.validateDateToRemoveCart(this.cartId)
     this.isDataOK = false
     const cartProgress = localStorage.getItem(`cartProgress-${localStorage.getItem('CartStoreID')}`)
     const parentIcon = this.iconCart!.closest(".js-target-iconCart")

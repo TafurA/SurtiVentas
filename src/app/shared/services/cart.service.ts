@@ -27,7 +27,8 @@ export class CartService {
     goalAmountNumber: 0,
     ProgressAmountNumber: 0,
     BarProgressAmountNumber: 0,
-    RestantAmountNumber: 0
+    RestantAmountNumber: 0,
+    date: null
   }
   private count = 0
   public countCart$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -459,13 +460,12 @@ export class CartService {
     this.currentCartStore.ProgressAmountNumber = this.currentAmountCartNumber$.value
     this.currentCartStore.RestantAmountNumber = this.restanteAmountCartNumber$.value
     this.currentCartStore.BarProgressAmountNumber = this.barGoalsAmountNumber$.value
-
+    this.currentCartStore.date = new Date();
     localStorage.setItem(`cartProgress-${this.storeId}`, JSON.stringify(this.currentCartStore));
   }
 
   saveCartProgress() {
     this.storeId = localStorage.getItem("CartStoreID")
-
     this.currentCartStore.storeId = this.storeId
     this.currentCartStore.cartIconCount = this.numberProductsCart$.getValue()
     this.currentCartStore.goalAmount = this.goalAmountCart$.value
@@ -477,9 +477,8 @@ export class CartService {
     this.currentCartStore.ProgressAmountNumber = this.currentAmountCartNumber$.value
     this.currentCartStore.RestantAmountNumber = this.restanteAmountCartNumber$.value
     this.currentCartStore.BarProgressAmountNumber = this.barGoalsAmountNumber$.value
-
+    this.currentCartStore.date = new Date();
     localStorage.setItem(`cartProgress-${this.storeId}`, JSON.stringify(this.currentCartStore));
-
     setTimeout(() => {
       this.currentAmountCart$.next(0)
       this.restanteAmountCart$.next(this.goalAmountCart$.value)
@@ -492,7 +491,33 @@ export class CartService {
         this.iconCart.innerHTML = '0'
       }
     }, 500)
+  }
 
+  validateDateToRemoveCart(cartId: any) {
+    const cartProgress: any = JSON.parse(localStorage.getItem(`cartProgress-${cartId}`)!)
+    if (cartProgress) {
+      const NOW_DATE = new Date()
+      const OLD_DATE = new Date(cartProgress.date)
+      if (this.dateFormat(NOW_DATE) > this.dateFormat(OLD_DATE)) {
+        localStorage.removeItem(`cartProgress-${cartId}`)
+        localStorage.removeItem(`ProductsCart-${cartId}`)
+        localStorage.removeItem(`orderPending-${cartId}`)
+      }
+    }
+  }
+
+  dateFormat(fecha: any) {
+    // Obtener el día de la semana en formato de texto abreviado (por ejemplo, "Tue" para martes)
+    const diaSemana = fecha.toLocaleDateString('es-CO', { weekday: 'short' });
+    // Obtener el mes en formato de texto abreviado (por ejemplo, "Apr" para abril)
+    const mes = fecha.toLocaleDateString('es-CO', { month: 'short' });
+    // Obtener el día del mes (por ejemplo, "09")
+    const diaMes = ('0' + fecha.getDate()).slice(-2);
+    // Obtener el año (por ejemplo, "2024")
+    const anno = fecha.getFullYear();
+    // Combinar los componentes para formar la fecha en el formato deseado
+    const fechaFormateada = `${diaSemana} ${mes} ${diaMes} ${anno}`;
+    return fechaFormateada; // Output: Tue Apr 09 2024
   }
 
   getCalification() {

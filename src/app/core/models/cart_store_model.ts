@@ -9,5 +9,6 @@ export interface CartStoreModel {
   goalAmountNumber: number,
   ProgressAmountNumber: number,
   BarProgressAmountNumber: number,
-  RestantAmountNumber: number
+  RestantAmountNumber: number,
+  date: any
 }
